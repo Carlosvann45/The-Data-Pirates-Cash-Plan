@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cash Plan</string>
+    <string name="home_page_text">This is the home page.</string>
+    <string name="login_page_text">This is the login page.</string>
+</resources>
