@@ -73,7 +73,7 @@
             android:background="@drawable/login_btn_background"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:textSize="21sp"
+            android:textSize="22sp"
             android:textAllCaps="false"/>
 
         <TextView
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="@string/create_account"
             android:textColor="@color/white"
-            android:textSize="21sp"
+            android:textSize="23sp"
             android:layout_gravity="center_horizontal"
             />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="light_blue">#004EA9</color>
-    <color name="gradient_blue">#3480D8</color>
+    <color name="light_blue">#6997CD</color>
     <color name="blue">#004EA9</color>
     <color name="black">#FF000000</color>
     <color name="light_grey">#B5555454</color>
