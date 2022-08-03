@@ -21,7 +21,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-        view.tvLoginText.setOnClickListener { Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment) }
+        view.btnLogin.setOnClickListener { Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment) }
 
         return view
     }

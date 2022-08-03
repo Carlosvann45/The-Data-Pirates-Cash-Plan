@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Cash Plan</string>
+    <string name="app_name">Ca$h Plan</string>
     <string name="home_page_text">This is the home page.</string>
     <string name="login_page_text">This is the login page.</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
 </resources>
