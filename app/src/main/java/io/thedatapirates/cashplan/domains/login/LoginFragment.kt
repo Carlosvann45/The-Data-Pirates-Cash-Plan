@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
         )
 
         try {
+            // will store the tokens later on another card
             val loginResponse = loginService.loginCustomer(loginRequest)
             isLoggedIn = true
         } catch (e: ClientRequestException) {
