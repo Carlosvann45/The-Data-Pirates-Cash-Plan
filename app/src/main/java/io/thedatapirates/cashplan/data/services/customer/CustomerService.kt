@@ -14,6 +14,9 @@ interface CustomerService {
 
     suspend fun getCustomerInformation(email: String?, accessToken: String?): CustomerResponse?
 
+    /**
+     * Dependency injection for customer service
+     */
     companion object {
         fun create(): CustomerService {
             return CustomerServiceImpl(
@@ -22,7 +25,10 @@ interface CustomerService {
                         level = LogLevel.ALL
                     }
                     install(JsonFeature) {
-                        serializer = KotlinxSerializer()
+                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                            isLenient = true
+                            ignoreUnknownKeys = true
+                        })
                     }
                 }
             )

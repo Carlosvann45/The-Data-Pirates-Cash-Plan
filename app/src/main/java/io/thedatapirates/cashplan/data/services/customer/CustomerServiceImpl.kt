@@ -18,7 +18,7 @@ class CustomerServiceImpl(
      * Gets customer information with email and token
      */
     override suspend fun getCustomerInformation(email: String?, accessToken: String?): CustomerResponse? {
-        return client.post {
+        return client.get {
             url("${HttpRoutes.CUSTOMERS}/$email")
             headers {
                 append("Authorization", "Bearer $accessToken")

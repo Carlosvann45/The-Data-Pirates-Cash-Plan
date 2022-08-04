@@ -1,6 +1,5 @@
 package io.thedatapirates.cashplan.domains.login
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,10 +32,12 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginContext: Context
     private val loginService = LoginServiceLocator.getLoginService()
-    private val loginFragment = this
     private var toast: Toast? = null
     private var error = ""
 
+    /**
+     * Runs listener's when fragment is created
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,10 +46,12 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         view.btnLogin.setOnClickListener {
+            // coroutine to run async code in a separate thread
             GlobalScope.launch(Dispatchers.IO) {
                 val isLoggedIn = processLogin(view)
 
                 if (isLoggedIn) {
+                    // whenever changing fragments/activities you have to switch to the main thread
                     withContext(Dispatchers.Main) {
                         Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
                     }
@@ -56,7 +59,7 @@ class LoginFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         toast?.cancel()
 
-                        toast = CustomToast.createCustomToast(error, view, loginFragment.context)
+                        toast = CustomToast.createCustomToast(error, view, loginContext)
 
                         toast?.show()
                     }
@@ -67,6 +70,9 @@ class LoginFragment : Fragment() {
         return view
     }
 
+    /**
+     * When context attaches to fragment sets context to private variable
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         loginContext = context
@@ -85,9 +91,12 @@ class LoginFragment : Fragment() {
 
         try {
             val loginResponse = loginService.loginCustomer(loginRequest)
+
+            // adds shared preferences to store tokens and user email
             val sharedPreferences = loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
             val editPreferences = sharedPreferences.edit()
 
+            // actually saves user info
             editPreferences.apply {
                 putString("accessToken", loginResponse?.accessToken)
                 putString("refresherToken", loginResponse?.refresherToken)

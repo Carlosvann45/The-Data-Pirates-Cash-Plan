@@ -15,6 +15,9 @@ interface LoginService {
 
     suspend fun loginCustomer(loginRequest: LoginRequest): LoginResponse?
 
+    /**
+     * Dependency injection for login service
+     */
     companion object {
         fun create(): LoginService {
             return LoginServiceImpl(
