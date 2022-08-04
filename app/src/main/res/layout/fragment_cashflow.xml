@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
-    tools:context=".login.LoginFragment">
+    android:background="@color/base"
+    tools:context=".cashflow.CashFlowFragment">
 
     <TextView
-        android:id="@+id/tvLoginText"
+        android:id="@+id/tvCashFlowText"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/theme"
-        android:text="@string/login_page_text"
+        android:layout_height="match_parent"
+        android:text="Cash Flow"
         android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 
 

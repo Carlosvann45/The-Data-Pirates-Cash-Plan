@@ -23,6 +23,8 @@ class LoginFragment : Fragment() {
 
         view.tvLoginText.setOnClickListener { Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment) }
 
+
+
         return view
     }
 

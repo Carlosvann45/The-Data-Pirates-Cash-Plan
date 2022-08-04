@@ -2,4 +2,6 @@
     <string name="app_name">Cash Plan</string>
     <string name="home_page_text">This is the home page.</string>
     <string name="login_page_text">This is the login page.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
