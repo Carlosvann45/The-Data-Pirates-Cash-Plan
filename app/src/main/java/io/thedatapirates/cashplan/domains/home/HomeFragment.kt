@@ -1,4 +1,4 @@
-package io.thedatapirates.cashplan.home
+package io.thedatapirates.cashplan.domains.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 
 
 /**
