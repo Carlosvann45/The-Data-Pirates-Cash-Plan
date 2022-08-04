@@ -24,7 +24,7 @@ class CashFlowFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cashflow, container, false)
 
-        view.tvCashFlowText.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_cashflowFragment_to_homeFragment) }
+        view.tvCashFlowTitle.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_cashflowFragment_to_homeFragment) }
 
         return view
     }
