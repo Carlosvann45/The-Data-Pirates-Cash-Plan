@@ -1,5 +1,7 @@
 package io.thedatapirates.cashplan.domains.login
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +21,7 @@ import java.lang.Exception
 /**
  * Service locator to inject login service into login fragment
  */
-object ServiceLocator {
+object LoginServiceLocator {
     fun getLoginService(): LoginService = LoginService.create()
 }
 
@@ -29,7 +31,9 @@ object ServiceLocator {
 @DelicateCoroutinesApi
 class LoginFragment : Fragment() {
 
-    private val loginService = ServiceLocator.getLoginService()
+    private lateinit var loginContext: Context
+    private val loginService = LoginServiceLocator.getLoginService()
+    private val loginFragment = this
     private var toast: Toast? = null
     private var error = ""
 
@@ -39,7 +43,6 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val loginFragment = this
 
         view.btnLogin.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
@@ -64,6 +67,11 @@ class LoginFragment : Fragment() {
         return view
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loginContext = context
+    }
+
     /**
      * Makes request to api to process login request from user input
      */
@@ -76,12 +84,23 @@ class LoginFragment : Fragment() {
         )
 
         try {
-            // will store the tokens later on another card
             val loginResponse = loginService.loginCustomer(loginRequest)
+            val sharedPreferences = loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+            val editPreferences = sharedPreferences.edit()
+
+            editPreferences.apply {
+                putString("accessToken", loginResponse?.accessToken)
+                putString("refresherToken", loginResponse?.refresherToken)
+                putString("userEmail", loginRequest.username)
+                apply()
+            }
+
             isLoggedIn = true
         } catch (e: ClientRequestException) {
+            println("Error: ${e.response.status.description}")
             error = "Your username or password is invalid."
         } catch (e: Exception) {
+            println("Error: ${e.message}")
             error = " Sorry there was an error with the server. Try again later."
         }
 

@@ -7,7 +7,6 @@ import io.ktor.http.*
 import io.thedatapirates.cashplan.constants.HttpRoutes
 import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.dtos.login.LoginResponse
-import io.thedatapirates.cashplan.data.services.login.LoginService
 
 /**
  * Implement's logic from login service
