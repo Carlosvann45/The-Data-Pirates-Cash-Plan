@@ -26,7 +26,10 @@ interface LoginService {
                         level = LogLevel.ALL
                     }
                     install(JsonFeature) {
-                        serializer = KotlinxSerializer()
+                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                            isLenient = true
+                            ignoreUnknownKeys = true
+                        })
                     }
                 }
             )
