@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
-    tools:context=".home.HomeFragment">
+    tools:context=".domains.home.HomeFragment">
 
     <TextView
         android:id="@+id/tvHomeText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/home_page_text"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"
