@@ -67,6 +67,10 @@ class LoginFragment : Fragment() {
             }
         }
 
+        view.tvForgotPassword.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.navigateToForgotPasswordFragment)
+        }
+
         return view
     }
 
