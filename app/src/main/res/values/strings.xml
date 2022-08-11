@@ -12,6 +12,6 @@
     <string name="continue_message">Continue</string>
     <string name="email">Email</string>
     <string name="forgot_password_message">Enter the email address associated with your account and we will send you a link to reset your password.</string>
-    <string name="email_sent_message">We sent an link to your email, if it belongs to an existing account. The link will expire after 15 minutes and if you don\'t see the email please check your spam folder.</string>
+    <string name="email_sent_message"> If your account exists, we sent a link to your email. The link will expire after 15 minutes and if you don\'t see the email please check your spam folder.</string>
     <string name="finish">Finish</string>
 </resources>

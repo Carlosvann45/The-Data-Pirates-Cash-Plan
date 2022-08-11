@@ -47,10 +47,10 @@ class ForgotPasswordFragment : Fragment() {
             val email = view.etEmailField.text.toString()
 
             GlobalScope.launch(Dispatchers.IO) {
-                val emailSent = sendEmail(email)
+                val emailSent = async { sendEmail(email) }
 
                 withContext(Dispatchers.Main) {
-                    if (emailSent) {
+                    if (emailSent.await()) {
                         Navigation.findNavController(view)
                             .navigate(R.id.navigateToPasswordConfirmation)
                     } else {
@@ -81,7 +81,7 @@ class ForgotPasswordFragment : Fragment() {
     private suspend fun sendEmail(email: String): Boolean {
         var emailSent = false
 
-        if (!emailRegex.matches(email)) {
+        if (emailRegex.matches(email)) {
             try {
                 loginService.sendCustomerForgotPasswordEmail(email)
 
