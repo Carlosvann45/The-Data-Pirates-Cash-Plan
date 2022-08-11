@@ -13,18 +13,28 @@ import io.thedatapirates.cashplan.data.dtos.login.LoginResponse
  */
 class LoginServiceImpl(
     private val client: HttpClient
-    ) : LoginService {
+) : LoginService {
+
+    /**
+     * Makes request to send an email for password reset
+     */
+    override suspend fun sendCustomerForgotPasswordEmail(email: String) {
+        client.post<String> {
+            url("${HttpRoutes.FORGOT_PASSWORD}/$email")
+            body = ""
+        }
+    }
 
     /**
      * logs in customer with given login request
      */
     override suspend fun loginCustomer(loginRequest: LoginRequest): LoginResponse {
         return client.post {
-                url(HttpRoutes.LOGIN)
-                body = FormDataContent(Parameters.build {
-                    append("username", loginRequest.username)
-                    append("password", loginRequest.password)
-                })
-            }
+            url(HttpRoutes.LOGIN)
+            body = FormDataContent(Parameters.build {
+                append("username", loginRequest.username)
+                append("password", loginRequest.password)
+            })
+        }
     }
 }

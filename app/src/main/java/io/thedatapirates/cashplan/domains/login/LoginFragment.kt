@@ -2,11 +2,11 @@ package io.thedatapirates.cashplan.domains.login
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
@@ -15,7 +15,6 @@ import io.thedatapirates.cashplan.data.services.login.LoginService
 import io.thedatapirates.cashplan.utils.CustomToast
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
-import java.lang.Exception
 
 /**
  * Service locator to inject login service into login fragment
@@ -50,13 +49,11 @@ class LoginFragment : Fragment() {
             GlobalScope.launch(Dispatchers.IO) {
                 val isLoggedIn = processLogin(view)
 
-                if (isLoggedIn) {
-                    // whenever changing fragments/activities you have to switch to the main thread
-                    withContext(Dispatchers.Main) {
+                // whenever changing fragments/activities you have to switch to the main thread
+                withContext(Dispatchers.Main) {
+                    if (isLoggedIn) {
                         Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
+                    } else {
                         toast?.cancel()
 
                         toast = CustomToast.createCustomToast(error, view, loginContext)
@@ -97,7 +94,8 @@ class LoginFragment : Fragment() {
             val loginResponse = loginService.loginCustomer(loginRequest)
 
             // adds shared preferences to store tokens and user email
-            val sharedPreferences = loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+            val sharedPreferences =
+                loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
             val editPreferences = sharedPreferences.edit()
 
             // actually saves user info

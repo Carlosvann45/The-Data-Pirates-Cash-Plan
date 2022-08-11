@@ -37,7 +37,11 @@ class CustomToast {
         /**
          * Inflates the toast message int view
          */
-        private fun ViewGroup.inflate(context: Context?, @LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+        private fun ViewGroup.inflate(
+            context: Context?,
+            @LayoutRes layoutRes: Int,
+            attachToRoot: Boolean = false
+        ): View {
             return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
         }
     }
