@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.cashflow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,20 +33,22 @@ class CashFlowFragment : Fragment() {
         view.tvCashFlowTitle.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_cashflowFragment_to_homeFragment) }
 
         view.btnAddExpense.setOnClickListener {
-            val expenseAmount = view.etPaymentFieldAmount.text.toString().toFloat()
-            if(expenseAmount != 0f) {
+            if (view.etPaymentFieldAmount.text.isNotEmpty()){
+                val expenseAmount = view.etPaymentFieldAmount.text.toString().toFloat()
                 val expense = Expense(expenseAmount)
                 expensesList.addExpense(expense)
                 view.etPaymentFieldAmount.text.clear()
+
+                Log.d("TAG", expensesList.getItemCount().toString())
             }
         }
 
         view.btnRemoveExpense.setOnClickListener {
-                expensesList.deleteExpense()
+            expensesList.deleteExpense()
         }
 
         view.tvCashInAmount.text = expensesList.getItemCount().toString()
-        
+
 
         return view
     }
