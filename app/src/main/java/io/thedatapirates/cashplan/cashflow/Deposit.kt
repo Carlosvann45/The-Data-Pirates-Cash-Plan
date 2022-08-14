@@ -1,6 +1,6 @@
 package io.thedatapirates.cashplan.cashflow
 
-data class Expense (
+data class Deposit (
     var name: String = "",
     var amount: Float,
 

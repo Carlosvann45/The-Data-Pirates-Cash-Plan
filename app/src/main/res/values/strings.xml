@@ -12,8 +12,8 @@
     <string name="amount">Amount:</string>
     <string name="enter_amount">Enter Amount</string>
     <string name="deposit">Deposit</string>
-    <string name="cash_in_7_289_31">Cash In $7,289.31</string>
+    <string name="cash_out_7_289_31">Cash Out: $7,289.31</string>
     <string name="_100">100%</string>
-    <string name="cash_out_4018_62">Cash Out $4018.62</string>
+    <string name="cash_in_4018_62">Cash In: $4018.62</string>
     <string name="profit_3270_69">Profit $3270.69</string>
 </resources>
