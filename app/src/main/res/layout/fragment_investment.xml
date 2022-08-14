@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/rlHomeFragment"
+<RelativeLayout
+    android:id="@+id/rlInvestmentFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domains.home.HomeFragment">
+    tools:context=".domains.investment.InvestmentFragment">
 
     <TextView
-        android:id="@+id/tvHomeText"
+        android:id="@+id/tvInvestmentText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="Investments Page"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"

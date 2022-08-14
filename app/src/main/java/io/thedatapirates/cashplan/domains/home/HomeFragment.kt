@@ -1,19 +1,22 @@
 package io.thedatapirates.cashplan.domains.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.activities.AppMainActivity
+import io.thedatapirates.cashplan.activities.LoginActivity
 import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.utils.CustomToast
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 
 /**
@@ -54,9 +57,10 @@ class HomeFragment : Fragment() {
                         getString(R.string.home_welcome, customer.firstName, customer.lastName)
                 }
             } else {
-                // reroutes to navigation page and displays error message
+                // reroutes to login page and displays error message
                 withContext(Dispatchers.Main) {
-                    Navigation.findNavController(view).navigate(R.id.navigateToLoginFragment)
+                    val intent = Intent(homeContext, LoginActivity::class.java)
+                    startActivity(intent)
 
                     toast?.cancel()
 
@@ -71,7 +75,6 @@ class HomeFragment : Fragment() {
         }
 
         view.tvHomeText.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.navigateToLoginFragment)
         }
 
         return view
@@ -105,5 +108,4 @@ class HomeFragment : Fragment() {
 
         return customer
     }
-
 }

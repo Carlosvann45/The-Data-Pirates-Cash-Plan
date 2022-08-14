@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.domains.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.ktor.client.features.*
+import io.thedatapirates.cashplan.activities.AppMainActivity
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.login.LoginService
@@ -52,7 +54,14 @@ class LoginFragment : Fragment() {
                 // whenever changing fragments/activities you have to switch to the main thread
                 withContext(Dispatchers.Main) {
                     if (isLoggedIn) {
-                        Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
+                        val intent = Intent(loginContext, AppMainActivity::class.java)
+
+                        // clears fields
+                        view.etUsernameField.text.clear()
+                        view.etPasswordField.text.clear()
+
+                        // moves to the main activity once logged in
+                        startActivity(intent)
                     } else {
                         toast?.cancel()
 
