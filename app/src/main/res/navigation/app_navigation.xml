@@ -31,6 +31,9 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_stMenu"
+            app:destination="@id/stMenu" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -53,5 +56,26 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/stMenu"
+        android:name="io.thedatapirates.cashplan.domains.settings.StMenu"
+        android:label="fragment_st_menu"
+        tools:layout="@layout/fragment_st_menu" >
+        <action
+            android:id="@+id/stMenu_to_stAccnt"
+            app:destination="@id/stAccount" />
+        <action
+            android:id="@+id/action_stMenu_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stAccount"
+        android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
+        android:label="fragment_st_account"
+        tools:layout="@layout/fragment_st_account" >
+        <action
+            android:id="@+id/frag2_to_stMenu"
+            app:destination="@id/stMenu" />
     </fragment>
 </navigation>

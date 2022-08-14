@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Ca$h Plan</string>
     <string name="home_page_text">This is the home page.</string>
     <string name="login_page_text">This is the login page.</string>
@@ -14,4 +14,32 @@
     <string name="forgot_password_message">Enter the email address associated with your account and we will send you a link to reset your password.</string>
     <string name="email_sent_message"> If your account exists, we sent a link to your email. The link will expire after 15 minutes and if you don\'t see the email please check your spam folder.</string>
     <string name="finish">Finish</string>
+    <!--    PLACE HOLDERS AKA Temp or Template   -->
+    <string name="Template">Temp</string>
+    <string name="Temp_Phone" tools:ignore="TypographyDashes">123-456-7890</string>
+    <string name="Temp_Email">JohnDoe@temp.com</string>
+    <string name="Temp_BankName">Bank Name</string>
+    <string name="Temp_CheckingName">Checking X4321</string>
+    <string name="Temp_SavingsName">Savings X1234</string>
+    <string name="Temp_AccntNum">*****4321</string>
+    <string name="Temp_Title_StockApp">RobinHat</string>
+    <string name="Temp_Title_CryptoApp">CubeChain</string>
+    <!--    NAMES FOR BUTTONS AKA B OR Btn       -->
+    <string name="BTitle_Account">Account</string>
+    <string name="BTitle_Customize">Customization</string>
+    <string name="BTitle_Notifications">Notifications</string>
+    <!--    NAMES FOR ITEMS AKA Title            -->
+    <string name="Title_Permissions">Permissions</string>
+    <string name="Title_FirstName">First Name:</string>
+    <string name="Title_LastName">Last Name:</string>
+    <string name="Title_PhoneNum">Phone Number:</string>
+    <string name="Title_Email">Email:</string>
+    <string name="Title_CheckingAccnt_Singlar">Checking Account</string>
+    <string name="Title_SavingsAccnt">Savings Account</string>
+    <string name="Title_Stocks">Stocks</string>
+    <string name="Title_Crypto">Cryptocurrency</string>
+    <!--    NAMES FOR CATEGORY TITLES AKA Cat    -->
+    <string name="Title_Cat_BankInfo">Banking</string>
+    <string name="Title_Cat_Prsnl">Personal Information</string>
+    <string name="Title_Cat_Investments">Investments</string>
 </resources>
