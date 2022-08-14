@@ -18,4 +18,23 @@
     <string name="expenses">Expenses</string>
     <string name="cash_flows">Cash Flows</string>
     <string name="investments">Investments</string>
+    <string name="settings">Settings</string>
+    <string name="profile">profile</string>
+    <string name="view_profile">View Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="help">Help</string>
+    <string name="about_us">About Us</string>
+    <string name="help_center">Help Center</string>
+    <string name="community">Community</string>
+    <string name="share">Share</string>
+    <string name="write_review">Write Review</string>
+    <string name="social_media">Social Media</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="snapchat">Snapchat</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="place_holder_name">Bob Ross</string>
+    <string name="place_holder_email">bob.ross@example.com</string>
 </resources>
