@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/rlHomeFragment"
+    <item
+        android:id="@+id/navHomeFragment"
         android:icon="@drawable/home_icon"
         android:title="@string/home" />
 
-    <item android:id="@+id/rlExpenseFragment"
+    <item
+        android:id="@+id/navExpenseFragment"
         android:icon="@drawable/wallet_icon"
         android:title="@string/expenses" />
 
-    <item android:id="@+id/rlCashFlowFragment"
+    <item
+        android:id="@+id/navCashFlowFragment"
         android:icon="@drawable/cash_icon"
         android:title="@string/cash_flows" />
 
-    <item android:id="@+id/rlInvestmentFragment"
+    <item
+        android:id="@+id/navInvestmentFragment"
         android:icon="@drawable/invest_icon"
         android:title="@string/investments" />
+
+    <item
+        android:id="@+id/navInvisible"
+        android:visible="false" />
 </menu>

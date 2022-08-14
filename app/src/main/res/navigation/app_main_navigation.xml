@@ -25,4 +25,19 @@
         android:name="io.thedatapirates.cashplan.domains.cashflow.CashFlowFragment"
         android:label="fragment_cash_flow"
         tools:layout="@layout/fragment_cash_flow" />
+    <fragment
+        android:id="@+id/rlProfileFragment"
+        android:name="io.thedatapirates.cashplan.domains.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/rlSettingFragment"
+        android:name="io.thedatapirates.cashplan.domains.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/rlHelpCenterFragment"
+        android:name="io.thedatapirates.cashplan.domains.helpcenter.HelpCenterFragment"
+        android:label="fragment_help_center"
+        tools:layout="@layout/fragment_help_center" />
 </navigation>
