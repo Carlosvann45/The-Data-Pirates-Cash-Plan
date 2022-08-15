@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -90,8 +91,13 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navHelpCenterActivity -> {
                     startActivity(Intent(this, HelpCenterActivity::class.java))
                     overridePendingTransition(0, 0)
-
                 }
+                R.id.navShare -> navView.menu.findItem(R.id.navShare).isChecked = false
+                R.id.navWriteReview -> navView.menu.findItem(R.id.navWriteReview).isChecked = false
+                R.id.navFacebook -> navView.menu.findItem(R.id.navFacebook).isChecked = false
+                R.id.navInstagram -> navView.menu.findItem(R.id.navInstagram).isChecked = false
+                R.id.navSnapchat -> navView.menu.findItem(R.id.navSnapchat).isChecked = false
+                R.id.navLinkedIn -> navView.menu.findItem(R.id.navLinkedIn).isChecked = false
             }
             true
         }

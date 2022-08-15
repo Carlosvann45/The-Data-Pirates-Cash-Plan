@@ -87,6 +87,12 @@ class HelpCenterActivity : AppCompatActivity() {
                     startActivity(Intent(this, LoginActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
+                R.id.navShare -> navView.menu.findItem(R.id.navShare).isChecked = false
+                R.id.navWriteReview -> navView.menu.findItem(R.id.navWriteReview).isChecked = false
+                R.id.navFacebook -> navView.menu.findItem(R.id.navFacebook).isChecked = false
+                R.id.navInstagram -> navView.menu.findItem(R.id.navInstagram).isChecked = false
+                R.id.navSnapchat -> navView.menu.findItem(R.id.navSnapchat).isChecked = false
+                R.id.navLinkedIn -> navView.menu.findItem(R.id.navLinkedIn).isChecked = false
             }
             true
         }

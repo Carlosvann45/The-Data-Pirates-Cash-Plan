@@ -43,11 +43,13 @@
 
             <item
                 android:id="@+id/navShare"
+                android:checkable="false"
                 android:icon="@drawable/share_icon"
                 android:title="@string/share" />
 
             <item
                 android:id="@+id/navWriteReview"
+                android:checkable="false"
                 android:icon="@drawable/write_review_icon"
                 android:title="@string/write_review" />
 
@@ -61,23 +63,29 @@
 
             <item
                 android:id="@+id/navFacebook"
+                android:checkable="false"
+                android:onClick=""
                 android:icon="@drawable/facebook_icon"
                 android:title="@string/facebook" />
 
             <item
                 android:id="@+id/navInstagram"
+                android:checkable="false"
                 android:icon="@drawable/instagram_icon"
                 android:title="@string/instagram" />
 
             <item
                 android:id="@+id/navSnapchat"
+                android:checkable="false"
                 android:icon="@drawable/snapchat_icon"
                 android:title="@string/snapchat" />
 
             <item
                 android:id="@+id/navLinkedIn"
+                android:checkable="false"
                 android:icon="@drawable/linkedin_icon"
                 android:title="@string/linkedin" />
+
         </menu>
 
     </item>
