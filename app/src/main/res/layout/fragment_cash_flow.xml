@@ -12,7 +12,7 @@
         android:id="@+id/tvCashFlowText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Cash Flow Page"
+        android:text="@string/cash_flows"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"

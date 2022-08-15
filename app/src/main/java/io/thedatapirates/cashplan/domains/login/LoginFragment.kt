@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.activities.AppMainActivity
 import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.login.LoginService
+import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.utils.CustomToast
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
@@ -88,7 +88,7 @@ class LoginFragment : Fragment() {
                                 apply()
                             }
 
-                            val intent = Intent(loginContext, AppMainActivity::class.java)
+                            val intent = Intent(loginContext, HomeActivity::class.java)
 
                             // clears fields
                             view.etUsernameField.text.clear()

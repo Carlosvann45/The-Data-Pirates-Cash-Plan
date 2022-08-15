@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".domains.helpcenter.HelpCenterFragment">
+    tools:context=".domains.helpcenter.HelpCenterActivity">
 
     <TextView
-        android:id="@+id/tvSettingText"
+        android:id="@+id/tvHelpCenterText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Help Center Page"
+        android:text="@string/help_center"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"

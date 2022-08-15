@@ -11,18 +11,18 @@
             <group android:checkableBehavior="single">
 
                 <item
-                    android:id="@+id/navProfileFragment"
+                    android:id="@+id/navProfileActivity"
                     android:icon="@drawable/user_profile_icon"
                     android:title="@string/view_profile" />
 
                 <item
-                    android:id="@+id/navHelpCenterFragment"
+                    android:id="@+id/navHelpCenterActivity"
                     android:icon="@drawable/help_icon"
                     android:title="@string/help_center" />
 
 
                 <item
-                    android:id="@+id/navSettingFragment"
+                    android:id="@+id/navSettingActivity"
                     android:icon="@drawable/settings_icon"
                     android:title="@string/settings" />
 

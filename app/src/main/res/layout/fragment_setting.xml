@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".domains.setting.SettingFragment">
+    tools:context=".domains.setting.SettingActivity">
 
     <TextView
         android:id="@+id/tvSettingText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Settings Page"
+        android:text="@string/settings"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"

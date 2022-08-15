@@ -12,7 +12,7 @@
         android:id="@+id/tvExpenseText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Expenses Page"
+        android:text="@string/expenses"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"
