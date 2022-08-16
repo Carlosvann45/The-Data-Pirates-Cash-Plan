@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".domains.setting.SettingActivity"
+            android:name=".domains.settings.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".domains.helpcenter.HelpCenterActivity"
@@ -40,8 +40,8 @@
         <activity
             android:name=".domains.login.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.Login">
+            android:theme="@style/Theme.Login"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

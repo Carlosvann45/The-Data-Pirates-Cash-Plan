@@ -1,12 +1,12 @@
-package io.thedatapirates.cashplan.domains.setting
+package io.thedatapirates.cashplan.domains.settings
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -18,12 +18,11 @@ import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import io.thedatapirates.cashplan.domains.profile.ProfileActivity
-import kotlinx.android.synthetic.main.activity_help_center.*
-import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
-class SettingActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var drawerLayout: DrawerLayout
@@ -35,11 +34,11 @@ class SettingActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        setContentView(R.layout.activity_settings)
 
-        bottomNav = findViewById(R.id.navSettingBottomNavigation)
-        navView = findViewById(R.id.nvSettingTopNavigationWithHeader)
-        drawerLayout = findViewById(R.id.dlSettingActivity)
+        bottomNav = findViewById(R.id.navSettingsBottomNavigation)
+        navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
+        drawerLayout = findViewById(R.id.dlSettingsActivity)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
 
         drawerLayout.addDrawerListener(toggle)
@@ -97,7 +96,7 @@ class SettingActivity : AppCompatActivity() {
             true
         }
 
-        navSettingBottomNavigation.setOnNavigationItemSelectedListener {
+        navSettingsBottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navHomeActivity -> {
                     startActivity(Intent(this, HomeActivity::class.java))
@@ -120,7 +119,7 @@ class SettingActivity : AppCompatActivity() {
         }
 
         bottomNav.selectedItemId = R.id.navInvisible
-        navView.setCheckedItem(R.id.navSettingActivity)
+        navView.setCheckedItem(R.id.navSettingsActivity)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

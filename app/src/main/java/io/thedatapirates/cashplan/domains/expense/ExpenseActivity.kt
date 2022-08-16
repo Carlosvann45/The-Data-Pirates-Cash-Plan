@@ -17,7 +17,7 @@ import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import io.thedatapirates.cashplan.domains.profile.ProfileActivity
-import io.thedatapirates.cashplan.domains.setting.SettingActivity
+import io.thedatapirates.cashplan.domains.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_expense.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -69,8 +69,8 @@ class ExpenseActivity : AppCompatActivity() {
                     startActivity(Intent(this, ProfileActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
-                R.id.navSettingActivity -> {
-                    startActivity(Intent(this, SettingActivity::class.java))
+                R.id.navSettingsActivity -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
                 R.id.navLogOut -> {

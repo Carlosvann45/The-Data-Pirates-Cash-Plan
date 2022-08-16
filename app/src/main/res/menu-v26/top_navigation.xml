@@ -22,7 +22,7 @@
 
 
                 <item
-                    android:id="@+id/navSettingActivity"
+                    android:id="@+id/navSettingsActivity"
                     android:icon="@drawable/settings_icon"
                     android:title="@string/settings" />
 
@@ -37,8 +37,9 @@
 
     </item>
 
-    <item android:title="@string/community"
-        android:checkable="false">
+    <item
+        android:checkable="false"
+        android:title="@string/community">
 
         <menu>
 

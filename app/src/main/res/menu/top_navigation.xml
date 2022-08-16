@@ -22,7 +22,7 @@
 
 
                 <item
-                    android:id="@+id/navSettingActivity"
+                    android:id="@+id/navSettingsActivity"
                     android:icon="@drawable/settings_icon"
                     android:title="@string/settings" />
 
@@ -64,8 +64,8 @@
             <item
                 android:id="@+id/navFacebook"
                 android:checkable="false"
-                android:onClick=""
                 android:icon="@drawable/facebook_icon"
+                android:onClick=""
                 android:title="@string/facebook" />
 
             <item

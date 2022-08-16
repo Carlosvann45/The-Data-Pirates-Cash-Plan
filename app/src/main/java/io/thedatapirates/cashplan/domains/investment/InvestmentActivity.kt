@@ -2,12 +2,11 @@ package io.thedatapirates.cashplan.domains.investment
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -18,8 +17,7 @@ import io.thedatapirates.cashplan.domains.helpcenter.HelpCenterActivity
 import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import io.thedatapirates.cashplan.domains.profile.ProfileActivity
-import io.thedatapirates.cashplan.domains.setting.SettingActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import io.thedatapirates.cashplan.domains.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_investment.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -71,8 +69,8 @@ class InvestmentActivity : AppCompatActivity() {
                     startActivity(Intent(this, ProfileActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
-                R.id.navSettingActivity -> {
-                    startActivity(Intent(this, SettingActivity::class.java))
+                R.id.navSettingsActivity -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
                 R.id.navLogOut -> {

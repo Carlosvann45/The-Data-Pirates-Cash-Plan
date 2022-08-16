@@ -2,22 +2,22 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dlSettingActivity"
+    android:id="@+id/dlSettingsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".domains.setting.SettingActivity">
+    tools:context=".domains.settings.SettingsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/settingFragmentContainerView"
+            android:id="@+id/settingsFragmentContainerView"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="@+id/navSettingBottomNavigation"
+            app:layout_constraintBottom_toBottomOf="@+id/navSettingsBottomNavigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
             app:navGraph="@navigation/setting_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navSettingBottomNavigation"
+            android:id="@+id/navSettingsBottomNavigation"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -43,7 +43,7 @@
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nvSettingTopNavigationWithHeader"
+        android:id="@+id/nvSettingsTopNavigationWithHeader"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
