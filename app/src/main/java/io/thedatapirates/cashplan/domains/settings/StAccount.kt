@@ -1,12 +1,11 @@
 package io.thedatapirates.cashplan.domains.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import io.thedatapirates.cashplan.R
-import android.widget.TextView
 
 /**
  * A simple [Fragment] subclass.
@@ -43,26 +42,3 @@ class StAccount : Fragment() {
     }
 
 }
-
-
-/*
- *      ////    UNUSED CODE OR TEMP REMOVED     ////
-//        view.frag_btn.setOnClickListener { Navigation.findNavController(view).navigate(R.id.frag2_to_stMenu) }
-*       ////    Name convention Key            ////
-*       St              Settings
-*       M               Menu
-*       Accnt           Account
-*       Btn / B         Button
-*       TV              Text View
-*       TVI             Text View designated for input items
-*       ET              Edit text
-*       #               notes which item it is in a list
-*       B#              Bank Account linked
-*       S#              Savings Account linked
-*       C#              Checkings Account linked
-*       Prsnl / Pnsl    Personal
-*       Num             Number
-*       Div             Divider (just a line on the screen)
-*       FName           First Name
-*       LName           Last Name
-*/

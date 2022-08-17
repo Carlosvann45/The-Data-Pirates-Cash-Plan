@@ -32,8 +32,8 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_homeFragment_to_stMenu"
-            app:destination="@id/stMenu" />
+            android:id="@+id/home_to_settings"
+            app:destination="@id/settings" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -58,10 +58,10 @@
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/stMenu"
-        android:name="io.thedatapirates.cashplan.domains.settings.StMenu"
+        android:id="@+id/settings"
+        android:name="io.thedatapirates.cashplan.domains.settings.settings"
         android:label="fragment_st_menu"
-        tools:layout="@layout/fragment_st_menu" >
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/stMenu_to_stAccnt"
             app:destination="@id/stAccount" />
@@ -73,9 +73,9 @@
         android:id="@+id/stAccount"
         android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
         android:label="fragment_st_account"
-        tools:layout="@layout/fragment_st_account" >
+        tools:layout="@layout/fragment_st_account">
         <action
             android:id="@+id/frag2_to_stMenu"
-            app:destination="@id/stMenu" />
+            app:destination="@id/settings" />
     </fragment>
 </navigation>

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="domains.settings.StAccount">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        tools:context=".StAccount">
+        android:background="@color/white">
 
         <!--                ITEM AND CATEGORY TITLES                -->
         <!--        Personal Info Category Title                -->
@@ -138,8 +138,8 @@
             android:text="@string/Temp_AccntNum"
             android:textColor="@color/Grayed_Out"
             android:textSize="24sp"
-            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_B1C1Name"
             app:layout_constraintTop_toBottomOf="@id/StAccntTV_Bank1Check1" />
 
@@ -168,8 +168,8 @@
             android:textColor="@color/Grayed_Out"
             android:textSize="24sp"
             android:visibility="visible"
-            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintEnd_toEndOf="@+id/StAccntTV_B1S1Number"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1Savings1" />
 
@@ -183,8 +183,8 @@
             android:textColor="@color/Grayed_Out"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1Savings1"
-            app:layout_constraintLeft_toRightOf="@id/StAccntTV_B1S1Name"/>
+            app:layout_constraintLeft_toRightOf="@id/StAccntTV_B1S1Name"
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1Savings1" />
 
         <!--        Title for Investment Category               -->
         <TextView
@@ -328,13 +328,12 @@
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Email" />
 
 
-
         <View
             android:id="@+id/StAccntDiv_BanktoInvestments"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/blue"
             android:layout_marginTop="20dp"
+            android:background="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1S1Name" />
