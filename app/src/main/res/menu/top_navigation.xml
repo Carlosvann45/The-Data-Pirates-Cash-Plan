@@ -11,18 +11,18 @@
             <group android:checkableBehavior="single">
 
                 <item
-                    android:id="@+id/navProfileFragment"
+                    android:id="@+id/navProfileActivity"
                     android:icon="@drawable/user_profile_icon"
                     android:title="@string/view_profile" />
 
                 <item
-                    android:id="@+id/navHelpCenterFragment"
+                    android:id="@+id/navHelpCenterActivity"
                     android:icon="@drawable/help_icon"
                     android:title="@string/help_center" />
 
 
                 <item
-                    android:id="@+id/navSettingFragment"
+                    android:id="@+id/navSettingsActivity"
                     android:icon="@drawable/settings_icon"
                     android:title="@string/settings" />
 
@@ -43,11 +43,13 @@
 
             <item
                 android:id="@+id/navShare"
+                android:checkable="false"
                 android:icon="@drawable/share_icon"
                 android:title="@string/share" />
 
             <item
                 android:id="@+id/navWriteReview"
+                android:checkable="false"
                 android:icon="@drawable/write_review_icon"
                 android:title="@string/write_review" />
 
@@ -61,23 +63,29 @@
 
             <item
                 android:id="@+id/navFacebook"
+                android:checkable="false"
                 android:icon="@drawable/facebook_icon"
+                android:onClick=""
                 android:title="@string/facebook" />
 
             <item
                 android:id="@+id/navInstagram"
+                android:checkable="false"
                 android:icon="@drawable/instagram_icon"
                 android:title="@string/instagram" />
 
             <item
                 android:id="@+id/navSnapchat"
+                android:checkable="false"
                 android:icon="@drawable/snapchat_icon"
                 android:title="@string/snapchat" />
 
             <item
                 android:id="@+id/navLinkedIn"
+                android:checkable="false"
                 android:icon="@drawable/linkedin_icon"
                 android:title="@string/linkedin" />
+
         </menu>
 
     </item>

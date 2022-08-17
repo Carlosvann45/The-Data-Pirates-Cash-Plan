@@ -1,4 +1,4 @@
-package io.thedatapirates.cashplan.activities
+package io.thedatapirates.cashplan.domains.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

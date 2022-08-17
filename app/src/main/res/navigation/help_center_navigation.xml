@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/help_center_navigation"
+    app:startDestination="@id/rlHelpCenterFragment">
+
+    <fragment
+        android:id="@+id/rlHelpCenterFragment"
+        android:name="io.thedatapirates.cashplan.domains.helpcenter.HelpCenterFragment"
+        android:label="fragment_help_center"
+        tools:layout="@layout/fragment_help_center" />
+
+</navigation>

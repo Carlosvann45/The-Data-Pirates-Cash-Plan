@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rlSettingFragment"
+    android:id="@+id/rlSettingsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".domains.setting.SettingFragment">
+    tools:context=".domains.settings.SettingsActivity">
 
     <TextView
         android:id="@+id/tvSettingText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Settings Page"
+        android:text="@string/settings"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"

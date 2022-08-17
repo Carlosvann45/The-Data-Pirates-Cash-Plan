@@ -9,10 +9,10 @@
     tools:context=".domains.investment.InvestmentFragment">
 
     <TextView
-        android:id="@+id/tvInvestmentText"
+        android:id="@+id/tvExpenseText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Investments Page"
+        android:text="@string/investments"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="35sp"
