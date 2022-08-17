@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="io.thedatapirates.cashplan.domains.settings.settings"
+        android:name="io.thedatapirates.cashplan.domains.settings.SettingsFragment"
         android:label="fragment_st_menu"
         tools:layout="@layout/fragment_settings">
         <action

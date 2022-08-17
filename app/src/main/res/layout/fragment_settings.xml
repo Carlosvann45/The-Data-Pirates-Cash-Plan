@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="domains.settings.settings">
-
+    tools:context="domains.settings.SettingsFragment">
+    <!--    TODO: Rename line 7 to SettingsActivity when this merged-->
     <!--    <TextView-->
     <!--        android:id="@+id/tv_Settings"-->
     <!--        android:layout_width="wrap_content"-->

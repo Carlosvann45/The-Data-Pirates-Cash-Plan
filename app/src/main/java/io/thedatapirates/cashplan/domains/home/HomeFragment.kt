@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
         }
 
         view.tvHomeText.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.home_to_settings)
+            Navigation.findNavController(view).navigate(R.id.navigateToLoginFragment)
         }
 
         return view

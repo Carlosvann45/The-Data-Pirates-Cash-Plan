@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_settings.view.*
 /**
  * A simple [Fragment] subclass.
  */
-class settings : Fragment() {
+class SettingsFragment : Fragment() {
 
 
     override fun onCreateView(
