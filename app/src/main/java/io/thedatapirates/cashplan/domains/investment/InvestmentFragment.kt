@@ -2,21 +2,16 @@ package io.thedatapirates.cashplan.domains.investment
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
-import com.github.mikephil.charting.utils.MPPointF
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
@@ -25,9 +20,6 @@ import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import kotlinx.android.synthetic.main.fragment_investment.view.*
 import kotlinx.coroutines.*
-import java.math.RoundingMode
-import java.text.DecimalFormat
-import kotlin.random.Random
 
 /**
  * Service locator to inject customer service into login fragment
@@ -46,6 +38,8 @@ class InvestmentFragment : Fragment() {
 
     private lateinit var investmentContext: Context
     private lateinit var recyclerView: RecyclerView
+    private var handler = Handler()
+    private var runnable: Runnable? = null
     private val investmentService = InvestmentServiceLocator.getInvestmentService()
     private var investmentsMap = mutableMapOf<String, TotalInvestment>()
     private val stockTypes = mutableListOf<String>()
@@ -99,29 +93,34 @@ class InvestmentFragment : Fragment() {
                 var colorI = 0
                 // sets up pie entries and colors for pie chart
                 for(key in investmentsMap.keys) {
-                    pieEntries.add(PieEntry((investmentOverview.shares / investmentsMap[key]!!.shares).toFloat()))
+                    pieEntries.add(PieEntry(((investmentsMap[key]!!.currentAmount / investmentOverview.currentAmount) * 100).toFloat(), "${investmentsMap[key]!!.name}"))
 
                     var newColor: Int
 
                     when (colorI) {
                         0 -> {
                             ++colorI
-                            newColor = Color.BLACK
+                            newColor = Color.argb(255, 14, 135, 54)
                             colors.add(newColor)
                         }
                         1 -> {
                             ++colorI
-                            newColor = Color.LTGRAY
+                            newColor = Color.argb(255, 212, 102, 6)
                             colors.add(newColor)
                         }
                         2 -> {
                             ++colorI
-                            newColor = Color.GRAY
+                            newColor = Color.argb(255, 150, 17, 135)
+                            colors.add(newColor)
+                        }
+                        3 -> {
+                            ++colorI
+                            newColor = Color.argb(255, 17, 150, 150)
                             colors.add(newColor)
                         }
                         else -> {
                             ++colorI
-                            newColor = Color.DKGRAY
+                            newColor = Color.argb(255, 13, 19, 140)
                             colors.add(newColor)
                         }
                     }
@@ -158,6 +157,23 @@ class InvestmentFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         investmentContext = context
+    }
+
+    override fun onResume() {
+        handler.postDelayed(Runnable {
+            // add code to update investments
+            GlobalScope.launch(Dispatchers.IO) {
+                val stockDataList = async{ getStockPriceData() }.await()
+            }
+
+            handler.postDelayed(runnable!!, 5000)
+        }.also { runnable = it }, 5000)
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(runnable!!)
     }
 
     /**
@@ -241,6 +257,7 @@ class InvestmentFragment : Fragment() {
 
         return this
     }
+
 }
 
 

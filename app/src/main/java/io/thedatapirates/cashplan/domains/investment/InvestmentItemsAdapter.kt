@@ -158,7 +158,7 @@ class InvestmentItemsAdapter(
         overviewPieChart.isHighlightPerTapEnabled = true
         overviewPieChart.animateY(1400, Easing.EaseInOutQuad)
         overviewPieChart.legend.isEnabled = false
-        overviewPieChart.setEntryLabelColor(resource.getColor(R.color.black))
+        overviewPieChart.setEntryLabelColor(resource.getColor(R.color.white))
         overviewPieChart.setEntryLabelTextSize(12f)
 
 
