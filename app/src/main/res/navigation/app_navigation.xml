@@ -5,6 +5,7 @@
     android:id="@+id/app_navigation"
     app:startDestination="@id/loginFragment">
 
+<!--    login-->
     <fragment
         android:id="@+id/loginFragment"
         android:name="io.thedatapirates.cashplan.domains.login.LoginFragment"
@@ -35,6 +36,7 @@
             android:id="@+id/home_to_settings"
             app:destination="@id/settings" />
     </fragment>
+<!--    forgot password-->
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="io.thedatapirates.cashplan.domains.login.ForgotPasswordFragment"
@@ -46,6 +48,7 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
+<!--    password confrim-->
     <fragment
         android:id="@+id/passwordConfirmation"
         android:name="io.thedatapirates.cashplan.domains.login.PasswordConfirmation"
@@ -57,6 +60,7 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
+<!--    settings menu-->
     <fragment
         android:id="@+id/settings"
         android:name="io.thedatapirates.cashplan.domains.settings.SettingsFragment"
@@ -68,14 +72,28 @@
         <action
             android:id="@+id/action_stMenu_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_settings_to_stNotifications"
+            app:destination="@id/stNotifications" />
     </fragment>
+<!--    account settings page-->
     <fragment
         android:id="@+id/stAccount"
         android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
         android:label="fragment_st_account"
         tools:layout="@layout/fragment_st_account">
         <action
-            android:id="@+id/frag2_to_stMenu"
+            android:id="@+id/stAccount_to_stMenu"
+            app:destination="@id/settings" />
+    </fragment>
+<!--    notification settings-->
+    <fragment
+        android:id="@+id/stNotifications"
+        android:name="io.thedatapirates.cashplan.domains.settings.StNotifications"
+        android:label="fragment_st_notifications"
+        tools:layout="@layout/fragment_st_notifications" >
+        <action
+            android:id="@+id/stNotif_to_stMenu"
             app:destination="@id/settings" />
     </fragment>
 </navigation>
