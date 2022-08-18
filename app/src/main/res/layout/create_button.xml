@@ -7,14 +7,12 @@
     <android.widget.Button
         android:id="@+id/btnCreateBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="175dp"
-        android:drawableStart="@drawable/plus_icon"
+        android:layout_height="match_parent"
         android:background="@color/blue"
-        android:text="  Create"
+        android:text="Create"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="22sp" />
 
     <TextView

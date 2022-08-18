@@ -14,13 +14,14 @@
         android:orientation="horizontal">
 
         <ImageView
+
             android:id="@+id/tvInvestmentItemDiagramCircle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/circle_background"
-            android:backgroundTint="@color/green" />
+            android:contentDescription="@string/pie_legend" />
 
         <TextView
             android:id="@+id/tvInvestmentItemName"

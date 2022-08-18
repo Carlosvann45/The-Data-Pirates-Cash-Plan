@@ -1,28 +1,33 @@
 package io.thedatapirates.cashplan.domains.investment
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.utils.MPPointF
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.StockData
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
-import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
-import io.thedatapirates.cashplan.domains.login.CustomerServiceLocator
-import io.thedatapirates.cashplan.domains.login.LoginServiceLocator
 import kotlinx.android.synthetic.main.fragment_investment.view.*
 import kotlinx.coroutines.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.random.Random
 
 /**
  * Service locator to inject customer service into login fragment
@@ -42,8 +47,7 @@ class InvestmentFragment : Fragment() {
     private lateinit var investmentContext: Context
     private lateinit var recyclerView: RecyclerView
     private val investmentService = InvestmentServiceLocator.getInvestmentService()
-    private var investmentsMap = mutableMapOf<String, MutableList<InvestmentResponse>>()
-    private var totalInvestments = mutableListOf<TotalInvestment>()
+    private var investmentsMap = mutableMapOf<String, TotalInvestment>()
     private val stockTypes = mutableListOf<String>()
 
     override fun onCreateView(
@@ -57,50 +61,91 @@ class InvestmentFragment : Fragment() {
 
             val investments = getInvestmentInformation()
 
+            // adds all the uniques investment types to a list
+            investments.forEach { if (!stockTypes.contains(it.name)) stockTypes.add(it.name) }
+
+            val stockDataList = getStockPriceData()
+
             for (investment in investments) {
+
                 if (investmentsMap.containsKey(investment.name)) {
-                    val oldInvestments = investmentsMap[investment.name]
-
-                    oldInvestments!!.add(investment)
-
-                    investmentsMap[investment.name] = oldInvestments
+                    // adds investment information to existing total investment information in the hashmap
+                    investmentsMap[investment.name] = investmentsMap[investment.name]!!.combineTotalInvestment(investment, stockDataList)
                 } else {
-                    val newInvestments = mutableListOf<InvestmentResponse>()
-
-                    newInvestments.add(investment)
-
-                    stockTypes.add(investment.name)
-
-                    investmentsMap[investment.name] = newInvestments
+                    // creates a new total investment from the current investment
+                    investmentsMap[investment.name] = TotalInvestment().combineTotalInvestment(investment, stockDataList)
                 }
             }
 
-            val stockDataList = async{ getStockPriceData() }
+            var investmentOverview = TotalInvestment()
 
             for (key in investmentsMap.keys) {
-                addTotalInvestment(investmentsMap[key]!!, stockDataList.await())
+                // adds current profit/loss information to investmennt
+                val newInvestment = investmentsMap[key]!!.calculateCurrentProfitLoss()
+
+                // adds information investment overview
+                investmentOverview = investmentOverview.getTotalOverview(newInvestment)
+
+                // updates information in the hashmap
+                investmentsMap[key] = newInvestment
             }
 
             withContext(Dispatchers.Main) {
-                val totalOverview = getTotalOverview(investments)
 
-                val formatter = DecimalFormat("#,###.##")
+                val pieEntries = ArrayList<PieEntry>()
 
-                formatter.roundingMode = RoundingMode.DOWN
-                view.tvInvestmentTotalAmount.text = "$${formatter.format(totalOverview.amount)}"
+                val colors = ArrayList<Int>()
 
-                if (totalOverview.currentP_L >= 0.00) {
-                    view.tvInvestmentCurrentP_L.text = "+${formatter.format(totalOverview.currentP_L)}(+${formatter.format(totalOverview.currentP_L_Percent)}%)"
-                } else {
-                    view.tvInvestmentCurrentP_L.text = "${formatter.format(totalOverview.currentP_L)}(${formatter.format(totalOverview.currentP_L_Percent)}%)"
-                    view.tvInvestmentCurrentP_L.setTextColor(resources.getColor(R.color.red))
+                var colorI = 0
+                // sets up pie entries and colors for pie chart
+                for(key in investmentsMap.keys) {
+                    pieEntries.add(PieEntry((investmentOverview.shares / investmentsMap[key]!!.shares).toFloat()))
+
+                    var newColor: Int
+
+                    when (colorI) {
+                        0 -> {
+                            ++colorI
+                            newColor = Color.BLACK
+                            colors.add(newColor)
+                        }
+                        1 -> {
+                            ++colorI
+                            newColor = Color.LTGRAY
+                            colors.add(newColor)
+                        }
+                        2 -> {
+                            ++colorI
+                            newColor = Color.GRAY
+                            colors.add(newColor)
+                        }
+                        else -> {
+                            ++colorI
+                            newColor = Color.DKGRAY
+                            colors.add(newColor)
+                        }
+                    }
+
+                    investmentsMap[key]!!.color = newColor
                 }
 
+                val investmentItems = mutableListOf<TotalInvestment>()
+
+                investmentItems.add(TotalInvestment())
+                investmentItems.addAll(investmentsMap.values)
+                investmentItems.add(TotalInvestment())
+
+                // sets up recycler view and creates/adds each stock total investment to recycler
                 recyclerView = view.rvInvestmentItems
                 recyclerView.layoutManager = LinearLayoutManager(investmentContext)
                 recyclerView.setHasFixedSize(true)
-                recyclerView.adapter = InvestmentItemsAdapter(totalInvestments, resources)
-
+                recyclerView.adapter = InvestmentItemsAdapter(
+                    investmentItems,
+                    investmentOverview,
+                    pieEntries,
+                    colors,
+                    resources
+                )
             }
         }
 
@@ -132,6 +177,9 @@ class InvestmentFragment : Fragment() {
     }
 
 
+    /**
+     * gets all stock data information from the current list of stock types
+     */
     private suspend fun getStockPriceData(): MutableList<StockData>? {
         val stockDataList = mutableListOf<StockData>()
 
@@ -146,52 +194,53 @@ class InvestmentFragment : Fragment() {
         return stockDataList
     }
 
-    private fun addTotalInvestment(investments: MutableList<InvestmentResponse>, stockDataList: MutableList<StockData>?) {
-        val totalInvestment = TotalInvestment()
-        val currentPrice = stockDataList?.find { it.ticker == investments[0].name }?.price ?: 0.00
-        var totalAmount = 0.00;
-        var currentAmount = 0.00;
+    /**
+     * Takes an investment response and stock data list to create a new investment
+     * based on real time information
+     */
+    private fun TotalInvestment.combineTotalInvestment(
+        newInvestment: InvestmentResponse, stockDataList: MutableList<StockData>?
+    ): TotalInvestment {
+        val currentPrice = stockDataList?.find { it.ticker == newInvestment.name }?.price ?: 0.00
 
+        this.name = newInvestment.name
+        this.shares += newInvestment.amount
+        this.buyPrice += newInvestment.buyPrice
 
-        for (investment in investments) {
-            totalInvestment.name = investment.name
-            totalInvestment.shares += investment.amount
-            totalInvestment.buyPrice += investment.buyPrice
+        this.totalAmount += (newInvestment.amount * newInvestment.buyPrice)
+        this.currentAmount += (newInvestment.amount * currentPrice)
+        this.currentPrice = currentPrice
 
-            totalAmount += (investment.amount * investment.buyPrice)
-            currentAmount += (investment.amount * currentPrice)
-        }
-
-        totalInvestment.amount = currentAmount
-        totalInvestment.currentPrice = currentPrice
-        totalInvestment.currentP_L = (totalInvestment.currentPrice * totalInvestment.shares) - totalAmount
-        totalInvestment.currentP_L_Percent = (totalInvestment.currentP_L / totalAmount) * 100
-
-        totalInvestments.add(totalInvestment)
+        return this
     }
 
-    private fun getTotalOverview(investments: MutableList<InvestmentResponse>): TotalInvestment {
-        val investmentOverview = TotalInvestment()
-        var totalAmount = 0.00;
+    /**
+     * Adds both total investment to get an overview of the to investments together
+     */
+    private fun TotalInvestment.getTotalOverview(investment: TotalInvestment): TotalInvestment {
+        this.name = investment.name
+        this.shares += investment.shares
+        this.buyPrice += investment.buyPrice
 
-        for (investment in investments) {
-            investmentOverview.name = investment.name
-            investmentOverview.shares += investment.amount
-            investmentOverview.buyPrice += investment.buyPrice
+        this.totalAmount += investment.totalAmount
+        this.currentAmount += investment.currentAmount
+        this.currentP_L += investment.currentP_L
+        this.currentP_L_Percent += investment.currentP_L_Percent
 
-            totalAmount += (investment.amount * investment.buyPrice)
-        }
+        return this
+    }
 
-        var currentAmount = 0.00
+    /**
+     * Calculates the current profit/loss
+     * of given total investment
+     */
+    private fun TotalInvestment.calculateCurrentProfitLoss(): TotalInvestment {
 
-        for (investment in totalInvestments) {
-            currentAmount += investment.amount
-        }
+        this.currentP_L = (this.currentPrice * this.shares) - this.totalAmount
+        this.currentP_L_Percent = (this.currentP_L / this.totalAmount) * 100
 
-        investmentOverview.amount = totalAmount
-        investmentOverview.currentP_L = currentAmount - totalAmount
-        investmentOverview.currentP_L_Percent = ((investmentOverview.currentP_L / totalAmount) * 100)
-
-        return investmentOverview
+        return this
     }
 }
+
+

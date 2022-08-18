@@ -37,4 +37,5 @@
     <string name="close">Close</string>
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
+    <string name="pie_legend">Pie Legend</string>
 </resources>

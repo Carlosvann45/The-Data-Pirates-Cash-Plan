@@ -27,10 +27,12 @@ class InvestmentServiceImpl(
         }
     }
 
+    /**
+     * Gets stock data with api key from account and stock name string for stocks to get
+     */
     override suspend fun getStockData(stockName: String): StockResponse {
-        val url = "${HttpRoutes.STOCK_PRICES}$stockName&api_token=${BuildConfig.API_KEY}"
         return client.get {
-            url(url)
+            url("${HttpRoutes.STOCK_PRICES}$stockName&api_token=${BuildConfig.API_KEY}")
         }
     }
 }

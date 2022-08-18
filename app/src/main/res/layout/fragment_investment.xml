@@ -8,86 +8,10 @@
     android:orientation="vertical"
     tools:context=".domains.investment.InvestmentFragment">
 
-    <LinearLayout
-        android:id="@+id/llInvestmentOverview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvInvestmentTotalAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="$0.00"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvTotalInvestment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Total Investments"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <LinearLayout
-            android:id="@+id/llInvestmentOverviewSubGroup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/tvInvestmentCurrentP_L"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+0.00 (+0.00%)"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llInvestmentOverviewSubGroup2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="0dp">
-
-            <TextView
-                android:id="@+id/tvInvestmentCurrentP_LTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Current P/L"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvInvestmentFirstSeparator"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInvestmentItems"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp" />
 
 </LinearLayout>
