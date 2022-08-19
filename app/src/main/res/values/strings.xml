@@ -42,4 +42,11 @@
     <string name="Title_Cat_BankInfo">Banking</string>
     <string name="Title_Cat_Prsnl">Personal Information</string>
     <string name="Title_Cat_Investments">Investments</string>
+    <string name="All_Notif">All Notications</string>
+    <string name="Spend_Update">Spending Updates</string>
+    <string name="Daily_update">Daily Updates</string>
+    <string name="fees">Fees</string>
+    <string name="alerts">Alerts</string>
+    <string name="customize">Customize</string>
+    <string name="sound_and_vibration">Sound and Vibration</string>
 </resources>

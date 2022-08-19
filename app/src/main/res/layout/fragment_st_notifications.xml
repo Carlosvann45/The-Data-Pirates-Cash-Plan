@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundGravity="center"
     tools:context=".domains.settings.StNotifications">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,12 +12,125 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="267dp"
-            android:layout_height="240dp"
-            android:text="@string/hello_blank_fragment"
+        <!--    ALl Notification switch                     -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/stNotifSw_All"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/All_Notif"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/blue" />
+
+        <!--    Spending Notifications Switch and Options   -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/stNotifSw_SpendAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:enabled="true"
+            android:text="@string/Spend_Update"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifSw_All"
+            app:thumbTint="@color/white_bkgrnd" />
+        <TextView
+            android:id="@+id/stNotfCustomTv_Custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customize"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="visible"
+            app:layout_constraintHorizontal_bias=".8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifSw_SpendAlert" />
+
+        <!--    Daily Updates Switch                        -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/stNotifSw_DailyUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/Daily_update"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotfCustomTv_Custom"
+            app:thumbTint="@color/white_bkgrnd" />
+
+        <!--    Fee Updates Switch                          -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/stNotifSW_Fees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/fees"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifSw_DailyUpdate"
+            app:thumbTint="@color/white_bkgrnd" />
+
+        <!--    Alerts Notifications Switch and Options     -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/stNotifSw_Alerts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/alerts"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifSW_Fees"
+            app:thumbTint="@color/white_bkgrnd" />
+        <TextView
+            android:id="@+id/stNotfCustomTv_Alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customize"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="visible"
+            app:layout_constraintHorizontal_bias=".8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifSw_Alerts" />
+
+        <!--    Sound And Vibration Category Title          -->
+        <TextView
+            android:id="@+id/stNotif_Settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/sound_and_vibration"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotifDiv_NotiftoSnV" />
+
+        <!--    DIVIDERS                                    -->
+        <View
+            android:id="@+id/stNotifDiv_NotiftoSnV"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/blue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stNotfCustomTv_Alert" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
