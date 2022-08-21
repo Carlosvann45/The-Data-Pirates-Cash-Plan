@@ -49,4 +49,6 @@
     <string name="alerts">Alerts</string>
     <string name="customize">Customize</string>
     <string name="sound_and_vibration">Sound and Vibration</string>
+    <string name="sounds">Sounds</string>
+    <string name="vibration">Vibration</string>
 </resources>
