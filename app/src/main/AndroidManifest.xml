@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="io.thedatapirates.cashplan">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,11 +13,35 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CashPlan"
+        android:theme="@style/Theme.Main"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".domains.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.helpcenter.HelpCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.investment.InvestmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.expense.ExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.cashflow.CashFlowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".domains.login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Login"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
