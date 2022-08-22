@@ -11,6 +11,8 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -141,7 +143,6 @@ class InvestmentItemsAdapter(
         }
 
         //sets up the pie chart
-
         overviewPieChart.setUsePercentValues(true)
         overviewPieChart.description.isEnabled = false
         overviewPieChart.setExtraOffsets(5f, 10f, 5f, 5f)
@@ -150,19 +151,17 @@ class InvestmentItemsAdapter(
         overviewPieChart.setHoleColor(resource.getColor(R.color.blue))
         overviewPieChart.setTransparentCircleColor(resource.getColor(R.color.black))
         overviewPieChart.setTransparentCircleAlpha(110)
-        overviewPieChart.holeRadius = 58f
-        overviewPieChart.transparentCircleRadius = 61f
+        overviewPieChart.holeRadius = 51f
+        overviewPieChart.transparentCircleRadius = 20f
         overviewPieChart.setDrawCenterText(false)
         overviewPieChart.rotationAngle = 0f
         overviewPieChart.isRotationEnabled = true
         overviewPieChart.isHighlightPerTapEnabled = true
         overviewPieChart.animateY(1400, Easing.EaseInOutQuad)
         overviewPieChart.legend.isEnabled = false
-        overviewPieChart.setEntryLabelColor(resource.getColor(R.color.white))
-        overviewPieChart.setEntryLabelTextSize(12f)
 
 
-        val pieDataSet = PieDataSet(pieEntries, "Mobile OS")
+        val pieDataSet = PieDataSet(pieEntries, "")
 
         pieDataSet.setDrawIcons(false)
         pieDataSet.sliceSpace = 3f

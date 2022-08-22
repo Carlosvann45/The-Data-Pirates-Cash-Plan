@@ -8,6 +8,7 @@ import android.graphics.Color
 class TotalInvestment(
     var color: Int = 0,
     var name: String = "",
+    var sector: String = "",
     var currentAmount: Double = 0.00,
     var totalAmount: Double = 0.00,
     var shares: Double = 0.00,

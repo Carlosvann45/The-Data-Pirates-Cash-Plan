@@ -6,7 +6,6 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import io.thedatapirates.cashplan.data.dtos.investment.StockData
 import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 
 /**

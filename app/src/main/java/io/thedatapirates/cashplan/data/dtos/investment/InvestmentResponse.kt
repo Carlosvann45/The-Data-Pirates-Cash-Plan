@@ -12,6 +12,7 @@ class InvestmentResponse(
     var dateUpdated: String = "",
     var investmentType: String = "",
     var name: String = "",
+    var sector: String = "",
     var amount: Double = 0.00,
     var buyPrice: Double = 0.00
 ) {

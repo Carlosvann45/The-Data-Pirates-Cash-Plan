@@ -3,11 +3,9 @@ package io.thedatapirates.cashplan.domains.investment
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +14,7 @@ import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.StockData
+import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import kotlinx.android.synthetic.main.fragment_investment.view.*
@@ -38,8 +37,6 @@ class InvestmentFragment : Fragment() {
 
     private lateinit var investmentContext: Context
     private lateinit var recyclerView: RecyclerView
-    private var handler = Handler()
-    private var runnable: Runnable? = null
     private val investmentService = InvestmentServiceLocator.getInvestmentService()
     private var investmentsMap = mutableMapOf<String, TotalInvestment>()
     private val stockTypes = mutableListOf<String>()
@@ -74,7 +71,7 @@ class InvestmentFragment : Fragment() {
             var investmentOverview = TotalInvestment()
 
             for (key in investmentsMap.keys) {
-                // adds current profit/loss information to investmennt
+                // adds current profit/loss information to investment
                 val newInvestment = investmentsMap[key]!!.calculateCurrentProfitLoss()
 
                 // adds information investment overview
@@ -84,49 +81,54 @@ class InvestmentFragment : Fragment() {
                 investmentsMap[key] = newInvestment
             }
 
+            val techOverview = TotalInvestment().getSectorOverview("Technology")
+            val financeOverView = TotalInvestment().getSectorOverview("Finance")
+            val consumerOverview = TotalInvestment().getSectorOverview("Consumer")
+            val healthcareOverview = TotalInvestment().getSectorOverview("Healthcare")
+            val materialOverview = TotalInvestment().getSectorOverview("Material")
+            val realEstateOverview = TotalInvestment().getSectorOverview("Real Estate")
+            val utilityOverview = TotalInvestment().getSectorOverview("Utility")
+            val energyOverview = TotalInvestment().getSectorOverview("Energy")
+            val industrialOverview = TotalInvestment().getSectorOverview("Industrial")
+            val communication = TotalInvestment().getSectorOverview("Communication")
+
             withContext(Dispatchers.Main) {
 
                 val pieEntries = ArrayList<PieEntry>()
 
                 val colors = ArrayList<Int>()
 
-                var colorI = 0
                 // sets up pie entries and colors for pie chart
-                for(key in investmentsMap.keys) {
-                    pieEntries.add(PieEntry(((investmentsMap[key]!!.currentAmount / investmentOverview.currentAmount) * 100).toFloat(), "${investmentsMap[key]!!.name}"))
+                colors.add(findColorResource("Technology"))
+                pieEntries.add(PieEntry(((techOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
 
-                    var newColor: Int
+                colors.add(findColorResource("Finance"))
+                pieEntries.add(PieEntry(((financeOverView.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
 
-                    when (colorI) {
-                        0 -> {
-                            ++colorI
-                            newColor = Color.argb(255, 14, 135, 54)
-                            colors.add(newColor)
-                        }
-                        1 -> {
-                            ++colorI
-                            newColor = Color.argb(255, 212, 102, 6)
-                            colors.add(newColor)
-                        }
-                        2 -> {
-                            ++colorI
-                            newColor = Color.argb(255, 150, 17, 135)
-                            colors.add(newColor)
-                        }
-                        3 -> {
-                            ++colorI
-                            newColor = Color.argb(255, 17, 150, 150)
-                            colors.add(newColor)
-                        }
-                        else -> {
-                            ++colorI
-                            newColor = Color.argb(255, 13, 19, 140)
-                            colors.add(newColor)
-                        }
-                    }
+                colors.add(findColorResource("Consumer"))
+                pieEntries.add(PieEntry(((consumerOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
 
-                    investmentsMap[key]!!.color = newColor
-                }
+                colors.add(findColorResource("Healthcare"))
+                pieEntries.add(PieEntry(((healthcareOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+                colors.add(findColorResource("Material"))
+                pieEntries.add(PieEntry(((materialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+
+                colors.add(findColorResource("Real Estate"))
+                pieEntries.add(PieEntry(((realEstateOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+                colors.add(findColorResource("Utility"))
+                pieEntries.add(PieEntry(((utilityOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+                colors.add(findColorResource("Energy"))
+                pieEntries.add(PieEntry(((energyOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+                colors.add(findColorResource("Industrial"))
+                pieEntries.add(PieEntry(((industrialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+
+                colors.add(findColorResource("Communication"))
+                pieEntries.add(PieEntry(((communication.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
 
                 val investmentItems = mutableListOf<TotalInvestment>()
 
@@ -159,23 +161,6 @@ class InvestmentFragment : Fragment() {
         investmentContext = context
     }
 
-    override fun onResume() {
-        handler.postDelayed(Runnable {
-            // add code to update investments
-            GlobalScope.launch(Dispatchers.IO) {
-                val stockDataList = async{ getStockPriceData() }.await()
-            }
-
-            handler.postDelayed(runnable!!, 5000)
-        }.also { runnable = it }, 5000)
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(runnable!!)
-    }
-
     /**
      * Makes call to api to retrieve customer information
      */
@@ -201,7 +186,9 @@ class InvestmentFragment : Fragment() {
 
         try {
             for (stockName in stockTypes) {
-                stockDataList.add(investmentService.getStockData(stockName).data[0])
+                val stockResponse = investmentService.getStockData(stockName)
+
+                stockDataList.add(StockData(stockName, stockResponse.c))
             }
         } catch (e: Exception) {
             println("Error: ${e.message}")
@@ -217,11 +204,13 @@ class InvestmentFragment : Fragment() {
     private fun TotalInvestment.combineTotalInvestment(
         newInvestment: InvestmentResponse, stockDataList: MutableList<StockData>?
     ): TotalInvestment {
-        val currentPrice = stockDataList?.find { it.ticker == newInvestment.name }?.price ?: 0.00
+        val currentPrice = stockDataList?.find { it.name == newInvestment.name }?.currentPrice ?: 0.00
 
         this.name = newInvestment.name
         this.shares += newInvestment.amount
         this.buyPrice += newInvestment.buyPrice
+        this.sector = newInvestment.sector
+        this.color = findColorResource(newInvestment.sector)
 
         this.totalAmount += (newInvestment.amount * newInvestment.buyPrice)
         this.currentAmount += (newInvestment.amount * currentPrice)
@@ -258,6 +247,30 @@ class InvestmentFragment : Fragment() {
         return this
     }
 
+    private fun findColorResource(sector: String): Int {
+        return when (sector) {
+            "Finance" -> resources.getColor(R.color.finance_sector)
+            "Technology" -> resources.getColor(R.color.technology_sector)
+            "Communication" -> resources.getColor(R.color.communication_sector)
+            "Industrial" -> resources.getColor(R.color.industrial_sector)
+            "Energy" -> resources.getColor(R.color.energy_sector)
+            "Utility" -> resources.getColor(R.color.utility_sector)
+            "Utilities" -> resources.getColor(R.color.utility_sector)
+            "Real Estate" -> resources.getColor(R.color.real_estate_sector)
+            "Material" -> resources.getColor(R.color.material_sector)
+            "Healthcare" -> resources.getColor(R.color.healthcare_sector)
+            "Consumer" -> resources.getColor(R.color.consumer_sector)
+            else -> 0
+        }
+    }
+
+    private fun TotalInvestment.getSectorOverview(sector: String): TotalInvestment {
+        investmentsMap.values.filter { it.sector == sector }.forEach {
+            this.currentAmount += it.currentAmount
+        }
+
+        return this
+    }
 }
 
 

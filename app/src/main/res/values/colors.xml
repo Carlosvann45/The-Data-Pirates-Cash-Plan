@@ -9,4 +9,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="highlight">#95FFFFFF</color>
     <color name="underline">#B2FFFFFF</color>
+    <color name="healthcare_sector">#AC2929</color>
+    <color name="material_sector">#7D00BF</color>
+    <color name="real_estate_sector">#3116AA</color>
+    <color name="consumer_sector">#247515</color>
+    <color name="utility_sector">#C8740D</color>
+    <color name="energy_sector">#ECB800</color>
+    <color name="industrial_sector">#5E6710</color>
+    <color name="communication_sector">#DB36FF</color>
+    <color name="finance_sector">#9E0773</color>
+    <color name="technology_sector">#04B8D8</color>
 </resources>
