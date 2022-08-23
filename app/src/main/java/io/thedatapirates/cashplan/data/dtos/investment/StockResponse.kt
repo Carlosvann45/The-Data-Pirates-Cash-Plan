@@ -7,10 +7,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 class StockResponse(
-    var c: Double?,
-    var h: Double?,
-    var l: Double?,
-    var o: Double?,
-    var pc: Double?
+    var price: Double?,
+    var symbol: String?
 ) {
 }

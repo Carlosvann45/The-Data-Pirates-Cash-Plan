@@ -1,7 +1,6 @@
 package io.thedatapirates.cashplan.domains.investment
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.github.mikephil.charting.data.PieEntry
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import io.thedatapirates.cashplan.data.dtos.investment.StockData
 import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
@@ -38,6 +36,7 @@ class InvestmentFragment : Fragment() {
     private lateinit var investmentContext: Context
     private lateinit var recyclerView: RecyclerView
     private val investmentService = InvestmentServiceLocator.getInvestmentService()
+    private var investments = mutableListOf<InvestmentResponse>()
     private var investmentsMap = mutableMapOf<String, TotalInvestment>()
     private val stockTypes = mutableListOf<String>()
 
@@ -50,7 +49,7 @@ class InvestmentFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val investments = getInvestmentInformation()
+            investments = getInvestmentInformation()
 
             // adds all the uniques investment types to a list
             investments.forEach { if (!stockTypes.contains(it.name)) stockTypes.add(it.name) }
@@ -113,7 +112,6 @@ class InvestmentFragment : Fragment() {
 
                 colors.add(findColorResource("Material"))
                 pieEntries.add(PieEntry(((materialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
-
 
                 colors.add(findColorResource("Real Estate"))
                 pieEntries.add(PieEntry(((realEstateOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
@@ -181,20 +179,17 @@ class InvestmentFragment : Fragment() {
     /**
      * gets all stock data information from the current list of stock types
      */
-    private suspend fun getStockPriceData(): MutableList<StockData>? {
-        val stockDataList = mutableListOf<StockData>()
-
+    private suspend fun getStockPriceData(): MutableList<StockResponse>? {
+        var stockResponses = mutableListOf<StockResponse>()
         try {
-            for (stockName in stockTypes) {
-                val stockResponse = investmentService.getStockData(stockName)
+            val newStockResponses = investmentService.getStockData(stockTypes.joinToString(","))
 
-                stockDataList.add(StockData(stockName, stockResponse.c))
-            }
+            stockResponses = newStockResponses
         } catch (e: Exception) {
             println("Error: ${e.message}")
         }
 
-        return stockDataList
+        return stockResponses
     }
 
     /**
@@ -202,13 +197,13 @@ class InvestmentFragment : Fragment() {
      * based on real time information
      */
     private fun TotalInvestment.combineTotalInvestment(
-        newInvestment: InvestmentResponse, stockDataList: MutableList<StockData>?
+        newInvestment: InvestmentResponse, stockDataList: MutableList<StockResponse>?
     ): TotalInvestment {
-        val currentPrice = stockDataList?.find { it.name == newInvestment.name }?.currentPrice ?: 0.00
+        val currentPrice = stockDataList?.find { it.symbol == newInvestment.name }?.price ?: newInvestment.buyPrice
 
         this.name = newInvestment.name
         this.shares += newInvestment.amount
-        this.buyPrice += newInvestment.buyPrice
+        this.buyPrice = newInvestment.buyPrice
         this.sector = newInvestment.sector
         this.color = findColorResource(newInvestment.sector)
 
@@ -255,7 +250,6 @@ class InvestmentFragment : Fragment() {
             "Industrial" -> resources.getColor(R.color.industrial_sector)
             "Energy" -> resources.getColor(R.color.energy_sector)
             "Utility" -> resources.getColor(R.color.utility_sector)
-            "Utilities" -> resources.getColor(R.color.utility_sector)
             "Real Estate" -> resources.getColor(R.color.real_estate_sector)
             "Material" -> resources.getColor(R.color.material_sector)
             "Healthcare" -> resources.getColor(R.color.healthcare_sector)

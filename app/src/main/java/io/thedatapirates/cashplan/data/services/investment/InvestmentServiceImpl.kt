@@ -29,9 +29,9 @@ class InvestmentServiceImpl(
     /**
      * Gets stock data with api key from account and stock name string for stocks to get
      */
-    override suspend fun getStockData(stockName: String): StockResponse {
+    override suspend fun getStockData(stockNames: String): MutableList<StockResponse> {
         return client.get {
-            url("${HttpRoutes.STOCK_PRICES}$stockName&token=${BuildConfig.API_KEY}")
+            url("${HttpRoutes.STOCK_PRICES}$stockNames")
         }
     }
 }
