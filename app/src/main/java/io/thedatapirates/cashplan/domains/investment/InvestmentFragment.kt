@@ -1,5 +1,7 @@
 package io.thedatapirates.cashplan.domains.investment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import kotlinx.android.synthetic.main.fragment_investment.view.*
+import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
 
 /**
@@ -35,6 +38,7 @@ class InvestmentFragment : Fragment() {
 
     private lateinit var investmentContext: Context
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressOverlay: View
     private val investmentService = InvestmentServiceLocator.getInvestmentService()
     private var investments = mutableListOf<InvestmentResponse>()
     private var investmentsMap = mutableMapOf<String, TotalInvestment>()
@@ -47,6 +51,10 @@ class InvestmentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_investment, container, false)
 
+        progressOverlay = view.clProgressSpinnerOverlay
+
+        animateView(progressOverlay, View.VISIBLE, 0.75f, 200L)
+
         GlobalScope.launch(Dispatchers.IO) {
 
             investments = getInvestmentInformation()
@@ -56,30 +64,30 @@ class InvestmentFragment : Fragment() {
 
             val stockDataList = getStockPriceData()
 
-            for (investment in investments) {
+            val investmentOverview = TotalInvestment()
 
-                if (investmentsMap.containsKey(investment.name)) {
-                    // adds investment information to existing total investment information in the hashmap
-                    investmentsMap[investment.name] = investmentsMap[investment.name]!!.combineTotalInvestment(investment, stockDataList)
-                } else {
-                    // creates a new total investment from the current investment
-                    investmentsMap[investment.name] = TotalInvestment().combineTotalInvestment(investment, stockDataList)
+            for (stock in stockTypes) {
+                // gets all investments by current stock type
+                val uniqueInvestments = investments.filter { it.name == stock }
+
+                val totalInvestment  = TotalInvestment()
+
+                // calculates the total for each stock type
+                uniqueInvestments.forEach{
+                    totalInvestment.calculateTotalInvestment(it, stockDataList)
                 }
+
+                // adds the current profit/loss
+                totalInvestment.calculateCurrentProfitLoss()
+
+                // adds the stock total to the investment overview
+                investmentOverview.calculateTotalOverview(totalInvestment)
+
+                // adds total investment to map
+                investmentsMap[stock] = totalInvestment
             }
 
-            var investmentOverview = TotalInvestment()
-
-            for (key in investmentsMap.keys) {
-                // adds current profit/loss information to investment
-                val newInvestment = investmentsMap[key]!!.calculateCurrentProfitLoss()
-
-                // adds information investment overview
-                investmentOverview = investmentOverview.getTotalOverview(newInvestment)
-
-                // updates information in the hashmap
-                investmentsMap[key] = newInvestment
-            }
-
+            // calculates the total for each sector
             val techOverview = TotalInvestment().getSectorOverview("Technology")
             val financeOverView = TotalInvestment().getSectorOverview("Finance")
             val consumerOverview = TotalInvestment().getSectorOverview("Consumer")
@@ -97,7 +105,8 @@ class InvestmentFragment : Fragment() {
 
                 val colors = ArrayList<Int>()
 
-                // sets up pie entries and colors for pie chart
+                // sets up pie entries and colors for pie chart getting the average based
+                // on the investment overview total and the sector total
                 colors.add(findColorResource("Technology"))
                 pieEntries.add(PieEntry(((techOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
 
@@ -130,8 +139,13 @@ class InvestmentFragment : Fragment() {
 
                 val investmentItems = mutableListOf<TotalInvestment>()
 
+                // ensures the overview will get added to the recycler
                 investmentItems.add(TotalInvestment())
+
+                // all of the individual stocks get added
                 investmentItems.addAll(investmentsMap.values)
+
+                // ensures the buy and sell buttons get added to the recycler view at the bottom
                 investmentItems.add(TotalInvestment())
 
                 // sets up recycler view and creates/adds each stock total investment to recycler
@@ -140,13 +154,19 @@ class InvestmentFragment : Fragment() {
                 recyclerView.setHasFixedSize(true)
                 recyclerView.adapter = InvestmentItemsAdapter(
                     investmentItems,
+                    investments,
                     investmentOverview,
                     pieEntries,
                     colors,
-                    resources
+                    resources,
+                    view
                 )
+
+                animateView(progressOverlay, View.GONE, 0f, 200L)
             }
         }
+
+
 
         return view
     }
@@ -181,6 +201,7 @@ class InvestmentFragment : Fragment() {
      */
     private suspend fun getStockPriceData(): MutableList<StockResponse>? {
         var stockResponses = mutableListOf<StockResponse>()
+
         try {
             val newStockResponses = investmentService.getStockData(stockTypes.joinToString(","))
 
@@ -196,7 +217,7 @@ class InvestmentFragment : Fragment() {
      * Takes an investment response and stock data list to create a new investment
      * based on real time information
      */
-    private fun TotalInvestment.combineTotalInvestment(
+    private fun TotalInvestment.calculateTotalInvestment(
         newInvestment: InvestmentResponse, stockDataList: MutableList<StockResponse>?
     ): TotalInvestment {
         val currentPrice = stockDataList?.find { it.symbol == newInvestment.name }?.price ?: newInvestment.buyPrice
@@ -217,7 +238,7 @@ class InvestmentFragment : Fragment() {
     /**
      * Adds both total investment to get an overview of the to investments together
      */
-    private fun TotalInvestment.getTotalOverview(investment: TotalInvestment): TotalInvestment {
+    private fun TotalInvestment.calculateTotalOverview(investment: TotalInvestment): TotalInvestment {
         this.name = investment.name
         this.shares += investment.shares
         this.buyPrice += investment.buyPrice
@@ -242,6 +263,9 @@ class InvestmentFragment : Fragment() {
         return this
     }
 
+    /**
+     * Finds color based on sector name
+     */
     private fun findColorResource(sector: String): Int {
         return when (sector) {
             "Finance" -> resources.getColor(R.color.finance_sector)
@@ -258,12 +282,31 @@ class InvestmentFragment : Fragment() {
         }
     }
 
+    /**
+     * calculates the amount per sector
+     */
     private fun TotalInvestment.getSectorOverview(sector: String): TotalInvestment {
         investmentsMap.values.filter { it.sector == sector }.forEach {
             this.currentAmount += it.currentAmount
         }
 
         return this
+    }
+
+    private fun animateView(view: View, toVisibility: Int, toAlpha: Float, duration: Long) {
+        val show = toVisibility == view.visibility
+
+        if (show) view.alpha = 0f
+
+        view.visibility = view.visibility
+        view.animate()
+            .setDuration(duration)
+            .alpha(if(show) toAlpha else 0f)
+            .setListener(object: AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animator: Animator) {
+                    view.visibility = toVisibility
+                }
+            })
     }
 }
 

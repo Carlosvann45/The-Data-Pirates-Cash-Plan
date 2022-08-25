@@ -9,6 +9,19 @@
         android:id="@+id/rlInvestmentFragment"
         android:name="io.thedatapirates.cashplan.domains.investment.InvestmentFragment"
         android:label="fragment_investment"
-        tools:layout="@layout/fragment_investment" />
+        tools:layout="@layout/fragment_investment" >
+        <action
+            android:id="@+id/navigateToInvestmentBreakdownFragment"
+            app:destination="@id/llInvestmentBreakdownFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/llInvestmentBreakdownFragment"
+        android:name="io.thedatapirates.cashplan.domains.investment.InvestmentBreakdownFragment"
+        android:label="fragment_investment_breakdown"
+        tools:layout="@layout/fragment_investment_breakdown" >
+        <action
+            android:id="@+id/navigateToInvestmentFragment"
+            app:destination="@id/rlInvestmentFragment" />
+        </fragment>
 
 </navigation>

@@ -55,5 +55,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-datetime:0.3.2"
     implementation "com.github.PhilJay:MPAndroidChart:v3.1.0"
+    implementation "com.google.code.gson:gson:2.9.0"
 
 }

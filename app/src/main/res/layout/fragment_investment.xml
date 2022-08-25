@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".domains.investment.InvestmentFragment">
 
+    <include layout="@layout/progress_spinner_overlay" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInvestmentItems"
         android:layout_width="match_parent"

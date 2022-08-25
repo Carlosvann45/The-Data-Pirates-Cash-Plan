@@ -1,14 +1,19 @@
 package io.thedatapirates.cashplan.domains.investment
 
 import android.content.res.Resources
-import android.graphics.Paint
 import android.graphics.Typeface
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.NavAction
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -18,10 +23,11 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.gson.Gson
 import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
-import kotlinx.android.synthetic.main.investment_create_button.view.*
-import java.math.RoundingMode
+import kotlinx.android.synthetic.main.investment_buttons.view.*
 import java.text.DecimalFormat
 
 /**
@@ -29,10 +35,12 @@ import java.text.DecimalFormat
  */
 class InvestmentItemsAdapter(
     private val totalInvestments: MutableList<TotalInvestment>,
+    private val investments: MutableList<InvestmentResponse>,
     private val investmentOverview: TotalInvestment,
     private val pieEntries: ArrayList<PieEntry>,
     private val pieColors: ArrayList<Int>,
-    private val resource: Resources
+    private val resource: Resources,
+    private val view: View
     ) : RecyclerView.Adapter<InvestmentItemsAdapter.InvestmentItemsViewHolder>() {
 
     /**
@@ -44,9 +52,9 @@ class InvestmentItemsAdapter(
     ): InvestmentItemsAdapter.InvestmentItemsViewHolder {
 
         val itemView = when (viewType) {
-            R.layout.investment_create_button -> {
+            R.layout.investment_buttons -> {
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.investment_create_button, parent, false)
+                    .inflate(R.layout.investment_buttons, parent, false)
             }
             R.layout.investment_overview -> {
                 LayoutInflater.from(parent.context)
@@ -73,7 +81,8 @@ class InvestmentItemsAdapter(
                 fillInvestmentOverView(holder)
             }
             totalInvestments.size - 1 -> {
-                holder.itemView.btnCreateBtn.setOnClickListener {  }
+                holder.itemView.btnSellBtn.setOnClickListener {  }
+                holder.itemView.btnBuyBtn.setOnClickListener {  }
             }
             else -> {
                 fillInvestmentItem(holder, position)
@@ -90,7 +99,7 @@ class InvestmentItemsAdapter(
                 R.layout.investment_overview
             }
             totalInvestments.size - 1 -> {
-                R.layout.investment_create_button
+                R.layout.investment_buttons
             }
             else -> {
                 R.layout.investment_item
@@ -200,6 +209,7 @@ class InvestmentItemsAdapter(
     private fun fillInvestmentItem(
         holder: InvestmentItemsAdapter.InvestmentItemsViewHolder, position: Int
     ) {
+        val investmentItem: LinearLayout = holder.itemView.findViewById(R.id.rlInvestmentItem)
         val itemPieLegend: ImageView = holder.itemView.findViewById(R.id.tvInvestmentItemDiagramCircle)
         val itemStockName: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemName)
         val itemTotalAmount: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemTotalAmount)
@@ -207,7 +217,6 @@ class InvestmentItemsAdapter(
         val itemCurrentPrice: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemCurrentPrice)
         val itemCurrentPL: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemCurrentP_L)
 
-        val formatter = DecimalFormat("#,###,###.##")
         val currentItem = totalInvestments[position]
 
 
@@ -226,6 +235,15 @@ class InvestmentItemsAdapter(
         } else {
             itemCurrentPL.text = "${String.format("%,.2f", currentItem.currentP_L)}(${String.format("%,.2f", currentItem.currentP_L_Percent)}%)"
             itemCurrentPL.setTextColor(resource.getColor(R.color.red))
+        }
+
+        investmentItem.setOnClickListener {
+            val investmentTransactions = investments.filter { it.name == currentItem.name }
+            val bundle = Bundle()
+            bundle.putString("investmentTransactions", Gson().toJson(investmentTransactions))
+            bundle.putString("name", currentItem.name)
+
+            Navigation.findNavController(view).navigate(R.id.llInvestmentBreakdownFragment, bundle)
         }
     }
 }
