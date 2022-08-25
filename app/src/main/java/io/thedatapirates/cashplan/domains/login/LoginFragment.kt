@@ -16,7 +16,7 @@ import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.login.LoginService
 import io.thedatapirates.cashplan.domains.home.HomeActivity
-import io.thedatapirates.cashplan.utils.CustomToast
+import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 
@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
                     if (!isLoggedIn) {
                         toast?.cancel()
 
-                        toast = CustomToast.createCustomToast(error, view, loginContext)
+                        toast = AndroidUtils.createCustomToast(error, view, loginContext)
 
                         toast?.show()
                     }
@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
 
                             toast?.cancel()
 
-                            toast = CustomToast.createCustomToast(
+                            toast = AndroidUtils.createCustomToast(
                                 "Sorry there was an issue with the server. Please try again",
                                 view, loginContext
                             )

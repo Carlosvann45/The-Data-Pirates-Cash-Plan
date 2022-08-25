@@ -17,6 +17,7 @@ import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
+import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_investment.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
@@ -53,7 +54,7 @@ class InvestmentFragment : Fragment() {
 
         progressOverlay = view.clProgressSpinnerOverlay
 
-        animateView(progressOverlay, View.VISIBLE, 0.75f, 200L)
+        AndroidUtils.animateView(progressOverlay, View.VISIBLE, 0.75f, 200L)
 
         GlobalScope.launch(Dispatchers.IO) {
 
@@ -162,7 +163,7 @@ class InvestmentFragment : Fragment() {
                     view
                 )
 
-                animateView(progressOverlay, View.GONE, 0f, 200L)
+                AndroidUtils.animateView(progressOverlay, View.GONE, 0f, 200L)
             }
         }
 
@@ -291,22 +292,6 @@ class InvestmentFragment : Fragment() {
         }
 
         return this
-    }
-
-    private fun animateView(view: View, toVisibility: Int, toAlpha: Float, duration: Long) {
-        val show = toVisibility == view.visibility
-
-        if (show) view.alpha = 0f
-
-        view.visibility = view.visibility
-        view.animate()
-            .setDuration(duration)
-            .alpha(if(show) toAlpha else 0f)
-            .setListener(object: AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animator: Animator) {
-                    view.visibility = toVisibility
-                }
-            })
     }
 }
 
