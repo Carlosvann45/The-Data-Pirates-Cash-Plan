@@ -81,8 +81,11 @@ class InvestmentItemsAdapter(
                 fillInvestmentOverView(holder)
             }
             totalInvestments.size - 1 -> {
-                holder.itemView.btnSellBtn.setOnClickListener {  }
-                holder.itemView.btnBuyBtn.setOnClickListener {  }
+                holder.itemView.btnSellBtn.setOnClickListener {
+                    Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment)
+                }
+                holder.itemView.btnBuyBtn.setOnClickListener {
+                }
             }
             else -> {
                 fillInvestmentItem(holder, position)

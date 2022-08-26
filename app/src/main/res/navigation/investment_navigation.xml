@@ -13,6 +13,9 @@
         <action
             android:id="@+id/navigateToInvestmentBreakdownFragment"
             app:destination="@id/llInvestmentBreakdownFragment" />
+        <action
+            android:id="@+id/navigateSellInvestmentFragment"
+            app:destination="@id/llSellInvestmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/llInvestmentBreakdownFragment"
@@ -23,5 +26,14 @@
             android:id="@+id/navigateToInvestmentFragment"
             app:destination="@id/rlInvestmentFragment" />
         </fragment>
+    <fragment
+        android:id="@+id/llSellInvestmentFragment"
+        android:name="io.thedatapirates.cashplan.SellInvestmentFragment"
+        android:label="fragment_sell_investment"
+        tools:layout="@layout/fragment_sell_investment" >
+        <action
+            android:id="@+id/navigateToInvestmentFragmentFromSellInvestment"
+            app:destination="@id/rlInvestmentFragment" />
+    </fragment>
 
 </navigation>
