@@ -39,7 +39,7 @@
     <string name="place_holder_email">bob.ross@example.com</string>
     <!--    PLACE HOLDERS AKA Temp or Template   -->
     <string name="Template">Temp</string>
-    <string name="Temp_Phone" tools:ignore="TypographyDashes">123-456-7890</string>
+    <string name="Temp_Phone">123–456–7890</string>
     <string name="Temp_Email">JohnDoe@temp.com</string>
     <string name="Temp_BankName">Bank Name</string>
     <string name="Temp_CheckingName">Checking X4321</string>
