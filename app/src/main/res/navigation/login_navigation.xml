@@ -11,29 +11,10 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/navigateToForgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="io.thedatapirates.cashplan.domains.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/navigateToLoginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/home_to_settings"
-            app:destination="@id/settings" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -56,26 +37,5 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/settings"
-        android:name="io.thedatapirates.cashplan.domains.settings.SettingsFragment"
-        android:label="fragment_st_menu"
-        tools:layout="@layout/fragment_settings">
-        <action
-            android:id="@+id/stMenu_to_stAccnt"
-            app:destination="@id/stAccount" />
-        <action
-            android:id="@+id/action_stMenu_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/stAccount"
-        android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
-        android:label="fragment_st_account"
-        tools:layout="@layout/fragment_st_account">
-        <action
-            android:id="@+id/frag2_to_stMenu"
-            app:destination="@id/settings" />
     </fragment>
 </navigation>
