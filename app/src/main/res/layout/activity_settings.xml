@@ -19,7 +19,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_totopOf="@+id/navSettingsBottomNavigation"
+            android:layout_alignBottom="@id/navSettingsBottomNavigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
