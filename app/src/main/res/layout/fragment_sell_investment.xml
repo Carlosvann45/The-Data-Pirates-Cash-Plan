@@ -70,7 +70,7 @@
 
             <TextView
                 android:id="@+id/etStockToSell"
-                android:layout_width="150dp"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Stock"
