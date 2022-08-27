@@ -59,4 +59,5 @@
     <string name="finance_sector">finance sector</string>
     <string name="technology">Technology</string>
     <string name="transactions">Transactions</string>
+    <string name="sell_stock">Sell Stock</string>
 </resources>

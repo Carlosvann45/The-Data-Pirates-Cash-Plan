@@ -82,7 +82,9 @@ class InvestmentItemsAdapter(
             }
             totalInvestments.size - 1 -> {
                 holder.itemView.btnSellBtn.setOnClickListener {
-                    Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment)
+                    val bundle = Bundle()
+                    bundle.putString("stockList", Gson().toJson(totalInvestments))
+                    Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
                 }
                 holder.itemView.btnBuyBtn.setOnClickListener {
                 }
