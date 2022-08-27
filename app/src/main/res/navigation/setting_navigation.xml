@@ -13,6 +13,9 @@
         <action
             android:id="@+id/stMenu_to_stAccnt"
             app:destination="@id/stAccount" />
+        <action
+            android:id="@+id/stMenu_to_stNotif"
+            app:destination="@id/stNotifications" />
     </fragment>
 
     <fragment
@@ -20,4 +23,11 @@
         android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
         android:label="@string/BTitle_Account"
         tools:layout="@layout/fragment_st_account"/>
+    <fragment
+        android:id="@+id/stNotifications"
+        android:name="io.thedatapirates.cashplan.domains.settings.StNotifications"
+        android:label="fragment_st_notifications"
+        tools:layout="@layout/fragment_st_notifications" />
+
+
 </navigation>

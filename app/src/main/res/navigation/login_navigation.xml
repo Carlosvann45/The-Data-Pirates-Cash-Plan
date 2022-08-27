@@ -32,9 +32,6 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/home_to_settings"
-            app:destination="@id/settings" />
     </fragment>
 <!--    forgot password-->
     <fragment

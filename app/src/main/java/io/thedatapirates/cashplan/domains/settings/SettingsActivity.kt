@@ -1,12 +1,16 @@
 package io.thedatapirates.cashplan.domains.settings
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -129,4 +133,29 @@ class SettingsActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    var builder = NotificationCompat.Builder(this, "Channel_ID")
+        .setSmallIcon(R.drawable.ic_launcher_background)
+        .setContentTitle("Notification Title")
+        .setContentText("Notification Content")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setAutoCancel(true)
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.Template)
+            val descriptionText = getString(R.string.BTitle_Notifications)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("Channel_ID2", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }

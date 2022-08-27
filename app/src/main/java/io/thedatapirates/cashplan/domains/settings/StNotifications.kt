@@ -25,9 +25,9 @@ class StNotifications : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_st_notifications, container, false)
-        view.stNotifTv_AlertCustom.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.stNotif_to_stMenu)
-        }
+//        view.stNotifTv_AlertCustom.setOnClickListener {
+//            Navigation.findNavController(view).navigate(R.id.stNotif_to_stMenu)
+//        }
 
         return view
     }
