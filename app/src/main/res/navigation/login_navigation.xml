@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/settings">
+    app:startDestination="@id/loginFragment">
 
 <!--    login-->
     <fragment
@@ -59,41 +59,5 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-<!--    settings menu-->
-    <fragment
-        android:id="@+id/settings"
-        android:name="io.thedatapirates.cashplan.domains.settings.SettingsFragment"
-        android:label="fragment_st_menu"
-        tools:layout="@layout/fragment_settings">
-        <action
-            android:id="@+id/stMenu_to_stAccnt"
-            app:destination="@id/stAccount" />
-        <action
-            android:id="@+id/stMenu_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/stMenu_to_stNotif"
-            app:destination="@id/stNotifications" />
-    </fragment>
-<!--    account settings page-->
-    <fragment
-        android:id="@+id/stAccount"
-        android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
-        android:label="fragment_st_account"
-        tools:layout="@layout/fragment_st_account">
-        <action
-            android:id="@+id/stAccount_to_stMenu"
-            app:destination="@id/settings" />
-    </fragment>
-<!--    notification settings-->
-    <fragment
-        android:id="@+id/stNotifications"
-        android:name="io.thedatapirates.cashplan.domains.settings.StNotifications"
-        android:label="fragment_st_notifications"
-        tools:layout="@layout/fragment_st_notifications" >
-        <action
-            android:id="@+id/stNotif_to_stMenu"
-            app:destination="@id/settings" />
     </fragment>
 </navigation>

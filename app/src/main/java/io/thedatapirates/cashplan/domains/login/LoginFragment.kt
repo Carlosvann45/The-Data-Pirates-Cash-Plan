@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.domains.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
+import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.login.LoginService
+import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.utils.CustomToast
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
@@ -24,6 +28,13 @@ object LoginServiceLocator {
 }
 
 /**
+ * Service locator to inject customer service into login fragment
+ */
+object CustomerServiceLocator {
+    fun getCustomerService(): CustomerService = CustomerService.create()
+}
+
+/**
  * A simple [Fragment] subclass.
  */
 @DelicateCoroutinesApi
@@ -31,6 +42,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginContext: Context
     private val loginService = LoginServiceLocator.getLoginService()
+    private val customerService = CustomerServiceLocator.getCustomerService()
     private var toast: Toast? = null
     private var error = ""
 
@@ -51,14 +63,53 @@ class LoginFragment : Fragment() {
 
                 // whenever changing fragments/activities you have to switch to the main thread
                 withContext(Dispatchers.Main) {
-                    if (isLoggedIn) {
-                        Navigation.findNavController(view).navigate(R.id.navigateToHomeFragment)
-                    } else {
+                    if (!isLoggedIn) {
                         toast?.cancel()
 
                         toast = CustomToast.createCustomToast(error, view, loginContext)
 
                         toast?.show()
+                    }
+                }
+
+                if (isLoggedIn) {
+
+                    val customer = getCustomerInformation(view)
+
+                    // if user exist show welcome text
+                    if (customer != null) {
+                        withContext(Dispatchers.Main) {
+                            val sharedPreferences =
+                                loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+
+                            sharedPreferences.edit().apply {
+                                putString("customerFirstName", customer.firstName)
+                                putString("customerLastName", customer.lastName)
+                                apply()
+                            }
+
+                            val intent = Intent(loginContext, HomeActivity::class.java)
+
+                            // clears fields
+                            view.etUsernameField.text.clear()
+                            view.etPasswordField.text.clear()
+
+                            // moves to the main activity once logged in
+                            startActivity(intent)
+                        }
+                    } else {
+                        // reroutes to login page and displays error message
+                        withContext(Dispatchers.Main) {
+
+                            toast?.cancel()
+
+                            toast = CustomToast.createCustomToast(
+                                "Sorry there was an issue with the server. Please try again",
+                                view, loginContext
+                            )
+
+                            toast?.show()
+                        }
                     }
                 }
             }
@@ -116,5 +167,29 @@ class LoginFragment : Fragment() {
         }
 
         return isLoggedIn
+    }
+
+
+    /**
+     * Makes call to api to retrieve customer information
+     */
+    private suspend fun getCustomerInformation(view: View): CustomerResponse? {
+        val customer: CustomerResponse?
+
+        val sharedPreferences = loginContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("accessToken", "")
+        val email = sharedPreferences.getString("userEmail", "")
+
+        customer = try {
+            customerService.getCustomerInformation(email, accessToken)
+        } catch (e: ClientRequestException) {
+            println("Error: ${e.response.status.description}")
+            null
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+            null
+        }
+
+        return customer
     }
 }
