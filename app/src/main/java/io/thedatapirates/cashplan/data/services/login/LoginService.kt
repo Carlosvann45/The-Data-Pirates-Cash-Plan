@@ -13,6 +13,8 @@ import io.thedatapirates.cashplan.data.dtos.login.LoginResponse
  */
 interface LoginService {
 
+    suspend fun sendCustomerForgotPasswordEmail(email: String)
+
     suspend fun loginCustomer(loginRequest: LoginRequest): LoginResponse?
 
     /**

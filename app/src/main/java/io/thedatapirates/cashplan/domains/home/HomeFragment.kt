@@ -2,27 +2,14 @@ package io.thedatapirates.cashplan.domains.home
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.Navigation
-import io.ktor.client.features.*
+import androidx.fragment.app.Fragment
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
-import io.thedatapirates.cashplan.data.services.customer.CustomerService
-import io.thedatapirates.cashplan.utils.CustomToast
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.coroutines.*
-import java.lang.Exception
+import kotlinx.coroutines.DelicateCoroutinesApi
 
-/**
- * Service locator to inject customer service into login fragment
- */
-object CustomerServiceLocator {
-    fun getCustomerService(): CustomerService = CustomerService.create()
-}
 
 /**
  * A simple [Fragment] subclass.
@@ -31,8 +18,6 @@ object CustomerServiceLocator {
 class HomeFragment : Fragment() {
 
     private lateinit var homeContext: Context
-    private val customerService = CustomerServiceLocator.getCustomerService()
-    private var toast: Toast? = null
 
     /**
      * Runs listener's when fragment is created
@@ -44,66 +29,26 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // coroutine to run async method on separate thread
-        GlobalScope.launch(Dispatchers.IO) {
-            val customer = getCustomerInformation(view)
+        val sharedPreferences =
+            homeContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
 
-            // if user exist show welcome text
-            if (customer != null) {
-                withContext(Dispatchers.Main) {
-                    view.tvHomeText.text = getString(R.string.home_welcome, customer.firstName, customer.lastName)
-                }
-            } else {
-                // reroutes to navigation page and displays error message
-                withContext(Dispatchers.Main) {
-                    Navigation.findNavController(view).navigate(R.id.navigateToLoginFragment)
+        val firstName = sharedPreferences.getString("customerFirstName", "")
+        val lastName = sharedPreferences.getString("customerLastName", "")
 
-                    toast?.cancel()
+        view.tvHomeText.text =
+            getString(
+                R.string.home_welcome,
+                firstName,
+                lastName
+            )
 
-                    toast = CustomToast.createCustomToast(
-                        "Sorry there was an issue with the server. Please try again",
-                        view, homeContext
-                    )
-
-                    toast?.show()
-                }
-            }
-        }
-
-            view.tvHomeText.setOnClickListener {
-                Navigation.findNavController(view).navigate(R.id.navigateToLoginFragment)
-            }
-
-            return view
-        }
+        return view
+    }
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         homeContext = context
-    }
-
-    /**
-     * Makes call to api to retrieve customer information
-     */
-   private suspend fun getCustomerInformation(view: View): CustomerResponse? {
-        val customer: CustomerResponse?
-
-        val sharedPreferences = homeContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
-        val accessToken = sharedPreferences.getString("accessToken", "")
-        val email = sharedPreferences.getString("userEmail", "")
-
-       customer = try {
-           customerService.getCustomerInformation(email, accessToken)
-       } catch (e: ClientRequestException) {
-           println("Error: ${e.response.status.description}")
-           null
-       } catch (e: Exception) {
-           println("Error: ${e.message}")
-           null
-       }
-
-        return customer
     }
 
 }

@@ -6,4 +6,9 @@
     <color name="light_grey">#B5555454</color>
     <color name="red">#C54E57</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="highlight">#95FFFFFF</color>
+    <color name="underline">#B2FFFFFF</color>
+    <color name="Grayed_Out">#FF808080</color>
+    <color name="abs_black">#FF000000</color>
+    <color name="white_bkgrnd">#FFf9f9f9</color>
 </resources>
