@@ -37,4 +37,9 @@
     <string name="close">Close</string>
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
+    <string-array name="cash_flow_choices_array">
+        <item>Deposit</item>
+        <item>Expense</item>
+    </string-array>
+    <string name="selected_item">Selected item:</string>
 </resources>
