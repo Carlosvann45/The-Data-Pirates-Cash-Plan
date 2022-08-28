@@ -20,6 +20,9 @@ import kotlinx.android.synthetic.main.custom_picker.view.*
 import kotlinx.android.synthetic.main.fragment_sell_investment.view.*
 import kotlinx.coroutines.*
 
+/**
+ * Service locator to inject customer service into investment fragment
+ */
 object SellInvestmentServiceLocator {
     fun getInvestmentService(): InvestmentService = InvestmentService.create()
 }
@@ -45,6 +48,7 @@ class SellInvestmentFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sell_investment, container, false)
         val listJson = arguments?.getString("stockList")
 
+        // gets all the json sent from the navigation
         totalInvestments =
             if (listJson != null)
                 Gson().fromJson(
@@ -54,11 +58,13 @@ class SellInvestmentFragment : Fragment() {
             else mutableListOf()
 
 
+        // created a list of options for the custom picker
         val options = mutableListOf<String>()
         options.add("Choose Stock")
 
         totalInvestments.forEach { if (it.name != "") options.add(it.name) }
 
+        // sets up the custom picker for scrolling through options
         view.npCustomPicker.minValue = 0
         view.npCustomPicker.maxValue = (options.size - 1)
         view.npCustomPicker.displayedValues = options.toTypedArray()
@@ -73,24 +79,30 @@ class SellInvestmentFragment : Fragment() {
                 "You currently have $${String.format("%,.2f", amount)} available"
         }
 
+        // when dropdown button is selected makes sure picker is visible
         view.ivOpenSelectStockPicker.setOnClickListener {
             view.clCustomPickerLayout.visibility = View.VISIBLE
         }
 
+        // when done button is selected makes sure picker is closed
         view.tvCustomPickerDone.setOnClickListener {
             view.clCustomPickerLayout.visibility = View.GONE
         }
 
+        // if back button is clicked navigates back to investment overview
         view.ivSellInvestmentBackBtn.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.navigateToInvestmentFragmentFromSell)
         }
 
+        // handles calculating sell transaction for selected stock
         view.btnSellStock.setOnClickListener {
             val amountToSell = view.etAmountToSell.text.toString()
             val totalAmount: Double =
                 totalInvestments.find { it.name == view.etStockToSell.text.toString() }?.totalAmount
                     ?: 0.00
 
+            // if selected sell amount is meets criteria make request for sell transaction
+            // otherwise it will throw toast
             if (amountToSell != "" && amountToSell.toDouble() > 0.00 && amountToSell.toDouble() < totalAmount) {
                 val investmentToSell =
                     totalInvestments.find { it.name == view.etStockToSell.text.toString() }
@@ -100,7 +112,9 @@ class SellInvestmentFragment : Fragment() {
                     val stockWasSold: Boolean
 
                     if (investmentToSell != null) {
+                        // if sell amount is the total amount available
                         if (amountToSell.toDouble() == totalAmount) {
+                            // calculates sell transaction
                             val newInvestment = InvestmentRequest(
                                 investmentToSell.name,
                                 investmentToSell.sector,
@@ -108,10 +122,12 @@ class SellInvestmentFragment : Fragment() {
                                 (investmentToSell.totalAmount / investmentToSell.shares) * -1
                             )
 
-                            // send request to api
+                            // send sell transaction to api
                             stockWasSold = createInvestment(newInvestment)
 
+                        // else if transaction it less then total amount
                         } else {
+                            // calculates sell transaction
                             val amount = amountToSell.toDouble() / investmentToSell.buyPrice
                             val newInvestment = InvestmentRequest(
                                 investmentToSell.name,
@@ -120,15 +136,17 @@ class SellInvestmentFragment : Fragment() {
                                 (amountToSell.toDouble() / amount) * -1
                             )
 
-                            // send request to api
+                            // send sell transaction to api
                             stockWasSold = createInvestment(newInvestment)
 
                         }
 
                         withContext(Dispatchers.Main) {
+                            // if transaction was completed navigates to investment overview page
                             if (stockWasSold) {
                                 Navigation.findNavController(view)
                                     .navigate(R.id.navigateToInvestmentFragmentFromSell)
+                            // else if transaction failed throws error toast
                             } else {
                                 // throw error toast
                                 toast?.cancel()
@@ -145,7 +163,7 @@ class SellInvestmentFragment : Fragment() {
                         }
                     }
                 }
-
+            // if validation doesn't pass throws error toast
             } else {
                 // throw error toast
                 toast?.cancel()
@@ -172,7 +190,7 @@ class SellInvestmentFragment : Fragment() {
     }
 
     /**
-     * Makes call to api to retrieve customer information
+     * Makes call to api to process sell transaction
      */
     private suspend fun createInvestment(investment: InvestmentRequest): Boolean {
         var wasSold = false

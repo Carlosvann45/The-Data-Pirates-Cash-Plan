@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
 
 /**
- * Service locator to inject customer service into login fragment
+ * Service locator to inject customer service into investment fragment
  */
 object InvestmentServiceLocator {
     fun getInvestmentService(): InvestmentService = InvestmentService.create()
@@ -229,6 +229,7 @@ class InvestmentFragment : Fragment() {
         this.sector = newInvestment.sector
         this.color = findColorResource(newInvestment.sector)
 
+        // calculates shares and current amount depending of if the transaction was a sell or buy
         if (newInvestment.buyPrice > 0) {
             this.shares += newInvestment.amount
             this.currentAmount += (newInvestment.amount * currentPrice)
