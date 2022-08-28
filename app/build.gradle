@@ -54,5 +54,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     implementation "org.jetbrains.kotlinx:kotlinx-datetime:0.3.2"
-
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

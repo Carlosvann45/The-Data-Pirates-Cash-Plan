@@ -8,4 +8,5 @@ object HttpRoutes {
     const val LOGIN = "$BASE_URL/customers/login"
     const val CUSTOMERS = "$BASE_URL/customers"
     const val FORGOT_PASSWORD = "$BASE_URL/verifications/password/forgot"
+    const val CREATECUSTOMER = "$CUSTOMERS/create"
 }
