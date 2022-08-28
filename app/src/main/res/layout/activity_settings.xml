@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".domains.settings.SettingsActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,12 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="@+id/navSettingsBottomNavigation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintBottom_toTopOf="@+id/navSettingsBottomNavigation"
             app:navGraph="@navigation/setting_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,9 +36,13 @@
             app:itemIconTint="@drawable/nav_item_color_selected"
             app:itemTextColor="@color/white"
             app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_navigation" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nvSettingsTopNavigationWithHeader"

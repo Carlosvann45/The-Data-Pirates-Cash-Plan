@@ -15,6 +15,9 @@
             app:destination="@id/forgotPasswordFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/navigateToCreateAccountFragment"
+            app:destination="@id/flCreateAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -37,5 +40,14 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/flCreateAccountFragment"
+        android:name="io.thedatapirates.cashplan.domains.login.CreateAccountFragment"
+        android:label="fragment_create_account"
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/navigateTologinFragmentFromCreateAccount"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
