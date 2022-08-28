@@ -60,4 +60,41 @@
     <string name="technology">Technology</string>
     <string name="transactions">Transactions</string>
     <string name="sell_stock">Sell Stock</string>
+    <string-array name="cash_flow_choices_array">
+        <item>Deposit</item>
+        <item>Expense</item>
+    </string-array>
+    <string name="selected_item">Selected item:</string>
+    <string name="BTitle_Account">Account</string>
+    <string name="BTitle_Customize">Customization</string>
+    <string name="BTitle_Notifications">Notifications</string>
+    <string name="Title_Permissions">Permissions</string>
+    <string name="Template">Temp</string>
+    <string name="Temp_Phone">123–456–7890</string>
+    <string name="Temp_Email">JohnDoe@temp.com</string>
+    <string name="Temp_BankName">Bank Name</string>
+    <string name="Temp_CheckingName">Checking X4321</string>
+    <string name="Temp_SavingsName">Savings X1234</string>
+    <string name="Temp_AccntNum">*****4321</string>
+    <string name="Temp_Title_StockApp">RobinHat</string>
+    <string name="Temp_Title_CryptoApp">CubeChain</string>
+    <string name="Title_FirstName">First Name:</string>
+    <string name="Title_LastName">Last Name:</string>
+    <string name="Title_PhoneNum">Phone Number:</string>
+    <string name="Title_Email">Email:</string>
+    <string name="Title_CheckingAccnt_Singlar">Checking Account</string>
+    <string name="Title_SavingsAccnt">Savings Account</string>
+    <string name="Title_Stocks">Stocks</string>
+    <string name="Title_Crypto">Cryptocurrency</string> <string name="Title_Cat_BankInfo">Banking</string>
+    <string name="Title_Cat_Prsnl">Personal Information</string>
+    <string name="Title_Cat_Investments">Investments</string>
+    <string name="All_Notif">All Notications</string>
+    <string name="Spend_Update">Spending Updates</string>
+    <string name="Daily_update">Daily Updates</string>
+    <string name="fees">Fees</string>
+    <string name="alerts">Alerts</string>
+    <string name="customize">Customize</string>
+    <string name="sound_and_vibration">Sound and Vibration</string>
+    <string name="sounds">Sounds</string>
+    <string name="vibration">Vibration</string>
 </resources>

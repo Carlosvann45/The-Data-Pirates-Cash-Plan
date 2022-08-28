@@ -24,6 +24,8 @@ class PasswordConfirmation : Fragment() {
             Navigation.findNavController(view).navigate(R.id.navigateToLoginFragmentSlide)
         }
 
+        //view.bCashFlow.setOnClickListener { Navigation.findNavController(view).navigate(R.id.rlCashFlowFragment) }
+
         return view
     }
 }

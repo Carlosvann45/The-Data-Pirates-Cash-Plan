@@ -11,4 +11,5 @@ object HttpRoutes {
     const val FORGOT_PASSWORD = "$BASE_URL/verifications/password/forgot"
     const val INVESTMENT = "$BASE_URL/investments"
     const val STOCK_PRICES = "$STOCK_URL/stock/data/quote?symbols="
+    const val CREATE_CUSTOMER = "$CUSTOMERS/create"
 }

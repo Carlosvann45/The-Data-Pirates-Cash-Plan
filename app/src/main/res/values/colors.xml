@@ -19,4 +19,7 @@
     <color name="communication_sector">#DB36FF</color>
     <color name="finance_sector">#9E0773</color>
     <color name="technology_sector">#04B8D8</color>
+    <color name="Grayed_Out">#FF808080</color>
+    <color name="abs_black">#FF000000</color>
+    <color name="white_bkgrnd">#FFf9f9f9</color>
 </resources>
