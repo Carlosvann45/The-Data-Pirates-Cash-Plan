@@ -119,6 +119,10 @@ class LoginFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.navigateToForgotPasswordFragment)
         }
 
+        view.tvCreateAccount.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.navigateToCreateAccountFragment)
+        }
+
         return view
     }
 

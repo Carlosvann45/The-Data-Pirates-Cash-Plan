@@ -2,7 +2,10 @@ package io.thedatapirates.cashplan.data.services.customer
 
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.thedatapirates.cashplan.constants.HttpRoutes
+import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
+import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountResponse
 import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 
 /**
@@ -24,6 +27,14 @@ class CustomerServiceImpl(
             headers {
                 append("Authorization", "Bearer $accessToken")
             }
+        }
+    }
+
+    override suspend fun createCustomer(customerInformation: CreateAccountRequest): CreateAccountResponse {
+        return client.post {
+            url(HttpRoutes.CREATECUSTOMER)
+            contentType(ContentType.Application.Json)
+            body = customerInformation
         }
     }
 }
