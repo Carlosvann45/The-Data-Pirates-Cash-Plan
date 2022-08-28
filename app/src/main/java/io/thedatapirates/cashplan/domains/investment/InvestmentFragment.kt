@@ -81,11 +81,13 @@ class InvestmentFragment : Fragment() {
                 // adds the current profit/loss
                 totalInvestment.calculateCurrentProfitLoss()
 
-                // adds the stock total to the investment overview
-                investmentOverview.calculateTotalOverview(totalInvestment)
+                if (totalInvestment.shares > 0.00){
+                    // adds the stock total to the investment overview
+                    investmentOverview.calculateTotalOverview(totalInvestment)
 
-                // adds total investment to map
-                investmentsMap[stock] = totalInvestment
+                    // adds total investment to map
+                    investmentsMap[stock] = totalInvestment
+                }
             }
 
             // calculates the total for each sector
@@ -224,13 +226,19 @@ class InvestmentFragment : Fragment() {
         val currentPrice = stockDataList?.find { it.symbol == newInvestment.name }?.price ?: newInvestment.buyPrice
 
         this.name = newInvestment.name
-        this.shares += newInvestment.amount
-        this.buyPrice = newInvestment.buyPrice
         this.sector = newInvestment.sector
         this.color = findColorResource(newInvestment.sector)
 
+        if (newInvestment.buyPrice > 0) {
+            this.shares += newInvestment.amount
+            this.currentAmount += (newInvestment.amount * currentPrice)
+        } else {
+            this.shares -= newInvestment.amount
+            this.currentAmount += ((newInvestment.amount * currentPrice) * -1)
+        }
+
+        this.buyPrice += newInvestment.buyPrice
         this.totalAmount += (newInvestment.amount * newInvestment.buyPrice)
-        this.currentAmount += (newInvestment.amount * currentPrice)
         this.currentPrice = currentPrice
 
         return this
@@ -258,6 +266,9 @@ class InvestmentFragment : Fragment() {
      */
     private fun TotalInvestment.calculateCurrentProfitLoss(): TotalInvestment {
 
+        val numOfInvestments = investments.count { it.name == this.name && it.buyPrice > 0 }
+
+        this.buyPrice = this.buyPrice / numOfInvestments
         this.currentP_L = (this.currentPrice * this.shares) - this.totalAmount
         this.currentP_L_Percent = (this.currentP_L / this.totalAmount) * 100
 

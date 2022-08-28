@@ -5,6 +5,8 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
+import io.ktor.http.*
+import io.thedatapirates.cashplan.data.dtos.investment.InvestmentRequest
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
 
@@ -17,6 +19,8 @@ interface InvestmentService {
 
     suspend fun getStockData(stockNames: String) : MutableList<StockResponse>
 
+    suspend fun createInvestment(investment: InvestmentRequest, accessToken: String?): InvestmentResponse
+
     /**
      * Dependency injection for investment service
      */
@@ -28,6 +32,7 @@ interface InvestmentService {
                         level = LogLevel.ALL
                     }
                     install(JsonFeature) {
+                        accept(ContentType.Application.Json)
                         serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                             isLenient = true
                             ignoreUnknownKeys = true

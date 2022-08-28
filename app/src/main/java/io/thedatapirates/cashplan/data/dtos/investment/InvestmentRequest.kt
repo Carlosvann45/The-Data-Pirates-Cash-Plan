@@ -3,14 +3,10 @@ package io.thedatapirates.cashplan.data.dtos.investment
 import kotlinx.serialization.Serializable
 
 /**
- * A class to represent a customer response from the api
+ * A class to represent a customer request to the api
  */
 @Serializable
-class InvestmentResponse(
-    var id: Int,
-    var dateCreated: String,
-    var dateUpdated: String,
-    var investmentType: String,
+class InvestmentRequest(
     var name: String,
     var sector: String,
     var amount: Double,
