@@ -83,6 +83,7 @@ class InvestmentItemsAdapter(
             }
             totalInvestments.size - 1 -> {
                 holder.itemView.btnSellBtn.setOnClickListener {
+
                     if (totalInvestments.size > 2) {
                         val bundle = Bundle()
                         bundle.putString("stockList", Gson().toJson(totalInvestments))
@@ -92,6 +93,10 @@ class InvestmentItemsAdapter(
 
                 holder.itemView.btnBuyBtn.setOnClickListener {
                     Navigation.findNavController(view).navigate(R.id.llBuyInvestmentFragment)
+
+                    val bundle = Bundle()
+                    bundle.putString("stockList", Gson().toJson(totalInvestments))
+                    Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
                 }
             }
             else -> {

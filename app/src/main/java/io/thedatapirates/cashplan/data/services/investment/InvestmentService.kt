@@ -23,7 +23,6 @@ interface InvestmentService {
     suspend fun createInvestment(investment: InvestmentRequest, accessToken: String?): InvestmentResponse
 
     suspend fun getAllStockTickers(): MutableList<StockTicker>
-
     /**
      * Dependency injection for investment service
      */

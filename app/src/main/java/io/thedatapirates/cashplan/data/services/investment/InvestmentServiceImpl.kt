@@ -9,6 +9,10 @@ import io.ktor.http.auth.*
 import io.thedatapirates.cashplan.BuildConfig
 import io.thedatapirates.cashplan.constants.HttpRoutes
 import io.thedatapirates.cashplan.data.dtos.investment.*
+import io.thedatapirates.cashplan.data.dtos.investment.InvestmentRequest
+import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
+import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
+import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import kotlinx.serialization.json.Json
 
 /**
@@ -38,6 +42,7 @@ class InvestmentServiceImpl(
             url("${HttpRoutes.STOCK_PRICES}$stockNames")
         }
     }
+
 
     /**
      * Creates an investment

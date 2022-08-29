@@ -85,8 +85,6 @@
     <string name="Title_CheckingAccnt_Singlar">Checking Account</string>
     <string name="Title_SavingsAccnt">Savings Account</string>
     <string name="Title_Stocks">Stocks</string>
-    <string name="Title_Crypto">Cryptocurrency</string>
-    <string name="Title_Cat_BankInfo">Banking</string>
     <string name="Title_Cat_Prsnl">Personal Information</string>
     <string name="Title_Cat_Investments">Investments</string>
     <string name="All_Notif">All Notications</string>
