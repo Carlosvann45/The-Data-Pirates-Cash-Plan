@@ -8,10 +8,7 @@ import io.ktor.http.*
 import io.ktor.http.auth.*
 import io.thedatapirates.cashplan.BuildConfig
 import io.thedatapirates.cashplan.constants.HttpRoutes
-import io.thedatapirates.cashplan.data.dtos.investment.InvestmentRequest
-import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
-import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
+import io.thedatapirates.cashplan.data.dtos.investment.*
 import kotlinx.serialization.json.Json
 
 /**
@@ -42,6 +39,9 @@ class InvestmentServiceImpl(
         }
     }
 
+    /**
+     * Creates an investment
+     */
     override suspend fun createInvestment(investment: InvestmentRequest, accessToken: String?): InvestmentResponse {
         return client.post {
             url(HttpRoutes.INVESTMENT)
@@ -50,6 +50,15 @@ class InvestmentServiceImpl(
                 append("Authorization", "Bearer $accessToken")
             }
             body = investment
+        }
+    }
+
+    /**
+     * Gets all stock tickers
+     */
+    override suspend fun getAllStockTickers(): MutableList<StockTicker> {
+        return client.get {
+            url(HttpRoutes.STOCK_TICKERS)
         }
     }
 }
