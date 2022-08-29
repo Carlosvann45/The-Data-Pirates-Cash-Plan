@@ -98,4 +98,12 @@
     <string name="sound_and_vibration">Sound and Vibration</string>
     <string name="sounds">Sounds</string>
     <string name="vibration">Vibration</string>
+    <string name="sector">Sector:</string>
+    <string name="drop_down_button">Drop Down button</string>
+    <string name="amount">Amount:</string>
+    <string name="price">Price:</string>
+    <string name="buy_stock">Buy Stock</string>
+    <string name="stock_symbol">Stock Symbol:</string>
+    <string name="buy_investment">Buy Investment</string>
+    <string name="back_button">Back Button</string>
 </resources>

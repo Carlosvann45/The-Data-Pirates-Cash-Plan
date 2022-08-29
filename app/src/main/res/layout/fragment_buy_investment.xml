@@ -32,7 +32,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
                 android:background="@drawable/back_button"
-                android:contentDescription="Back Button" />
+                android:contentDescription="@string/back_button" />
 
             <TextView
                 android:layout_width="0dp"
@@ -42,7 +42,7 @@
                 android:gravity="start"
                 android:paddingStart="12dp"
                 android:paddingEnd="0dp"
-                android:text="Buy Investment"
+                android:text="@string/buy_investment"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stock Symbol:"
+                android:text="@string/stock_symbol"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -83,7 +83,40 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/drop_down_icon"
-                android:contentDescription="Drop Down button" />
+                android:contentDescription="@string/drop_down_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sector"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/etStockSector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/technology"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivOpenSelectSectorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/drop_down_icon"
+                android:contentDescription="@string/drop_down_button" />
 
         </LinearLayout>
 
@@ -97,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amount:"
+                android:text="@string/amount"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -125,7 +158,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price:"
+                android:text="@string/price"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -144,7 +177,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvTotalAmountAvailable"
+            android:id="@+id/tvTotalSharesSelected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -161,7 +194,7 @@
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/login_btn_background"
-            android:text="@string/sell_stock"
+            android:text="@string/buy_stock"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="22sp" />
