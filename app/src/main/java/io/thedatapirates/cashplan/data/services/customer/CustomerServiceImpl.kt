@@ -32,7 +32,7 @@ class CustomerServiceImpl(
 
     override suspend fun createCustomer(customerInformation: CreateAccountRequest): CreateAccountResponse {
         return client.post {
-            url(HttpRoutes.CREATECUSTOMER)
+            url(HttpRoutes.CREATE_CUSTOMER)
             contentType(ContentType.Application.Json)
             body = customerInformation
         }

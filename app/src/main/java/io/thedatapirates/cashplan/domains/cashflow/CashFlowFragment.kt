@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import io.thedatapirates.cashplan.R
+import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 
 
 class CashFlowFragment : Fragment() {
+
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private lateinit var cashFlowAdapter: CashFlowAdapter

@@ -36,6 +36,8 @@ class InvestmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_investment)
 
+        supportActionBar!!.title = "Investments"
+
         bottomNav = findViewById(R.id.navInvestmentBottomNavigation)
         navView = findViewById(R.id.nvInvestmentTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlInvestmentActivity)

@@ -1,20 +1,19 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import io.thedatapirates.cashplan.R
+import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_cashflow.view.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
@@ -28,19 +27,21 @@ import java.nio.channels.Selector
  */
 class NestedCashFlowFragment : Fragment() {
 
+
     var option = ""
     private lateinit var cashFlowAdapter: CashFlowAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        cashFlowAdapter = CashFlowAdapter(mutableListOf())
         return inflater.inflate(R.layout.fragment_nested_cash_flow, container, false)
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        cashFlowAdapter = CashFlowAdapter(mutableListOf())
 
         super.onViewCreated(itemView, savedInstanceState)
 
@@ -85,7 +86,6 @@ class NestedCashFlowFragment : Fragment() {
             }
             Navigation.findNavController(itemView).navigate(R.id.rlCashFlowFragment)
         }
-
     }
 
 }
