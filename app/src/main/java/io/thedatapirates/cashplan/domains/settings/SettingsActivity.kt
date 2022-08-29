@@ -2,15 +2,20 @@ package io.thedatapirates.cashplan.domains.settings
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -32,6 +37,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
+    private val channel_id = "example_id_channel"
+    private val notifID = 100
 
     /**
      * Handles adding listeners to switch between activities when any navigation button is selected
@@ -39,6 +46,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        createNotificationChannel()
 
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
@@ -124,7 +132,18 @@ class SettingsActivity : AppCompatActivity() {
 
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
+
+        object : CountDownTimer(10000,1000){
+            override fun onTick(tick: Long) {
+                tick - 1000;
+            }
+            override fun onFinish() {
+                sendNotification()
+            }
+        }.start()
+
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
@@ -134,28 +153,46 @@ class SettingsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    var builder = NotificationCompat.Builder(this, "Channel_ID")
-        .setSmallIcon(R.drawable.ic_launcher_background)
-        .setContentTitle("Notification Title")
-        .setContentText("Notification Content")
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setAutoCancel(true)
 
     private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+        // check if device is running android 8.0 or not
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = getString(R.string.Template)
-            val descriptionText = getString(R.string.BTitle_Notifications)
+            //creates notification item in the device settings
+            val name = "All Notifications"
+            val descriptionText = "Notification Description"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("Channel_ID2", name, importance).apply {
+            val channel = NotificationChannel(channel_id, name, importance).apply {
+                enableVibration(true)
                 description = descriptionText
             }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            // Register the channel with the users device
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
 
+   fun sendNotification(){
+       val intent = Intent(this, SettingsActivity::class.java).apply {
+           flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+       }
+       val pendingIntent : PendingIntent = getActivity(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
+       val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_launcher_background)
+       val bitmapLarge = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_launcher_foreground)
+
+       //the actual notification itself
+        val builder = NotificationCompat.Builder(this, channel_id)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle("Notification Title")
+            .setContentText("Notification Content")
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+//            .setLargeIcon(bitmapLarge)
+//            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+//            .setAutoCancel(true)
+//            .setStyle((NotificationCompat.BigTextStyle().bigText("the text that takes numerous lines")))
+        with(NotificationManagerCompat.from(this)){
+            notify(notifID, builder.build())
+        }
+    }
 }
