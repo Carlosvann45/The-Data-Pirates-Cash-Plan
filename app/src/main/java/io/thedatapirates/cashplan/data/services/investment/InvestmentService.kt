@@ -9,6 +9,7 @@ import io.ktor.http.*
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentRequest
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
 import io.thedatapirates.cashplan.data.dtos.investment.StockResponse
+import io.thedatapirates.cashplan.data.dtos.investment.StockTicker
 
 /**
  * Interface method for investment api calls
@@ -21,6 +22,7 @@ interface InvestmentService {
 
     suspend fun createInvestment(investment: InvestmentRequest, accessToken: String?): InvestmentResponse
 
+    suspend fun getAllStockTickers(): MutableList<StockTicker>
     /**
      * Dependency injection for investment service
      */

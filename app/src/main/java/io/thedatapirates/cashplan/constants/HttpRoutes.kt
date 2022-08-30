@@ -12,4 +12,5 @@ object HttpRoutes {
     const val INVESTMENT = "$BASE_URL/investments"
     const val STOCK_PRICES = "$STOCK_URL/stock/data/quote?symbols="
     const val CREATE_CUSTOMER = "$CUSTOMERS/create"
+    const val STOCK_TICKERS = "$STOCK_URL/stock/tickers/all"
 }

@@ -35,7 +35,8 @@
             android:id="@+id/npCustomPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/numberPicker"/>
+            android:theme="@style/numberPicker"
+            android:background="@color/blue"/>
 
 
     </LinearLayout>

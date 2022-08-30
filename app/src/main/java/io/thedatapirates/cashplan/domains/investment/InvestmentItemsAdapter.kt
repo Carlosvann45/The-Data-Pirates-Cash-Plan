@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavAction
@@ -82,11 +83,20 @@ class InvestmentItemsAdapter(
             }
             totalInvestments.size - 1 -> {
                 holder.itemView.btnSellBtn.setOnClickListener {
+
+                    if (totalInvestments.size > 2) {
+                        val bundle = Bundle()
+                        bundle.putString("stockList", Gson().toJson(totalInvestments))
+                        Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
+                    }
+                }
+
+                holder.itemView.btnBuyBtn.setOnClickListener {
+                    Navigation.findNavController(view).navigate(R.id.llBuyInvestmentFragment)
+
                     val bundle = Bundle()
                     bundle.putString("stockList", Gson().toJson(totalInvestments))
                     Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
-                }
-                holder.itemView.btnBuyBtn.setOnClickListener {
                 }
             }
             else -> {
