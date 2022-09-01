@@ -32,13 +32,13 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/login_edit_background"
             android:hint="@string/username"
-            android:textColorHint="@color/Grayed_Out"
-            android:textColor="@color/black"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:padding="8dp"
             android:paddingStart="10dp"
-            android:paddingEnd="8dp" />
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
         <EditText
             android:id="@+id/etPasswordField"
@@ -49,13 +49,13 @@
             android:layout_marginEnd="25dp"
             android:background="@drawable/login_edit_background"
             android:hint="@string/password"
-            android:textColorHint="@color/Grayed_Out"
-            android:textColor="@color/black"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:padding="8dp"
             android:paddingStart="10dp"
-            android:paddingEnd="8dp" />
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
         <TextView
             android:id="@+id/tvForgotPassword"

@@ -4,17 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentRequest
 import io.thedatapirates.cashplan.data.dtos.investment.StockTicker
-import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.custom_picker.view.*
@@ -116,11 +115,12 @@ class BuyInvestmentFragment : Fragment() {
 
         // on click listener for back button
         view.ivBuyInvestmentBackBtn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
         }
 
         // on change listener for shares calculation with amount
-        view.etAmountToBuy.addTextChangedListener(object: TextWatcher {
+        view.etAmountToBuy.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -132,11 +132,15 @@ class BuyInvestmentFragment : Fragment() {
         })
 
         // on change listener for shares calculation with price
-        view.etPriceToBuy.addTextChangedListener(object: TextWatcher {
+        view.etPriceToBuy.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!p0.isNullOrBlank()) calculateAndSetShares(view, p0.toString().toDouble(), false)
+                if (!p0.isNullOrBlank()) calculateAndSetShares(
+                    view,
+                    p0.toString().toDouble(),
+                    false
+                )
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -170,7 +174,8 @@ class BuyInvestmentFragment : Fragment() {
 
                     if (stockWasBought) {
                         withContext(Dispatchers.Main) {
-                            Navigation.findNavController(view).navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
+                            Navigation.findNavController(view)
+                                .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
                         }
                     } else {
                         // throw error toast

@@ -1,7 +1,5 @@
 package io.thedatapirates.cashplan.data.dtos.investment
 
-import android.graphics.Color
-
 /**
  * A class to represent a total investment
  */

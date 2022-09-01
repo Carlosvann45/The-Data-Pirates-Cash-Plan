@@ -9,11 +9,11 @@
     tools:context=".domains.cashflow.CashFlowFragment">
 
     <TextView
-        android:textAlignment="center"
         android:id="@+id/tvExpensesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cash Flow"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,11 +22,10 @@
     <View
         android:id="@+id/vHL"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="5dp"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="5dp"
         android:background="@color/light_grey"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
 
     <TextView
         android:id="@+id/tvExpensesName"
@@ -35,17 +34,16 @@
         android:text="Name:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
 
     <TextView
         android:id="@+id/tvExpensesAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:paddingStart="8dp"
         android:text="Amount:"
         android:textSize="18sp"
-        android:layout_marginStart="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvExpensesName"
         app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
@@ -71,15 +69,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
-
-
     <Button
         android:id="@+id/btnAddExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Item"
         android:layout_marginBottom="50dp"
+        android:text="Add Item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteDoneExpenses" />
 
@@ -87,8 +82,8 @@
         android:id="@+id/btnDeleteDoneExpenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Items"
         android:layout_marginBottom="50dp"
+        android:text="Delete Items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

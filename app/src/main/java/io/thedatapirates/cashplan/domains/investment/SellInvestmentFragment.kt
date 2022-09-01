@@ -125,7 +125,7 @@ class SellInvestmentFragment : Fragment() {
                             // send sell transaction to api
                             stockWasSold = createInvestment(newInvestment)
 
-                        // else if transaction it less then total amount
+                            // else if transaction it less then total amount
                         } else {
                             // calculates sell transaction
                             val amount = amountToSell.toDouble() / investmentToSell.buyPrice
@@ -146,7 +146,7 @@ class SellInvestmentFragment : Fragment() {
                             if (stockWasSold) {
                                 Navigation.findNavController(view)
                                     .navigate(R.id.navigateToInvestmentFragmentFromSell)
-                            // else if transaction failed throws error toast
+                                // else if transaction failed throws error toast
                             } else {
                                 // throw error toast
                                 toast?.cancel()
@@ -163,7 +163,7 @@ class SellInvestmentFragment : Fragment() {
                         }
                     }
                 }
-            // if validation doesn't pass throws error toast
+                // if validation doesn't pass throws error toast
             } else {
                 // throw error toast
                 toast?.cancel()

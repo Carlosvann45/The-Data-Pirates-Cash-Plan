@@ -1,7 +1,5 @@
 package io.thedatapirates.cashplan.domains.investment
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -71,17 +69,17 @@ class InvestmentFragment : Fragment() {
                 // gets all investments by current stock type
                 val uniqueInvestments = investments.filter { it.name == stock }
 
-                val totalInvestment  = TotalInvestment()
+                val totalInvestment = TotalInvestment()
 
                 // calculates the total for each stock type
-                uniqueInvestments.forEach{
+                uniqueInvestments.forEach {
                     totalInvestment.calculateTotalInvestment(it, stockDataList)
                 }
 
                 // adds the current profit/loss
                 totalInvestment.calculateCurrentProfitLoss()
 
-                if (totalInvestment.shares > 0.00){
+                if (totalInvestment.shares > 0.00) {
                     // adds the stock total to the investment overview
                     investmentOverview.calculateTotalOverview(totalInvestment)
 
@@ -186,7 +184,8 @@ class InvestmentFragment : Fragment() {
      * Makes call to api to retrieve customer information
      */
     private suspend fun getInvestmentInformation(): MutableList<InvestmentResponse> {
-        val sharedPreferences = investmentContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            investmentContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("accessToken", "")
 
         try {
@@ -223,7 +222,8 @@ class InvestmentFragment : Fragment() {
     private fun TotalInvestment.calculateTotalInvestment(
         newInvestment: InvestmentResponse, stockDataList: MutableList<StockResponse>?
     ): TotalInvestment {
-        val currentPrice = stockDataList?.find { it.symbol == newInvestment.name }?.price ?: newInvestment.buyPrice
+        val currentPrice =
+            stockDataList?.find { it.symbol == newInvestment.name }?.price ?: newInvestment.buyPrice
 
         this.name = newInvestment.name
         this.sector = newInvestment.sector

@@ -18,11 +18,15 @@ interface InvestmentService {
 
     suspend fun getCustomerInvestments(accessToken: String?): MutableList<InvestmentResponse>
 
-    suspend fun getStockData(stockNames: String) : MutableList<StockResponse>
+    suspend fun getStockData(stockNames: String): MutableList<StockResponse>
 
-    suspend fun createInvestment(investment: InvestmentRequest, accessToken: String?): InvestmentResponse
+    suspend fun createInvestment(
+        investment: InvestmentRequest,
+        accessToken: String?
+    ): InvestmentResponse
 
     suspend fun getAllStockTickers(): MutableList<StockTicker>
+
     /**
      * Dependency injection for investment service
      */

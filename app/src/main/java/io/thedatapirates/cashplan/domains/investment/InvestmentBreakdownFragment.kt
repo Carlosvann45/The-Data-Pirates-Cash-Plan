@@ -2,10 +2,10 @@ package io.thedatapirates.cashplan.domains.investment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,12 +35,15 @@ class InvestmentBreakdownFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_investment_breakdown, container, false)
         val title = arguments?.getString("name")
-        val investmentJson= arguments?.getString("investmentTransactions")
+        val investmentJson = arguments?.getString("investmentTransactions")
 
         // creates list of investment transactions for recycler view or just an empty list
         val investmentTransactions: MutableList<InvestmentResponse> =
             if (investmentJson != null)
-                Gson().fromJson(investmentJson, object: TypeToken<MutableList<InvestmentResponse>>(){}.type)
+                Gson().fromJson(
+                    investmentJson,
+                    object : TypeToken<MutableList<InvestmentResponse>>() {}.type
+                )
             else mutableListOf()
 
         // sets title with stock name

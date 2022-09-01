@@ -58,8 +58,8 @@ class AndroidUtils {
             view.visibility = view.visibility
             view.animate()
                 .setDuration(duration)
-                .alpha(if(show) toAlpha else 0f)
-                .setListener(object: AnimatorListenerAdapter() {
+                .alpha(if (show) toAlpha else 0f)
+                .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animator: Animator) {
                         view.visibility = toVisibility
                     }
