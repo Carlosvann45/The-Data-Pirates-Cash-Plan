@@ -61,25 +61,26 @@ class BuyInvestmentFragment : Fragment() {
 
             stockOptions = async { getStockTickers() }.await()
 
-        }
+            withContext(Dispatchers.Main) {
+                // when dropdown button is selected makes sure picker is visible
+                view.ivOpenSelectStockPicker.setOnClickListener {
+                    // created a list of options for the custom picker
+                    val options = mutableListOf<String>()
+                    options.add("Choose Stock")
 
-        // when dropdown button is selected makes sure picker is visible
-        view.ivOpenSelectStockPicker.setOnClickListener {
-            // created a list of options for the custom picker
-            val options = mutableListOf<String>()
-            options.add("Choose Stock")
+                    stockOptions.forEach { options.add(it.Symbol) }
 
-            stockOptions.forEach { options.add(it.Symbol) }
+                    // sets up the custom picker for scrolling through options
+                    view.npCustomPicker.minValue = 0
+                    view.npCustomPicker.maxValue = (options.size - 1)
+                    view.npCustomPicker.displayedValues = options.toTypedArray()
+                    view.npCustomPicker.setOnValueChangedListener { _, _, newVal ->
+                        view.etStockToBuy.setText(options[newVal], TextView.BufferType.EDITABLE)
+                    }
 
-            // sets up the custom picker for scrolling through options
-            view.npCustomPicker.minValue = 0
-            view.npCustomPicker.maxValue = (options.size - 1)
-            view.npCustomPicker.displayedValues = options.toTypedArray()
-            view.npCustomPicker.setOnValueChangedListener { _, _, newVal ->
-                view.etStockToBuy.setText(options[newVal], TextView.BufferType.EDITABLE)
+                    view.clCustomPickerLayout.visibility = View.VISIBLE
+                }
             }
-
-            view.clCustomPickerLayout.visibility = View.VISIBLE
         }
 
         view.ivOpenSelectSectorPicker.setOnClickListener {
@@ -252,12 +253,25 @@ class BuyInvestmentFragment : Fragment() {
 
         if (isAmount) {
             amount = number
-            price = view.etPriceToBuy.text.toString().toDouble()
+
+            val newPrice = view.etPriceToBuy.text.toString()
+
+            price = if (newPrice.isNotEmpty()) newPrice.toDouble()
+            else 0.00
+
         } else {
-            amount = view.etAmountToBuy.text.toString().toDouble()
             price = number
+
+            val newAmount = view.etAmountToBuy.text.toString()
+
+            amount = if (newAmount.isNotEmpty()) newAmount.toDouble()
+            else 0.00
         }
 
-        view.tvTotalSharesSelected.text = "You currently have ${String.format("%,.2f", amount / price)} shares selected"
+        view.tvTotalSharesSelected.text = if (!amount.isNaN() || !price.isNaN()) {
+            "You currently have ${String.format("%,.2f", amount / price)} shares selected"
+        } else {
+            "You currently have 0.00 shares selected"
+        }
     }
 }

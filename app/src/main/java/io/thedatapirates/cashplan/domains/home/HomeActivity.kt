@@ -2,6 +2,7 @@ package io.thedatapirates.cashplan.domains.home
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -93,7 +94,13 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.navShare -> navView.menu.findItem(R.id.navShare).isChecked = false
                 R.id.navWriteReview -> navView.menu.findItem(R.id.navWriteReview).isChecked = false
-                R.id.navFacebook -> navView.menu.findItem(R.id.navFacebook).isChecked = false
+                R.id.navFacebook -> {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/TheDataPirates"))
+
+                    navView.menu.findItem(R.id.navFacebook).isChecked = false
+
+                    startActivity(intent)
+                }
                 R.id.navInstagram -> navView.menu.findItem(R.id.navInstagram).isChecked = false
                 R.id.navSnapchat -> navView.menu.findItem(R.id.navSnapchat).isChecked = false
                 R.id.navLinkedIn -> navView.menu.findItem(R.id.navLinkedIn).isChecked = false
@@ -128,5 +135,19 @@ class HomeActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun getFacebookUrl(): String {
+        return try {
+            val versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode
+
+            if (versionCode >= 3002850) {
+                "fb://facewebmodal/f?href=https://www.facebook.com/TheDataPirates"
+            } else {
+                "fb://page/TheDataPirates"
+            }
+        } catch (ex: Exception) {
+            "https://www.facebook.com/TheDataPirates"
+        }
     }
 }
