@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.services.login.LoginService
-import io.thedatapirates.cashplan.utils.CustomToast
+import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_forgot_password.view.*
 import kotlinx.coroutines.*
 
@@ -56,7 +56,7 @@ class ForgotPasswordFragment : Fragment() {
                     } else {
                         toast?.cancel()
 
-                        toast = CustomToast.createCustomToast(error, view, forgotPasswordContext)
+                        toast = AndroidUtils.createCustomToast(error, view, forgotPasswordContext)
 
                         toast?.show()
                     }

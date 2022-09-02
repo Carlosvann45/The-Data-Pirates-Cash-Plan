@@ -1,5 +1,7 @@
 package io.thedatapirates.cashplan.utils
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -11,9 +13,9 @@ import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.custom_toast.view.*
 
 /**
- * Class for displaying a custom toast message
+ * Class for global misc helper functions
  */
-class CustomToast {
+class AndroidUtils {
     companion object {
         /**
          * Handles creating the custom toast message
@@ -43,6 +45,25 @@ class CustomToast {
             attachToRoot: Boolean = false
         ): View {
             return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+        }
+
+        /**
+         * Animates a view to fade in and fade out
+         */
+        fun animateView(view: View, toVisibility: Int, toAlpha: Float, duration: Long) {
+            val show = toVisibility == view.visibility
+
+            if (show) view.alpha = 0f
+
+            view.visibility = view.visibility
+            view.animate()
+                .setDuration(duration)
+                .alpha(if (show) toAlpha else 0f)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animator: Animator) {
+                        view.visibility = toVisibility
+                    }
+                })
         }
     }
 }

@@ -43,7 +43,9 @@ class CreateAccountFragment : Fragment() {
             val email = view.etEmailAddressField.text.toString()
             val initialPasswordEntry = view.etPasswordEntryField.text.toString()
             val reenterPasswordEntry = view.etPasswordReentryField.text.toString()
-            val customerInformation = CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
+            val customerInformation =
+                CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
+
 //            if (email.matches(emailPattern.toRegex())) {
 //                Toast.makeText(applicationContext, "Valid email address",
 //                    Toast.LENGTH_SHORT).show()
@@ -57,16 +59,19 @@ class CreateAccountFragment : Fragment() {
             if (initialPasswordEntry != reenterPasswordEntry) {
                 // Toast here - passwords do not match
             }
+
             GlobalScope.launch(Dispatchers.IO) {
                 if (processCreateAccount(customerInformation)) {
                     withContext(Dispatchers.Main) {
-                        Navigation.findNavController(view).navigate(R.id.navigateTologinFragmentFromCreateAccount)
+                        Navigation.findNavController(view)
+                            .navigate(R.id.navigateTologinFragmentFromCreateAccount)
                     }
                 }
             }
         }
         return view
     }
+
     /**
      * Makes request to api to process create account request from user input
      */
