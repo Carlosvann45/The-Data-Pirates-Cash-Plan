@@ -79,7 +79,7 @@ class InvestmentFragment : Fragment() {
                 // adds the current profit/loss
                 totalInvestment.calculateCurrentProfitLoss()
 
-                if (totalInvestment.shares > 0.00) {
+                if (totalInvestment.shares > 0) {
                     // adds the stock total to the investment overview
                     investmentOverview.calculateTotalOverview(totalInvestment)
 
@@ -235,7 +235,7 @@ class InvestmentFragment : Fragment() {
             this.currentAmount += (newInvestment.amount * currentPrice)
         } else {
             this.shares -= newInvestment.amount
-            this.currentAmount += ((newInvestment.amount * currentPrice) * -1)
+            this.currentAmount -= (newInvestment.amount * currentPrice)
         }
 
         this.buyPrice += newInvestment.buyPrice

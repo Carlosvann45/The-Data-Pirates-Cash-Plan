@@ -89,7 +89,10 @@ class ExpenseActivity : AppCompatActivity() {
                 R.id.navWriteReview -> {
                     navView.menu.findItem(R.id.navWriteReview).isChecked = false
 
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=io.thedatapirates.cashplan"))
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=io.thedatapirates.cashplan")
+                    )
 
                     startActivity(intent)
                 }

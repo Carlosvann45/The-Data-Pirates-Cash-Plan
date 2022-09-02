@@ -6,15 +6,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.play.core.review.ReviewInfo
-import com.google.android.play.core.review.ReviewManager
-import com.google.android.play.core.review.ReviewManagerFactory
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.domains.expense.ExpenseActivity
 import io.thedatapirates.cashplan.domains.helpcenter.HelpCenterActivity
@@ -22,7 +18,6 @@ import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import io.thedatapirates.cashplan.domains.settings.SettingsActivity
-import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.activity_cash_flow.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -94,7 +89,10 @@ class CashFlowActivity : AppCompatActivity() {
                 R.id.navWriteReview -> {
                     navView.menu.findItem(R.id.navWriteReview).isChecked = false
 
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=io.thedatapirates.cashplan"))
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=io.thedatapirates.cashplan")
+                    )
 
                     startActivity(intent)
                 }

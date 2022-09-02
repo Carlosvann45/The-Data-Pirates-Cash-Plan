@@ -97,29 +97,28 @@ class SellInvestmentFragment : Fragment() {
         // handles calculating sell transaction for selected stock
         view.btnSellStock.setOnClickListener {
             val amountToSell = view.etAmountToSell.text.toString()
-            val totalAmount: Double =
-                totalInvestments.find { it.name == view.etStockToSell.text.toString() }?.totalAmount
-                    ?: 0.00
+            val totalInvestment: TotalInvestment? =
+                totalInvestments.find { it.name == view.etStockToSell.text.toString() }
 
             // if selected sell amount is meets criteria make request for sell transaction
             // otherwise it will throw toast
-            if (amountToSell != "" && amountToSell.toDouble() > 0.00 && amountToSell.toDouble() < totalAmount) {
-                val investmentToSell =
-                    totalInvestments.find { it.name == view.etStockToSell.text.toString() }
+            if (
+                amountToSell != "" && totalInvestment != null &&amountToSell.toDouble() > 0.00
+                && amountToSell.toDouble() <= totalInvestment.totalAmount
+            ) {
 
                 GlobalScope.launch(Dispatchers.IO) {
 
                     val stockWasSold: Boolean
 
-                    if (investmentToSell != null) {
                         // if sell amount is the total amount available
-                        if (amountToSell.toDouble() == totalAmount) {
+                        if (amountToSell.toDouble() == String.format("%.2f", totalInvestment.totalAmount).toDouble()) {
                             // calculates sell transaction
                             val newInvestment = InvestmentRequest(
-                                investmentToSell.name,
-                                investmentToSell.sector,
-                                investmentToSell.shares,
-                                (investmentToSell.totalAmount / investmentToSell.shares) * -1
+                                totalInvestment.name,
+                                totalInvestment.sector,
+                                totalInvestment.shares,
+                                (totalInvestment.totalAmount / totalInvestment.shares) * -1
                             )
 
                             // send sell transaction to api
@@ -128,10 +127,10 @@ class SellInvestmentFragment : Fragment() {
                             // else if transaction it less then total amount
                         } else {
                             // calculates sell transaction
-                            val amount = amountToSell.toDouble() / investmentToSell.buyPrice
+                            val amount = amountToSell.toDouble() / totalInvestment.buyPrice
                             val newInvestment = InvestmentRequest(
-                                investmentToSell.name,
-                                investmentToSell.sector,
+                                totalInvestment.name,
+                                totalInvestment.sector,
                                 amount,
                                 (amountToSell.toDouble() / amount) * -1
                             )
@@ -139,7 +138,7 @@ class SellInvestmentFragment : Fragment() {
                             // send sell transaction to api
                             stockWasSold = createInvestment(newInvestment)
 
-                        }
+                       }
 
                         withContext(Dispatchers.Main) {
                             // if transaction was completed navigates to investment overview page
@@ -161,7 +160,6 @@ class SellInvestmentFragment : Fragment() {
                             }
 
                         }
-                    }
                 }
                 // if validation doesn't pass throws error toast
             } else {

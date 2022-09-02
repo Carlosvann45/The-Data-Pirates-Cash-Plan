@@ -36,6 +36,8 @@ class HelpCenterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help_center)
 
+        supportActionBar!!.title = "Help Center"
+
         bottomNav = findViewById(R.id.navHelpCenterBottomNavigation)
         navView = findViewById(R.id.nvHelpCenterTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlHelpCenterActivity)
@@ -85,7 +87,10 @@ class HelpCenterActivity : AppCompatActivity() {
                 R.id.navWriteReview -> {
                     navView.menu.findItem(R.id.navWriteReview).isChecked = false
 
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=io.thedatapirates.cashplan"))
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=io.thedatapirates.cashplan")
+                    )
 
                     startActivity(intent)
                 }

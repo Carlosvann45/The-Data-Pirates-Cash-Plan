@@ -58,7 +58,7 @@ class BuyInvestmentFragment : Fragment() {
         // gets all stock tickers
         GlobalScope.launch(Dispatchers.IO) {
 
-            stockOptions = async { getStockTickers() }.await()
+            stockOptions = getStockTickers()
 
             withContext(Dispatchers.Main) {
                 // when dropdown button is selected makes sure picker is visible
@@ -79,110 +79,128 @@ class BuyInvestmentFragment : Fragment() {
 
                     view.clCustomPickerLayout.visibility = View.VISIBLE
                 }
-            }
-        }
 
-        view.ivOpenSelectSectorPicker.setOnClickListener {
-            // created a list of options for the custom picker
-            val options = arrayOf(
-                "Technology",
-                "Finance",
-                "Consumer",
-                "Healthcare",
-                "Material",
-                "Real Estate",
-                "Utility",
-                "Energy",
-                "Industrial",
-                "Communication"
-            )
-
-            // sets up the custom picker for scrolling through options
-            view.npCustomPicker.minValue = 0
-            view.npCustomPicker.maxValue = (options.size - 1)
-            view.npCustomPicker.displayedValues = options
-            view.npCustomPicker.setOnValueChangedListener { _, _, newVal ->
-                view.etStockSector.setText(options[newVal], TextView.BufferType.EDITABLE)
-            }
-
-            view.clCustomPickerLayout.visibility = View.VISIBLE
-        }
-
-        // when done button is selected makes sure picker is closed
-        view.tvCustomPickerDone.setOnClickListener {
-            view.clCustomPickerLayout.visibility = View.GONE
-        }
-
-        // on click listener for back button
-        view.ivBuyInvestmentBackBtn.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
-        }
-
-        // on change listener for shares calculation with amount
-        view.etAmountToBuy.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!p0.isNullOrBlank()) calculateAndSetShares(view, p0.toString().toDouble(), true)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {}
-
-        })
-
-        // on change listener for shares calculation with price
-        view.etPriceToBuy.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (!p0.isNullOrBlank()) calculateAndSetShares(
-                    view,
-                    p0.toString().toDouble(),
-                    false
-                )
-            }
-
-            override fun afterTextChanged(p0: Editable?) {}
-
-        })
-
-        // runs code when buy button is clicked
-        view.btnBuyStock.setOnClickListener {
-            val amount = view.etAmountToBuy.text.toString()
-            val price = view.etPriceToBuy.text.toString()
-            val sector = view.etStockSector.text.toString()
-            val stockSymbol = view.etStockToBuy.text.toString()
-
-            if (
-                amount != "" && price != "" && amount.toDouble() > 0 && price.toDouble() > 0 && stockSymbol != "Choose Stock"
-            ) {
-
-                var stockWasBought: Boolean
-
-                GlobalScope.launch(Dispatchers.IO) {
-
-                    val newInvestment = InvestmentRequest(
-                        stockSymbol,
-                        sector,
-                        (amount.toDouble() / price.toDouble()),
-                        price.toDouble()
+                view.ivOpenSelectSectorPicker.setOnClickListener {
+                    // created a list of options for the custom picker
+                    val options = arrayOf(
+                        "Technology",
+                        "Finance",
+                        "Consumer",
+                        "Healthcare",
+                        "Material",
+                        "Real Estate",
+                        "Utility",
+                        "Energy",
+                        "Industrial",
+                        "Communication"
                     )
 
-                    // send buy transaction to api
-                    stockWasBought = createInvestment(newInvestment)
+                    // sets up the custom picker for scrolling through options
+                    view.npCustomPicker.minValue = 0
+                    view.npCustomPicker.maxValue = (options.size - 1)
+                    view.npCustomPicker.displayedValues = options
+                    view.npCustomPicker.setOnValueChangedListener { _, _, newVal ->
+                        view.etStockSector.setText(options[newVal], TextView.BufferType.EDITABLE)
+                    }
 
-                    if (stockWasBought) {
-                        withContext(Dispatchers.Main) {
-                            Navigation.findNavController(view)
-                                .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
+                    view.clCustomPickerLayout.visibility = View.VISIBLE
+                }
+
+                // when done button is selected makes sure picker is closed
+                view.tvCustomPickerDone.setOnClickListener {
+                    view.clCustomPickerLayout.visibility = View.GONE
+                }
+
+                // on click listener for back button
+                view.ivBuyInvestmentBackBtn.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
+                }
+
+                // on change listener for shares calculation with amount
+                view.etAmountToBuy.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                        if (!p0.isNullOrBlank()) calculateAndSetShares(
+                            view,
+                            p0.toString().toDouble(),
+                            true
+                        )
+                    }
+
+                    override fun afterTextChanged(p0: Editable?) {}
+
+                })
+
+                // on change listener for shares calculation with price
+                view.etPriceToBuy.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                        if (!p0.isNullOrBlank()) calculateAndSetShares(
+                            view,
+                            p0.toString().toDouble(),
+                            false
+                        )
+                    }
+
+                    override fun afterTextChanged(p0: Editable?) {}
+
+                })
+
+                // runs code when buy button is clicked
+                view.btnBuyStock.setOnClickListener {
+                    val amount = view.etAmountToBuy.text.toString()
+                    val price = view.etPriceToBuy.text.toString()
+                    val sector = view.etStockSector.text.toString()
+                    val stockSymbol = view.etStockToBuy.text.toString()
+
+                    if (
+                        amount != "" && price != "" && amount.toDouble() > 0 && price.toDouble() > 0 && stockSymbol != "Choose Stock"
+                    ) {
+
+                        var stockWasBought: Boolean
+
+                        GlobalScope.launch(Dispatchers.IO) {
+
+                            val newInvestment = InvestmentRequest(
+                                stockSymbol,
+                                sector,
+                                (amount.toDouble() / price.toDouble()),
+                                price.toDouble()
+                            )
+
+                            // send buy transaction to api
+                            stockWasBought = createInvestment(newInvestment)
+
+                            if (stockWasBought) {
+                                withContext(Dispatchers.Main) {
+                                    Navigation.findNavController(view)
+                                        .navigate(R.id.navigateToInvestmentFragmentFromBuyFragment)
+                                }
+                            } else {
+                                // throw error toast
+                                withContext(Dispatchers.Main) {
+                                    toast?.cancel()
+
+                                    toast = AndroidUtils.createCustomToast(
+                                        "There was an error with the server. Please try again later.",
+                                        view,
+                                        buyInvestmentContext
+                                    )
+
+                                    toast?.show()
+
+                                }
+                            }
                         }
                     } else {
                         // throw error toast
                         toast?.cancel()
 
                         toast = AndroidUtils.createCustomToast(
-                            "There was an error with the server. Please try again later.",
+                            "Amount, Price, and Stock Symbol are required.",
                             view,
                             buyInvestmentContext
                         )
@@ -190,21 +208,10 @@ class BuyInvestmentFragment : Fragment() {
                         toast?.show()
                     }
                 }
-            } else {
-                // throw error toast
-                toast?.cancel()
 
-                toast = AndroidUtils.createCustomToast(
-                    "Amount, Price, and Stock Symbol are required.",
-                    view,
-                    buyInvestmentContext
-                )
-
-                toast?.show()
+                AndroidUtils.animateView(progressOverlay, View.GONE, 0.75f, 200L)
             }
         }
-
-        AndroidUtils.animateView(progressOverlay, View.GONE, 0.75f, 200L)
 
         return view
     }
