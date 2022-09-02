@@ -17,6 +17,8 @@ import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import kotlinx.android.synthetic.main.fragment_create_account.view.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Service locator to inject customer service into login fragment
@@ -28,6 +30,7 @@ object CreateAccountServiceLocator {
 @DelicateCoroutinesApi
 class CreateAccountFragment : Fragment() {
     private val customerService = CreateAccountServiceLocator.getCustomerService()
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.][a-z]+"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,19 @@ class CreateAccountFragment : Fragment() {
             val initialPasswordEntry = view.etPasswordEntryField.text.toString()
             val reenterPasswordEntry = view.etPasswordReentryField.text.toString()
             val customerInformation = CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
+//            if (email.matches(emailPattern.toRegex())) {
+//                Toast.makeText(applicationContext, "Valid email address",
+//                    Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(applicationContext, "Invalid email address",
+//                    Toast.LENGTH_SHORT).show()
+//            }
+            if (initialPasswordEntry.length <= 8 || initialPasswordEntry.length >= 20) {
+                // Toast here - password must be between 8 and 20 characters in length
+            }
+            if (initialPasswordEntry != reenterPasswordEntry) {
+                // Toast here - passwords do not match
+            }
             GlobalScope.launch(Dispatchers.IO) {
                 if (processCreateAccount(customerInformation)) {
                     withContext(Dispatchers.Main) {
