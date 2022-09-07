@@ -31,7 +31,7 @@ object LoginServiceLocator {
 /**
  * Service locator to inject customer service into login fragment
  */
-object CustomerServiceLocator {
+object LoginCustomerServiceLocator {
     fun getCustomerService(): CustomerService = CustomerService.create()
 }
 
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginContext: Context
     private val loginService = LoginServiceLocator.getLoginService()
-    private val customerService = CustomerServiceLocator.getCustomerService()
+    private val customerService = LoginCustomerServiceLocator.getCustomerService()
     private var toast: Toast? = null
     private var error = ""
 

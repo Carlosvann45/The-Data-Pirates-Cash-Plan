@@ -106,4 +106,24 @@
     <string name="back_button">Back Button</string>
     <string name="Title_Crypto">Cryptocurrency</string>
     <string name="Title_Cat_BankInfo">Banking</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="miscellaneous_sector">Miscellaneous Sector</string>
+    <string name="recreation">Recreation</string>
+    <string name="recreation_sector">Recreation Sector</string>
+    <string name="personal">Personal</string>
+    <string name="personal_sector">Personal Sector</string>
+    <string name="savings">Savings</string>
+    <string name="savings_section">Savings Section</string>
+    <string name="medical">Medical</string>
+    <string name="medical_section">Medical Section</string>
+    <string name="insurance">Insurance</string>
+    <string name="insurance_section">Insurance Section</string>
+    <string name="utilities">Utilities</string>
+    <string name="utilities_section">Utilities Section</string>
+    <string name="food">Food</string>
+    <string name="food_section">Food Section</string>
+    <string name="transportation">Transportation</string>
+    <string name="transportation_section">Transportation Section</string>
+    <string name="housing">Housing</string>
+    <string name="housing_section">Housing Section</string>
 </resources>
