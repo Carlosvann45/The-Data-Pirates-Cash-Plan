@@ -84,11 +84,10 @@ class AndroidUtils {
          * Checks if date month is equal to current month
          */
         fun compareCurrentMonth(date: String) : Boolean {
-            val dateValid: Boolean
             val time = Calendar.getInstance().time
-            val formatter = SimpleDateFormat("MM", Locale.getDefault())
-            val dateNow = formatter.format(time)
-            val newDate = formatter.format(date)
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val dateNow = formatter.format(time).substring(6, 7)
+            val newDate = date.substring(6, 7)
 
             return dateNow.compareTo(newDate) == 0
         }
@@ -99,22 +98,19 @@ class AndroidUtils {
         fun compareDates(startDate: String?, endDate: String?) : Boolean {
             val dateValid: Boolean
             val time = Calendar.getInstance().time
-            val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
             val dateNow = formatter.format(time)
 
             dateValid = if (!startDate.isNullOrBlank() && !endDate.isNullOrBlank()) {
-                val newStart = formatter.format(startDate)
-                val newEnd = formatter.format(endDate)
-                val cmpStartEnd = newStart.compareTo(newEnd)
-                val cmpStartNow = newStart.compareTo(dateNow)
+                val cmpStartEnd = startDate.compareTo(endDate)
+                val cmpStartNow = startDate.compareTo(dateNow)
 
                 cmpStartEnd <= 0 && cmpStartNow >= 0
 
             } else if (!startDate.isNullOrBlank()) {
-                val newStart = formatter.format(startDate)
-                val cmpStartNow = newStart.compareTo(dateNow)
+                val cmpStartNow = startDate.compareTo(dateNow)
 
-                cmpStartNow > 0
+                cmpStartNow <= 0
             } else false
 
             return dateValid

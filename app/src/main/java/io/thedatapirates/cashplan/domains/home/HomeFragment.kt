@@ -15,28 +15,22 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
-import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.category.Category
-import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
-import io.thedatapirates.cashplan.data.dtos.expense.Withdrawal
-import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import io.thedatapirates.cashplan.data.services.category.CategoryService
-import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.utils.AndroidUtils
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.home_monthly_tracker.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.toLocalDate
-import kotlinx.datetime.toLocalDateTime
-import java.text.DecimalFormat
-import java.time.LocalDateTime.now
-import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.collections.filter
+import kotlin.collections.forEach
+import kotlin.collections.mutableListOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
 
 /**
  * Service locator to inject customer service into login fragment
@@ -88,18 +82,20 @@ class HomeFragment : Fragment() {
                             AndroidUtils.compareDates(it.startDate, it.endDate)
                 }
 
-                var totalCategoryAmount = 0.00
+                if (uniqueExpenses.isNotEmpty()) {
+                    var totalCategoryAmount = 0.00
 
-                uniqueExpenses.forEach { expense ->
-                    expense.withdrawals.filter {
-                        AndroidUtils.compareCurrentMonth(it.dateCreated)
-                    }.forEach {
-                        totalCategoryAmount += it.amount
-                        totalOverviewAmount += it.amount
+                    uniqueExpenses.forEach { expense ->
+                        expense.withdrawals.filter {
+                            AndroidUtils.compareCurrentMonth(it.dateCreated)
+                        }.forEach {
+                            totalCategoryAmount += it.amount
+                            totalOverviewAmount += it.amount
+                        }
                     }
-                }
 
-                expensesMap[category.name] = totalOverviewAmount
+                    expensesMap[category.name] = totalCategoryAmount
+                }
             }
 
             withContext(Dispatchers.Main) {
@@ -117,7 +113,7 @@ class HomeFragment : Fragment() {
         homeContext = context
     }
 
-    private suspend fun getExpensesForCustomer() : MutableList<ExpenseResponse> {
+    private suspend fun getExpensesForCustomer(): MutableList<ExpenseResponse> {
         val sharedPreferences =
             homeContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
 
@@ -125,7 +121,8 @@ class HomeFragment : Fragment() {
 
         return try {
             expenseService.getExpensesForCustomer(accessToken)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
+            print("Error: ${e.message}")
             mutableListOf()
         }
     }
@@ -133,7 +130,8 @@ class HomeFragment : Fragment() {
     private suspend fun getCategories(): MutableList<Category> {
         return try {
             categoryService.getCategories()
-        } catch(e: Exception) {
+        } catch (e: Exception) {
+            print("Error: ${e.message}")
             mutableListOf()
         }
     }
@@ -144,35 +142,97 @@ class HomeFragment : Fragment() {
         val pieColors = ArrayList<Int>()
 
         // sets up pie entries and colors for pie chart
-        pieColors.add(findColorResource("Housing"))
-        pieEntries.add(PieEntry(((expensesMap["Housing"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
 
-        pieColors.add(findColorResource("Transportation"))
-        pieEntries.add(PieEntry(((expensesMap["Transportation"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Housing"] != null) {
+            pieColors.add(findColorResource("Housing"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Housing"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Food"))
-        pieEntries.add(PieEntry(((expensesMap["Food"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Transportation"] != null) {
+            pieColors.add(findColorResource("Transportation"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Transportation"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Utilities"))
-        pieEntries.add(PieEntry(((expensesMap["Utilities"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
 
-        pieColors.add(findColorResource("Insurance"))
-        pieEntries.add(PieEntry(((expensesMap["Insurance"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Food"] != null) {
+            pieColors.add(findColorResource("Food"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Food"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Medical"))
-        pieEntries.add(PieEntry(((expensesMap["Medical"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Utilities"] != null) {
+            pieColors.add(findColorResource("Utilities"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Utilities"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Savings"))
-        pieEntries.add(PieEntry(((expensesMap["Savings"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Insurance"] != null) {
+            pieColors.add(findColorResource("Insurance"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Insurance"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Personal"))
-        pieEntries.add(PieEntry(((expensesMap["Personal"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Medical"] != null) {
+            pieColors.add(findColorResource("Medical"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Medical"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Recreation"))
-        pieEntries.add(PieEntry(((expensesMap["Recreation"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Savings"] != null) {
+            pieColors.add(findColorResource("Savings"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Savings"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
-        pieColors.add(findColorResource("Miscellaneous"))
-        pieEntries.add(PieEntry(((expensesMap["Miscellaneous"]?.div(totalAmount))?.times(100))?.toFloat() ?: 0f))
+        if (expensesMap["Personal"] != null) {
+            pieColors.add(findColorResource("Personal"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Personal"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
+
+        if (expensesMap["Recreation"] != null) {
+            pieColors.add(findColorResource("Recreation"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Recreation"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
+
+        if (expensesMap["Miscellaneous"] != null) {
+            pieColors.add(findColorResource("Miscellaneous"))
+            pieEntries.add(
+                PieEntry(
+                    ((expensesMap["Miscellaneous"]!!.div(totalAmount)).times(100)).toFloat()
+                )
+            )
+        }
 
         // sets text
         val monthText = view.tvMonthSpendingTitle
@@ -189,21 +249,21 @@ class HomeFragment : Fragment() {
         overviewPieChart.setUsePercentValues(true)
         overviewPieChart.minAngleForSlices = 15f
 
-        if (expensesMap.values.isEmpty()) {
-            overviewPieChart.description.isEnabled = false
-        } else {
-            val description = Description()
+        val description = Description()
 
-            description.text = "No expenses have been paid"
-            description.textColor = resources.getColor(R.color.white)
-            description.textSize = 12f
-            description.typeface = Typeface.DEFAULT_BOLD
-            description.xOffset = 115f
-            description.yOffset = 180f
+        description.text = if (expensesMap.values.isEmpty()) "No expenses have been paid"
+            else formattedTotal
 
-            overviewPieChart.description.isEnabled = true
-            overviewPieChart.description = description
-        }
+        description.textColor = resources.getColor(R.color.white)
+        description.textSize = 26f
+        description.typeface = Typeface.DEFAULT_BOLD
+        description.xOffset = 135f
+        description.yOffset = 180f
+
+        overviewPieChart.description.isEnabled = true
+        overviewPieChart.description = description
+
+
 
         overviewPieChart.setExtraOffsets(5f, 10f, 5f, 5f)
         overviewPieChart.dragDecelerationFrictionCoef = 0.5f
@@ -237,7 +297,6 @@ class HomeFragment : Fragment() {
         pieData.setValueTextColor(resources.getColor(R.color.white))
 
         overviewPieChart.data = pieData
-        overviewPieChart.highlightValues(null)
         overviewPieChart.invalidate()
     }
 

@@ -8,6 +8,7 @@ import io.ktor.client.features.logging.*
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.customer.CustomerServiceImpl
+import kotlinx.serialization.ExperimentalSerializationApi
 
 /**
  * Service class for all expense related request
@@ -19,6 +20,7 @@ interface ExpenseService {
     /**
      * Dependency injection for expense service
      */
+    @ExperimentalSerializationApi
     companion object {
         fun create(): ExpenseService {
             return ExpenseServiceImpl(

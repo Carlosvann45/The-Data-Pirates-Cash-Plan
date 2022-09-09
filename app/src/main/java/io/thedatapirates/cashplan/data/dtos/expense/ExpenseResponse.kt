@@ -9,12 +9,12 @@ import kotlinx.serialization.Serializable
  * A class to represent an expense from the api
  */
 @Serializable
-class ExpenseResponse(
+data class ExpenseResponse(
     var id: Long,
     var dateCreated: String,
     var dateUpdated: String,
     var startDate: String,
-    var endDate: String,
+    var endDate: String?,
     var name: String,
     var category: Category,
     var frequency: Frequency,
