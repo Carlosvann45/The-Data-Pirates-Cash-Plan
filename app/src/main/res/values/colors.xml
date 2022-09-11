@@ -22,4 +22,5 @@
     <color name="Grayed_Out">#FF808080</color>
     <color name="abs_black">#FF000000</color>
     <color name="white_bkgrnd">#FFf9f9f9</color>
+    <color name="progress_green">#358628</color>
 </resources>

@@ -1,6 +1,10 @@
 package io.thedatapirates.cashplan.domains.home
 
+import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,8 +26,10 @@ import io.thedatapirates.cashplan.data.services.category.CategoryService
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.home_monthly_tracker.view.*
+import kotlinx.android.synthetic.main.home_progress_tracker.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.collections.filter
@@ -75,8 +81,13 @@ class HomeFragment : Fragment() {
             expenses = getExpensesForCustomer()
 
             var totalOverviewAmount = 0.00
+            var totalToPay = 0
+            var totalPayed = 0
 
+            // calculates the total amount for amount paid this month for each category
+            // and the total payments made as well as total payments expected
             for (category in categories) {
+                // filters expenses to category and validate dates
                 val uniqueExpenses = expenses.filter {
                     it.category.name == category.name &&
                             AndroidUtils.compareDates(it.startDate, it.endDate)
@@ -85,21 +96,30 @@ class HomeFragment : Fragment() {
                 if (uniqueExpenses.isNotEmpty()) {
                     var totalCategoryAmount = 0.00
 
+                    // calculates total for each expense found
                     uniqueExpenses.forEach { expense ->
+
+                        totalToPay += findTotalToPay(expense)
+
+                        // find withdrawals for current month and adds corresponding amounts
                         expense.withdrawals.filter {
                             AndroidUtils.compareCurrentMonth(it.dateCreated)
                         }.forEach {
                             totalCategoryAmount += it.amount
                             totalOverviewAmount += it.amount
+                            totalPayed++
                         }
                     }
 
+                    // adds category amount to map
                     expensesMap[category.name] = totalCategoryAmount
                 }
             }
 
             withContext(Dispatchers.Main) {
                 initializeMonthlyTracker(view, totalOverviewAmount)
+
+                initializePaymentTracker(view, totalPayed, totalToPay)
 
                 AndroidUtils.animateView(progressOverlay, View.GONE, 0f, 200L)
             }
@@ -113,6 +133,9 @@ class HomeFragment : Fragment() {
         homeContext = context
     }
 
+    /**
+     * Makes call to API to get all expenses for a customer
+     */
     private suspend fun getExpensesForCustomer(): MutableList<ExpenseResponse> {
         val sharedPreferences =
             homeContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
@@ -127,6 +150,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Makes call to API to get all categories
+     */
     private suspend fun getCategories(): MutableList<Category> {
         return try {
             categoryService.getCategories()
@@ -136,12 +162,14 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Calculates and sets up pie chart for spending tracker and initializes the pie chart
+     */
     private fun initializeMonthlyTracker(view: View, totalAmount: Double) {
+        // sets up pie entries and colors for pie chart
         val pieEntries = ArrayList<PieEntry>()
 
         val pieColors = ArrayList<Int>()
-
-        // sets up pie entries and colors for pie chart
 
         if (expensesMap["Housing"] != null) {
             pieColors.add(findColorResource("Housing"))
@@ -234,7 +262,7 @@ class HomeFragment : Fragment() {
             )
         }
 
-        // sets text
+        // sets text for spending chart
         val monthText = view.tvMonthSpendingTitle
         val totalAmountText = view.tvAmountSpendingTitle
         val month = AndroidUtils.getMonthName()
@@ -301,10 +329,40 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Finds color based on sector name
+     * Calculates and initializes payment tracker to show correct values
      */
-    private fun findColorResource(sector: String): Int {
-        return when (sector) {
+    private fun initializePaymentTracker(view: View, totalPayed: Int, totalToPay: Int) {
+        val month = AndroidUtils.getMonthName()
+        val paymentTitleText = view.tvPaymentTrackerTitle
+        val amountPaidText = view.tvPaymentAmountPaid
+        val amountLeftText = view.tvPaymentAmountLeft
+        val supportMessage = view.tvPaymentSupportMsg
+        val progressBar = view.pbPaymentBar
+
+        // sets up text and progress bar for payment tracker
+        paymentTitleText.text = "$month payment tracker"
+        amountPaidText.text = totalPayed.toString()
+        amountLeftText.text = "of  $totalToPay"
+        supportMessage.text = "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
+        progressBar.max = if (totalToPay > 0) totalToPay * 1000 else 1000
+        progressBar.progressBackgroundTintList = ColorStateList.valueOf(
+            resources.getColor(R.color.white)
+        )
+        progressBar.progressTintList = ColorStateList.valueOf(
+            resources.getColor(R.color.progress_green)
+        )
+
+        // animates progress bar
+        ObjectAnimator.ofInt(progressBar, "progress", totalPayed * 1000)
+            .setDuration(2000)
+            .start()
+    }
+
+    /**
+     * Finds color based on section name
+     */
+    private fun findColorResource(section: String): Int {
+        return when (section) {
             "Transportation" -> resources.getColor(R.color.finance_sector)
             "Housing" -> resources.getColor(R.color.technology_sector)
             "Miscellaneous" -> resources.getColor(R.color.communication_sector)
@@ -319,4 +377,25 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Calculates total payments for month and if year still needs to be paid
+     */
+    private fun findTotalToPay(expense: ExpenseResponse) : Int {
+        val calendar = Calendar.getInstance()
+
+        return when(expense.frequency.name) {
+            "Daily" -> calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+            "Weekly" -> calendar.getMaximum(Calendar.WEEK_OF_MONTH)
+            "Biweekly" -> 2
+            "Monthly" -> 1
+            "Yearly" -> {
+                val withdrawal = expense.withdrawals.find {
+                    it.dateCreated.substring(0, it.dateCreated.indexOf("-") - 1).toInt() == calendar.get(Calendar.YEAR)
+                }
+
+                if (withdrawal == null) 1 else 0
+            }
+            else -> 0
+        }
+    }
 }

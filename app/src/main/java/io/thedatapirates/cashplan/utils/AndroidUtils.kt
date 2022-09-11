@@ -73,6 +73,9 @@ class AndroidUtils {
                 })
         }
 
+        /**
+         * Gets current month name
+         */
         fun getMonthName() : String {
             val time = Calendar.getInstance().time
             val formatter = SimpleDateFormat("MMMM", Locale.getDefault())
