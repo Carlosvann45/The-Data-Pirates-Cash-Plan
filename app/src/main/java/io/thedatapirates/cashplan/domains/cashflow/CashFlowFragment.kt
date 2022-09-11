@@ -1,5 +1,6 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +15,26 @@ import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.ktor.client.features.*
+import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
+import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
+import io.thedatapirates.cashplan.data.services.customer.CustomerService
+import io.thedatapirates.cashplan.data.services.investment.InvestmentService
+import io.thedatapirates.cashplan.domains.investment.InvestmentServiceLocator
+import io.thedatapirates.cashplan.domains.login.CustomerServiceLocator
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
+import kotlinx.coroutines.*
 
 
+object CashFlowServiceLocater {
+    fun getCashFlowService(): CashFlowService = CashFlowService.create()
+}
+
+@DelicateCoroutinesApi
 class CashFlowFragment : Fragment() {
-
+    private val cashFlowService = CashFlowServiceLocater.getCashFlowService()
+    private lateinit var cashFlowContext: Context
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
     private lateinit var cashFlowAdapter: CashFlowAdapter
@@ -28,40 +43,54 @@ class CashFlowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        cashFlowAdapter = CashFlowAdapter(mutableListOf())
         return inflater.inflate(R.layout.fragment_cash_flow, container, false)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        cashFlowContext = context
+    }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
-        cashFlowAdapter = CashFlowAdapter(mutableListOf())
 
-        setFragmentResultListener("requestKey") { key, bundle ->
-            // Any type can be passed via to the bundle
-            val itemName = bundle.getString("name")
-            val itemOption = bundle.getString("option")
-            val itemAmount = bundle.getFloat("amount")
 
-            if (itemOption != null  && itemName != null) {
-                val item = CashFlowItem(itemOption, itemName, itemAmount)
-                cashFlowAdapter.addExpense(item)
+        GlobalScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                cashFlowAdapter = CashFlowAdapter(getCashFlowInformation())
+
+                rvExpenses.apply {
+                    layoutManager = LinearLayoutManager(this.context)
+                    adapter = cashFlowAdapter
+
+                }
+                tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
             }
         }
-
-        super.onViewCreated(itemView, savedInstanceState)
-        rvExpenses.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            adapter = cashFlowAdapter
-
-        }
-        tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
 
         btnAddExpense.setOnClickListener {
             Navigation.findNavController(itemView).navigate(R.id.rlNestedCashFlowFragment)
         }
 
-        btnDeleteDoneExpenses.setOnClickListener {
-            cashFlowAdapter.deleteItems()
-            tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
+//        btnDeleteDoneExpenses.setOnClickListener {
+//
+//            cashFlowAdapter.deleteItem(0)
+//
+//            tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
+//        }
+    }
+
+    private suspend fun getCashFlowInformation(): MutableList<CashFlowItemsResponse> {
+        val sharedPreferences = cashFlowContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("accessToken", "")
+
+        try {
+            return cashFlowService.getCashFlow(accessToken)
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
         }
+
+        return mutableListOf()
     }
 }

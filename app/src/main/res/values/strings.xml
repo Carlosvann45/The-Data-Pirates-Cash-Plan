@@ -37,10 +37,6 @@
     <string name="close">Close</string>
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
-    <string-array name="cash_flow_choices_array">
-        <item>Deposit</item>
-        <item>Expense</item>
-    </string-array>
     <string name="selected_item">Selected item:</string>
     <string name="pie_legend">Pie Legend</string>
     <string name="technology_sector">technology sector</string>
@@ -69,7 +65,6 @@
         <item>Deposit</item>
         <item>Expense</item>
     </string-array>
-    <string name="selected_item">Selected item:</string>
     <string name="BTitle_Account">Account</string>
     <string name="BTitle_Customize">Customization</string>
     <string name="BTitle_Notifications">Notifications</string>
@@ -109,4 +104,6 @@
     <string name="stock_symbol">Stock Symbol:</string>
     <string name="buy_investment">Buy Investment</string>
     <string name="back_button">Back Button</string>
+    <string name="Title_Cat_BankInfo" />
+    <string name="Title_Crypto" />
 </resources>

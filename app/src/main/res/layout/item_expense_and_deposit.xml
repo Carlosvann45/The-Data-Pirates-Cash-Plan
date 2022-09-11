@@ -7,7 +7,7 @@
     android:paddingEnd="8dp">
 
     <TextView
-        android:id="@+id/tvTodoTitle"
+        android:id="@+id/tvItemTitle"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cbDone"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/red"/>
+        android:textColor="@color/green"/>
 
     <CheckBox
         android:id="@+id/cbDone"
