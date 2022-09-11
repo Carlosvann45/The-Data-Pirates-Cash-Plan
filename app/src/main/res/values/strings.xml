@@ -35,16 +35,11 @@
     <string name="linkedin">LinkedIn</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <!--    PLACE HOLDERS AKA Temp or Template   -->
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
-    <!--    PLACE HOLDERS AKA Temp or Template   -->
     <string name="Template">Temp</string>
     <string name="Temp_Phone">123–456–7890</string>
-    <string name="Temp_Email">JohnDoe@temp.com</string>
-    <string name="Temp_BankName">Bank Name</string>
-    <string name="Temp_CheckingName">Checking X4321</string>
-    <string name="Temp_SavingsName">Savings X1234</string>
-    <string name="Temp_AccntNum">*****4321</string>
     <string name="Temp_Title_StockApp">RobinHat</string>
     <string name="Temp_Title_CryptoApp">CubeChain</string>
     <!--    NAMES FOR BUTTONS AKA B OR Btn       -->
@@ -74,4 +69,9 @@
     <string name="sound_and_vibration">Sound and Vibration</string>
     <string name="sounds">Sounds</string>
     <string name="vibration">Vibration</string>
+    <string name="reminders">Reminders</string>
+    <!--    KEYS AND IDS                        -->
+    <string name="stNotifChnl_id01">01 Remind</string>
+    <string name="stNotifChnl_id02">02 Place Holder</string>
+    <string name="stNotifCatID">only group</string>
 </resources>

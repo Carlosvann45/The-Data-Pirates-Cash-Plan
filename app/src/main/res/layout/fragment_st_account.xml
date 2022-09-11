@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     tools:context="domains.settings.StAccount">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,148 +46,34 @@
             android:id="@+id/StAccntTV_LName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/Title_LastName"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_FName" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_FName" />
 
         <!--        Title for Phone Number              -->
         <TextView
             android:id="@+id/StAccntTV_Phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/Title_PhoneNum"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_LName" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_LName" />
 
         <!--        Title for Email                     -->
         <TextView
             android:id="@+id/StAccntTV_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/Title_Email"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_Phone" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_Phone" />
 
-        <!--        Title for Banking Category                  -->
-        <TextView
-            android:id="@+id/StAccntTV_Banking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_Cat_BankInfo"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntDiv_PrsnltoBank" />
-
-        <!--        Title for Linked Bank #1                 -->
-        <TextView
-            android:id="@+id/StAccntTV_Bank1Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/Temp_BankName"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Banking" />
-
-        <!--    Title for Bank #1 Checking(s) Account       -->
-        <TextView
-            android:id="@+id/StAccntTV_Bank1Check1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_CheckingAccnt_Singlar"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_Bank1Name" />
-
-        <!--        Checking Account #1 Name            -->
-        <TextView
-            android:id="@+id/StAccntTV_B1C1Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_CheckingName"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_Bank1Check1" />
-
-        <!--        Checking Account #1 Number          -->
-        <TextView
-            android:id="@+id/StAccntTV_B1C1Number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_AccntNum"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@+id/StAccntTV_B1C1Name"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_Bank1Check1" />
-
-        <!--        TitLe For Savings Account               -->
-        <TextView
-            android:id="@+id/StAccntTV_B1Savings1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_SavingsAccnt"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_B1C1Number" />
-
-        <!--        Savings Account #1 Name            -->
-        <TextView
-            android:id="@+id/StAccntTV_B1S1Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_SavingsName"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="@+id/StAccntTV_B1S1Number"
-            app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1Savings1" />
-
-        <!--        Savings Account #1 Number          -->
-        <TextView
-            android:id="@+id/StAccntTV_B1S1Number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_AccntNum"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/StAccntTV_B1S1Name"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1Savings1" />
 
         <!--        Title for Investment Category               -->
         <TextView
@@ -250,7 +138,7 @@
             android:textSize="24sp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/StAccntTV_InvestCrypto" />
 
@@ -261,21 +149,19 @@
             android:id="@+id/StAccntTVI_FName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="@string/Template"
             android:textColor="@color/Grayed_Out"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_FName"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_PsnlInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_FName" />
 
         <!--        Text Input for Last Name            -->
         <TextView
             android:id="@+id/StAccntTVI_LName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/Template"
             android:textColor="@color/Grayed_Out"
             android:textDirection="rtl"
@@ -283,61 +169,48 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_LName"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTVI_FName" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_LName" />
 
         <!--        Text Input for Phone Number         -->
         <TextView
             android:id="@+id/StAccntTVI_Phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/Temp_Phone"
             android:textColor="@color/Grayed_Out"
-            android:textDirection="rtl"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_Phone"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTVI_LName" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Phone" />
 
         <!--        Text Input for Email Address        -->
         <TextView
             android:id="@+id/StAccntTVI_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_Email"
+            android:text="@string/place_holder_email"
             android:textColor="@color/Grayed_Out"
             android:textDirection="rtl"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_Email"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTVI_Phone" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Email" />
 
 
         <!--        ******* CATEGORY DIVIDERS *******               -->
         <!--    Personal Info to Banking Info Divider   -->
-        <View
-            android:id="@+id/StAccntDiv_PrsnltoBank"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Email" />
-
 
         <View
             android:id="@+id/StAccntDiv_BanktoInvestments"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1S1Name" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_Email" />
 
 
         <!--  TEMP CODE OR REMOVED ITEMS DON'T REMOVE UNLESS WE DON'T NEED IT   -->

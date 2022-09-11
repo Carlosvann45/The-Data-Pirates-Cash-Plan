@@ -45,7 +45,6 @@ class LoginFragment : Fragment() {
     private val customerService = CustomerServiceLocator.getCustomerService()
     private var toast: Toast? = null
     private var error = ""
-
     /**
      * Runs listener's when fragment is created
      */

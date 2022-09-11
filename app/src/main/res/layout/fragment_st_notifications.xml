@@ -9,6 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrainLayout"
+    android:backgroundTint="@color/blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,7 +21,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:checked="true"
             android:text="@string/All_Notif"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,16 +31,16 @@
             app:thumbTintMode="src_in"
             app:trackTint="@color/Grayed_Out" />
 
-        <!--    Spending Notifications Switch and Options   -->
+        <!--    Reminders Switch and Options   -->
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/stNotifSw_SpendAlert"
+            android:id="@+id/stNotifSw_Reminders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:checked="true"
-            android:text="@string/Spend_Update"
+            android:text="@string/reminders"
             android:textSize="22sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -60,22 +60,22 @@
             app:layout_constraintHorizontal_bias=".3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stNotifSw_SpendAlert" />
+            app:layout_constraintTop_toBottomOf="@id/stNotifSw_Reminders" />
 
         <!--    Daily Updates Switch                        -->
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/stNotifSw_DailyUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
+            android:checked="true"
             android:text="@string/Daily_update"
             android:textSize="22sp"
-            android:checked="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stNotifTv_SpendCustom"
+            app:layout_constraintTop_toBottomOf="@+id/stNotifSw_Reminders"
             app:thumbTint="@color/white_bkgrnd"
             app:trackTint="@color/Grayed_Out" />
 

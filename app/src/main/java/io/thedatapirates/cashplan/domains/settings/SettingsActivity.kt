@@ -1,13 +1,12 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+
 import android.app.PendingIntent
 import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MenuItem
@@ -37,7 +36,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
-    private val channel_id = "example_id_channel"
     private val notifID = 100
 
     /**
@@ -46,7 +44,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        createNotificationChannel()
 
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
@@ -133,15 +130,15 @@ class SettingsActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
 
-        object : CountDownTimer(10000,1000){
+        object : CountDownTimer(10000, 1000) {
             override fun onTick(tick: Long) {
-                tick - 1000;
+                tick - 1000
             }
+
             override fun onFinish() {
                 sendNotification()
             }
         }.start()
-
     }
 
 
@@ -153,34 +150,23 @@ class SettingsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
-    private fun createNotificationChannel() {
-        // check if device is running android 8.0 or not
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //creates notification item in the device settings
-            val name = "All Notifications"
-            val descriptionText = "Notification Description"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(channel_id, name, importance).apply {
-                enableVibration(true)
-                description = descriptionText
-            }
-            // Register the channel with the users device
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
+    fun sendNotification() {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-    }
+        val pendingIntent: PendingIntent =
+            getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val bitmap = BitmapFactory.decodeResource(
+            applicationContext.resources,
+            R.drawable.ic_launcher_background
+        )
+        val bitmapLarge = BitmapFactory.decodeResource(
+            applicationContext.resources,
+            R.drawable.ic_launcher_foreground
+        )
 
-   fun sendNotification(){
-       val intent = Intent(this, SettingsActivity::class.java).apply {
-           flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-       }
-       val pendingIntent : PendingIntent = getActivity(this, 0 ,intent, PendingIntent.FLAG_IMMUTABLE)
-       val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_launcher_background)
-       val bitmapLarge = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_launcher_foreground)
-
-       //the actual notification itself
-        val builder = NotificationCompat.Builder(this, channel_id)
+        //the actual notification itself
+        val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("Notification Title")
             .setContentText("Notification Content")
@@ -191,7 +177,7 @@ class SettingsActivity : AppCompatActivity() {
 //            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
 //            .setAutoCancel(true)
 //            .setStyle((NotificationCompat.BigTextStyle().bigText("the text that takes numerous lines")))
-        with(NotificationManagerCompat.from(this)){
+        with(NotificationManagerCompat.from(this)) {
             notify(notifID, builder.build())
         }
     }
