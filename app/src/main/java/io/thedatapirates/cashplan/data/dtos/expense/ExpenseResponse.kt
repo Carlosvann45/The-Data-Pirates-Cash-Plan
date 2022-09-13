@@ -10,14 +10,14 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ExpenseResponse(
-    var id: Long,
-    var dateCreated: String,
-    var dateUpdated: String,
-    var startDate: String,
-    var endDate: String?,
-    var name: String,
-    var category: Category,
-    var frequency: Frequency,
-    var priorityLevel: PriorityLevel,
-    var withdrawals: MutableList<Withdrawal>
+    var id: Long = 0,
+    var dateCreated: String = "",
+    var dateUpdated: String = "",
+    var startDate: String = "",
+    var endDate: String? = null,
+    var name: String = "",
+    var category: Category = Category(0, ""),
+    var frequency: Frequency = Frequency(0, ""),
+    var priorityLevel: PriorityLevel = PriorityLevel(0, "", ""),
+    var withdrawals: MutableList<Withdrawal> = mutableListOf()
 )
