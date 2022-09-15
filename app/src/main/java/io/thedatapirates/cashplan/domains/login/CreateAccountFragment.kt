@@ -1,21 +1,15 @@
 package io.thedatapirates.cashplan.domains.login
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
-import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import kotlinx.android.synthetic.main.fragment_create_account.view.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 
 /**
@@ -40,17 +34,20 @@ class CreateAccountFragment : Fragment() {
             val email = view.etEmailAddressField.text.toString()
             val initialPasswordEntry = view.etPasswordEntryField.text.toString()
             val reenterPasswordEntry = view.etPasswordReentryField.text.toString()
-            val customerInformation = CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
+            val customerInformation =
+                CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
             GlobalScope.launch(Dispatchers.IO) {
                 if (processCreateAccount(customerInformation)) {
                     withContext(Dispatchers.Main) {
-                        Navigation.findNavController(view).navigate(R.id.navigateTologinFragmentFromCreateAccount)
+                        Navigation.findNavController(view)
+                            .navigate(R.id.navigateTologinFragmentFromCreateAccount)
                     }
                 }
             }
         }
         return view
     }
+
     /**
      * Makes request to api to process create account request from user input
      */
@@ -67,5 +64,4 @@ class CreateAccountFragment : Fragment() {
 
         return isLoggedIn
     }
-
 }

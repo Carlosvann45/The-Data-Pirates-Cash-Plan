@@ -104,4 +104,6 @@
     <string name="stock_symbol">Stock Symbol:</string>
     <string name="buy_investment">Buy Investment</string>
     <string name="back_button">Back Button</string>
+    <string name="Title_Crypto">Cryptocurrency</string>
+    <string name="Title_Cat_BankInfo">Banking</string>
 </resources>

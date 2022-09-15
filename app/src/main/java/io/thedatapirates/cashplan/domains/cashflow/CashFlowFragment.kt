@@ -1,21 +1,16 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import io.thedatapirates.cashplan.R
-import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
 import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
-import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 
 
 class CashFlowFragment : Fragment() {
@@ -41,7 +36,7 @@ class CashFlowFragment : Fragment() {
             val itemOption = bundle.getString("option")
             val itemAmount = bundle.getFloat("amount")
 
-            if (itemOption != null  && itemName != null) {
+            if (itemOption != null && itemName != null) {
                 val item = CashFlowItem(itemOption, itemName, itemAmount)
                 cashFlowAdapter.addExpense(item)
             }

@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.os.bundleOf
-import androidx.navigation.NavAction
-import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
@@ -42,7 +38,7 @@ class InvestmentItemsAdapter(
     private val pieColors: ArrayList<Int>,
     private val resource: Resources,
     private val view: View
-    ) : RecyclerView.Adapter<InvestmentItemsAdapter.InvestmentItemsViewHolder>() {
+) : RecyclerView.Adapter<InvestmentItemsAdapter.InvestmentItemsViewHolder>() {
 
     /**
      * Inflates the a layout to add it to recycler view
@@ -87,16 +83,13 @@ class InvestmentItemsAdapter(
                     if (totalInvestments.size > 2) {
                         val bundle = Bundle()
                         bundle.putString("stockList", Gson().toJson(totalInvestments))
-                        Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
+                        Navigation.findNavController(view)
+                            .navigate(R.id.llSellInvestmentFragment, bundle)
                     }
                 }
 
                 holder.itemView.btnBuyBtn.setOnClickListener {
                     Navigation.findNavController(view).navigate(R.id.llBuyInvestmentFragment)
-
-                    val bundle = Bundle()
-                    bundle.putString("stockList", Gson().toJson(totalInvestments))
-                    Navigation.findNavController(view).navigate(R.id.llSellInvestmentFragment, bundle)
                 }
             }
             else -> {
@@ -168,8 +161,7 @@ class InvestmentItemsAdapter(
         overviewPieChart.setUsePercentValues(true)
         overviewPieChart.minAngleForSlices = 15f
 
-        if (totalInvestments.size > 2)
-        {
+        if (totalInvestments.size > 2) {
             overviewPieChart.description.isEnabled = false
         } else {
             val description = Description()
@@ -225,11 +217,15 @@ class InvestmentItemsAdapter(
         holder: InvestmentItemsAdapter.InvestmentItemsViewHolder, position: Int
     ) {
         val investmentItem: LinearLayout = holder.itemView.findViewById(R.id.rlInvestmentItem)
-        val itemPieLegend: ImageView = holder.itemView.findViewById(R.id.tvInvestmentItemDiagramCircle)
+        val itemPieLegend: ImageView =
+            holder.itemView.findViewById(R.id.tvInvestmentItemDiagramCircle)
         val itemStockName: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemName)
-        val itemTotalAmount: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemTotalAmount)
-        val itemTotalShares: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemTotalShares)
-        val itemCurrentPrice: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemCurrentPrice)
+        val itemTotalAmount: TextView =
+            holder.itemView.findViewById(R.id.tvInvestmentItemTotalAmount)
+        val itemTotalShares: TextView =
+            holder.itemView.findViewById(R.id.tvInvestmentItemTotalShares)
+        val itemCurrentPrice: TextView =
+            holder.itemView.findViewById(R.id.tvInvestmentItemCurrentPrice)
         val itemCurrentPL: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemCurrentP_L)
 
         val currentItem = totalInvestments[position]
@@ -246,9 +242,19 @@ class InvestmentItemsAdapter(
         itemCurrentPrice.text = "$${String.format("%,.2f", currentItem.currentPrice)}"
 
         if (currentItem.currentP_L >= 0.00) {
-            itemCurrentPL.text = "+${String.format("%,.2f", currentItem.currentP_L)}(+${String.format("%,.2f", currentItem.currentP_L_Percent)}%)"
+            itemCurrentPL.text = "+${String.format("%,.2f", currentItem.currentP_L)}(+${
+                String.format(
+                    "%,.2f",
+                    currentItem.currentP_L_Percent
+                )
+            }%)"
         } else {
-            itemCurrentPL.text = "${String.format("%,.2f", currentItem.currentP_L)}(${String.format("%,.2f", currentItem.currentP_L_Percent)}%)"
+            itemCurrentPL.text = "${String.format("%,.2f", currentItem.currentP_L)}(${
+                String.format(
+                    "%,.2f",
+                    currentItem.currentP_L_Percent
+                )
+            }%)"
             itemCurrentPL.setTextColor(resource.getColor(R.color.red))
         }
 

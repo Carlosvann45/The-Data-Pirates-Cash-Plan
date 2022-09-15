@@ -45,7 +45,7 @@
         android:id="@+id/flCreateAccountFragment"
         android:name="io.thedatapirates.cashplan.domains.login.CreateAccountFragment"
         android:label="fragment_create_account"
-        tools:layout="@layout/fragment_create_account" >
+        tools:layout="@layout/fragment_create_account">
         <action
             android:id="@+id/navigateTologinFragmentFromCreateAccount"
             app:destination="@id/loginFragment" />

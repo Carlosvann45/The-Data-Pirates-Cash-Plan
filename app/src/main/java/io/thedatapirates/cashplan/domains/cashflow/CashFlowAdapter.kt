@@ -40,14 +40,14 @@ class CashFlowAdapter(
     }
 
     private fun toggleStrikeThrough(tvTodoTitle: TextView, isChecked: Boolean) {
-        if(isChecked) {
+        if (isChecked) {
             tvTodoTitle.paintFlags = tvTodoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
         } else {
             tvTodoTitle.paintFlags = tvTodoTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
 
-    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int){
+    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val curExpense = expensesList[position]
         holder.itemView.apply {
             tvTodoTitle.text = curExpense.name
@@ -65,8 +65,8 @@ class CashFlowAdapter(
         return expensesList.size
     }
 
-    fun expensesTotal() : Float {
-       var total = 0f
+    fun expensesTotal(): Float {
+        var total = 0f
 
         for (expense in expensesList) total += expense.amount
 

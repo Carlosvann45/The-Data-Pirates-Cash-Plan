@@ -11,11 +11,6 @@
             <group android:checkableBehavior="single">
 
                 <item
-                    android:id="@+id/navProfileActivity"
-                    android:icon="@drawable/user_profile_icon"
-                    android:title="@string/view_profile" />
-
-                <item
                     android:id="@+id/navHelpCenterActivity"
                     android:icon="@drawable/help_icon"
                     android:title="@string/help_center" />
@@ -40,12 +35,6 @@
     <item android:title="@string/community">
 
         <menu>
-
-            <item
-                android:id="@+id/navShare"
-                android:checkable="false"
-                android:icon="@drawable/share_icon"
-                android:title="@string/share" />
 
             <item
                 android:id="@+id/navWriteReview"
@@ -73,12 +62,6 @@
                 android:checkable="false"
                 android:icon="@drawable/instagram_icon"
                 android:title="@string/instagram" />
-
-            <item
-                android:id="@+id/navSnapchat"
-                android:checkable="false"
-                android:icon="@drawable/snapchat_icon"
-                android:title="@string/snapchat" />
 
             <item
                 android:id="@+id/navLinkedIn"
