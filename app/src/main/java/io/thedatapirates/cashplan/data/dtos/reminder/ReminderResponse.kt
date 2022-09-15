@@ -8,11 +8,11 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ReminderResponse(
-    val id: Long,
-    val dateCreated: String,
-    val dateUpdated: String,
-    var name: String,
-    var description: String,
-    var reminderTime: String,
-    var frequency: Frequency
+    val id: Long = 0,
+    val dateCreated: String = "",
+    val dateUpdated: String = "",
+    var name: String = "",
+    var description: String = "",
+    var reminderTime: String = "",
+    var frequency: Frequency = Frequency(0, "")
 )

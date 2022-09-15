@@ -25,6 +25,9 @@
         <action
             android:id="@+id/navigateToExpenseTransactionsFragment"
             app:destination="@id/rlExpenseTransactionsFragment" />
+        <action
+            android:id="@+id/navigateToExpenseRemindersFragment"
+            app:destination="@id/rlExpenseRemindersFragment" />
     </fragment>
     <fragment
         android:id="@+id/rlExpenseTransactionsFragment"
@@ -33,6 +36,15 @@
         tools:layout="@layout/fragment_expense_transactions" >
         <action
             android:id="@+id/navigateToExpenseNavFragmentFromExpenseTransactionsFragment"
+            app:destination="@id/rlExpenseNavFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rlExpenseRemindersFragment"
+        android:name="io.thedatapirates.cashplan.domains.expense.ExpenseRemindersFragment"
+        android:label="fragment_expense_reminders"
+        tools:layout="@layout/fragment_expense_reminders" >
+        <action
+            android:id="@+id/navigateToExpenseNavFragment"
             app:destination="@id/rlExpenseNavFragment" />
     </fragment>
 </navigation>

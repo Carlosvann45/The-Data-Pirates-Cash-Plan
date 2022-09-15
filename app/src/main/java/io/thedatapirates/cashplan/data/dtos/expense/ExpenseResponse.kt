@@ -22,5 +22,5 @@ data class ExpenseResponse(
     var frequency: Frequency = Frequency(0, ""),
     var priorityLevel: PriorityLevel = PriorityLevel(0, "", ""),
     var withdrawals: MutableList<Withdrawal> = mutableListOf(),
-    val reminders: MutableList<ReminderResponse> = mutableListOf()
+    var reminders: MutableList<ReminderResponse> = mutableListOf()
 )

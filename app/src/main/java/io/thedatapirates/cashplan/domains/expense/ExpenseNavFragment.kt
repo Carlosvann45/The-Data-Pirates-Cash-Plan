@@ -39,6 +39,8 @@ class ExpenseNavFragment : Fragment() {
                 )
             else ExpenseResponse()
 
+        view.tvExpenseOptionTitle.text = "${expense.name.ifEmpty { "Expense" }} Options"
+
         view.ivExpenseOptionBackBtn.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.rlExpenseFragment)
         }
@@ -54,6 +56,7 @@ class ExpenseNavFragment : Fragment() {
             val bundle = Bundle()
             bundle.putString("expense", Gson().toJson(expense))
 
+            Navigation.findNavController(view).navigate(R.id.rlExpenseRemindersFragment, bundle)
         }
 
         return view
