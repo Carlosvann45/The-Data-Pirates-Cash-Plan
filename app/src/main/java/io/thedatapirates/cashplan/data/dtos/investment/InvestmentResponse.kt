@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * A class to represent a customer response from the api
  */
 @Serializable
-class InvestmentResponse(
+data class InvestmentResponse(
     var id: Int,
     var dateCreated: String,
     var dateUpdated: String,
@@ -15,5 +15,4 @@ class InvestmentResponse(
     var sector: String,
     var amount: Double,
     var buyPrice: Double
-) {
-}
+)

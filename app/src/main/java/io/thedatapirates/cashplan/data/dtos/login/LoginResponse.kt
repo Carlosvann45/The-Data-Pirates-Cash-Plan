@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
  * Represents a login response
  */
 @Serializable
-class LoginResponse(
+data class LoginResponse(
     var accessToken: String,
     var refresherToken: String
-) {
-}
+)

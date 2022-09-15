@@ -37,6 +37,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        supportActionBar!!.title = "Home"
+
         bottomNav = findViewById(R.id.navHomeBottomNavigation)
         navView = findViewById(R.id.nvHomeTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlHomeActivity)

@@ -3,7 +3,7 @@ package io.thedatapirates.cashplan.data.dtos.investment
 /**
  * A class to represent a total investment
  */
-class TotalInvestment(
+data class TotalInvestment(
     var color: Int = 0,
     var name: String = "",
     var sector: String = "",
@@ -14,5 +14,4 @@ class TotalInvestment(
     var buyPrice: Double = 0.00,
     var currentP_L: Double = 0.00,
     var currentP_L_Percent: Double = 0.00
-) {
-}
+)

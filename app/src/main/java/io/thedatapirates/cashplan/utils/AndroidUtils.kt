@@ -11,6 +11,13 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.custom_toast.view.*
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toLocalDate
+import kotlinx.datetime.toLocalDateTime
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+import java.util.*
 
 /**
  * Class for global misc helper functions
@@ -65,5 +72,52 @@ class AndroidUtils {
                     }
                 })
         }
+
+        /**
+         * Gets current month name
+         */
+        fun getMonthName() : String {
+            val time = Calendar.getInstance().time
+            val formatter = SimpleDateFormat("MMMM", Locale.getDefault())
+
+            return formatter.format(time)
+        }
+
+        /**
+         * Checks if date month is equal to current month
+         */
+        fun compareCurrentMonth(date: String) : Boolean {
+            val time = Calendar.getInstance().time
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val dateNow = formatter.format(time).substring(6, 7)
+            val newDate = date.substring(6, 7)
+
+            return dateNow.compareTo(newDate) == 0
+        }
+
+        /**
+         * Validates start and end dates
+         */
+        fun compareDates(startDate: String?, endDate: String?) : Boolean {
+            val dateValid: Boolean
+            val time = Calendar.getInstance().time
+            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val dateNow = formatter.format(time)
+
+            dateValid = if (!startDate.isNullOrBlank() && !endDate.isNullOrBlank()) {
+                val cmpStartEnd = startDate.compareTo(endDate)
+                val cmpStartNow = startDate.compareTo(dateNow)
+
+                cmpStartEnd <= 0 && cmpStartNow >= 0
+
+            } else if (!startDate.isNullOrBlank()) {
+                val cmpStartNow = startDate.compareTo(dateNow)
+
+                cmpStartNow <= 0
+            } else false
+
+            return dateValid
+        }
+
     }
 }
