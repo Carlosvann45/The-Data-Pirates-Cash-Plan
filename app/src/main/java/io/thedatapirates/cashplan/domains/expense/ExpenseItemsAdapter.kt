@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -36,10 +37,6 @@ class ExpenseItemsAdapter(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.add_expense_button, parent, false)
             }
-            R.layout.add_reminder_button -> {
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.add_reminder_button, parent, false)
-            }
             else -> {
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.expense_item, parent, false)
@@ -58,11 +55,6 @@ class ExpenseItemsAdapter(
     ) {
         when (position) {
             expenses.size - 1 -> {
-                holder.itemView.btnAddReminder.setOnClickListener {
-
-                }
-            }
-            expenses.size - 2 -> {
                 holder.itemView.btnAddExpense.setOnClickListener {
                 }
             }
@@ -75,6 +67,7 @@ class ExpenseItemsAdapter(
                 val endDateNameText: TextView = holder.itemView.findViewById(R.id.tvExpenseEndDate)
                 val editExpenseBtn: TextView = holder.itemView.findViewById(R.id.tvEditExpense)
                 val withdrawalBtn: TextView = holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
+                val expenseItem: CardView = holder.itemView.findViewById(R.id.cvExpenseItem)
 
                 val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T") - 1)
                 val endDate = expense.endDate?.substring(0, expense.endDate?.indexOf("T")?.minus(1) ?: 0) ?: ""
@@ -87,6 +80,13 @@ class ExpenseItemsAdapter(
 
                 if (!AndroidUtils.compareDates(startDate, endDate)) {
                     withdrawalBtn.visibility = View.GONE
+                }
+
+                expenseItem.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("expense", Gson().toJson(expense))
+
+                    Navigation.findNavController(view).navigate(R.id.rlExpenseNavFragment, bundle)
                 }
 
                 editExpenseBtn.setOnClickListener {
@@ -106,9 +106,6 @@ class ExpenseItemsAdapter(
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             expenses.size - 1 -> {
-                R.layout.add_reminder_button
-            }
-            expenses.size - 2 -> {
                 R.layout.add_expense_button
             }
             else -> {

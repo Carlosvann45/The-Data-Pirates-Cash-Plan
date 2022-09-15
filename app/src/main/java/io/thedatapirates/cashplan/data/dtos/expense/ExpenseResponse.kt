@@ -1,8 +1,10 @@
 package io.thedatapirates.cashplan.data.dtos.expense
 
+import android.provider.CalendarContract
 import io.thedatapirates.cashplan.data.dtos.category.Category
 import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
 import io.thedatapirates.cashplan.data.dtos.priortiyLevel.PriorityLevel
+import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import kotlinx.serialization.Serializable
 
 /**
@@ -19,5 +21,6 @@ data class ExpenseResponse(
     var category: Category = Category(0, ""),
     var frequency: Frequency = Frequency(0, ""),
     var priorityLevel: PriorityLevel = PriorityLevel(0, "", ""),
-    var withdrawals: MutableList<Withdrawal> = mutableListOf()
+    var withdrawals: MutableList<Withdrawal> = mutableListOf(),
+    val reminders: MutableList<ReminderResponse> = mutableListOf()
 )

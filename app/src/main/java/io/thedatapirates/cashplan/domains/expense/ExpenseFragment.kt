@@ -60,8 +60,6 @@ class ExpenseFragment : Fragment() {
 
             expenses.add(ExpenseResponse())
 
-            expenses.add(ExpenseResponse())
-
             withContext(Dispatchers.Main) {
 
                 recyclerView = view.rvExpenseItems
