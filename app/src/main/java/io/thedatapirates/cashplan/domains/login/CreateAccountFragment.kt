@@ -31,6 +31,7 @@ object CreateAccountServiceLocator {
 class CreateAccountFragment : Fragment() {
     private val customerService = CreateAccountServiceLocator.getCustomerService()
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.][a-z]+"
+    private lateinit var createAccountContext: Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,18 +47,22 @@ class CreateAccountFragment : Fragment() {
             val customerInformation =
                 CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
 
-//            if (email.matches(emailPattern.toRegex())) {
-//                Toast.makeText(applicationContext, "Valid email address",
-//                    Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(applicationContext, "Invalid email address",
-//                    Toast.LENGTH_SHORT).show()
-//            }
+            if (email.matches(emailPattern.toRegex())) {
+                Toast.makeText(createAccountContext, "Valid email address",
+                    Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(createAccountContext, "Invalid email address",
+                    Toast.LENGTH_SHORT).show()
+            }
             if (initialPasswordEntry.length <= 8 || initialPasswordEntry.length >= 20) {
                 // Toast here - password must be between 8 and 20 characters in length
+                Toast.makeText(createAccountContext, "Password must be between 8 and 20 characters",
+                    Toast.LENGTH_SHORT).show()
             }
             if (initialPasswordEntry != reenterPasswordEntry) {
                 // Toast here - passwords do not match
+                Toast.makeText(createAccountContext, "Passwords do not match",
+                    Toast.LENGTH_SHORT).show()
             }
 
             GlobalScope.launch(Dispatchers.IO) {
@@ -70,6 +75,11 @@ class CreateAccountFragment : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        createAccountContext = context
     }
 
     /**
