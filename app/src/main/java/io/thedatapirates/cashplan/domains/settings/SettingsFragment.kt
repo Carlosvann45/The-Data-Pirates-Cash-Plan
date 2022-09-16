@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi
 class SettingsFragment : Fragment() {
     lateinit var settingsActivity: SettingsActivity
+    lateinit var alarm: AlarmService
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +33,12 @@ class SettingsFragment : Fragment() {
         return view
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         view.StMB_Customization.setOnClickListener {
             val activ = activity as SettingsActivity
-            activ.sendAlarm()
+            alarm = AlarmService(activ)
+            activ.sendAlarm{alarm.setAlarm(it)}
         }
     }
 

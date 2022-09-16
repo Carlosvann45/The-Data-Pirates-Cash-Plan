@@ -1,3 +1,5 @@
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package io.thedatapirates.cashplan.domains.settings
 
 import android.app.AlarmManager
@@ -6,9 +8,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import io.thedatapirates.cashplan.utils.RandomUtils
+import kotlinx.coroutines.DelicateCoroutinesApi
+import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
-
-class AlarmSettings(private val context: Context) {
+class AlarmService(private val context: Context) {
 
     private val manager: AlarmManager? = context.getSystemService(
         Context.ALARM_SERVICE
@@ -55,7 +59,7 @@ class AlarmSettings(private val context: Context) {
             context,
             RandomUtils.getRndInt(),
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
 
@@ -63,9 +67,27 @@ class AlarmSettings(private val context: Context) {
 
 
 class AlarmReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent?) {
+    override fun onReceive(context: Context, intent: Intent) {
 
+        val timeInMillis = intent.getLongExtra(RandomUtils.EXTRA_ALARM_TIME, 0L)
+        val activity = activity as SettingsActivity
 
+        when (intent.action) {
+            RandomUtils.ACTION_SET_ALARM -> {
+              activity.sendNotification()
+            }
+            RandomUtils.ACTION_SET_REMINDER ->{
+                val cal = Calendar.getInstance().apply {
+                    this.timeInMillis = timeInMillis + TimeUnit.DAYS.toMillis(7)
+                }
+                AlarmService(context).setRemind(cal.timeInMillis)
+
+//                createNotif(context, "Reminding you", convertDate(cal.timeInMillis), 102)
+            }
+        }
     }
 
+
+    private fun convertDate(timeinMillis: Long): String =
+        android.text.format.DateFormat.format("MM/dd/yyyy hh:mm:ss", timeinMillis) as String
 }

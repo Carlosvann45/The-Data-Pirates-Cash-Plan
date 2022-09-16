@@ -72,6 +72,6 @@
     <string name="reminders">Reminders</string>
     <!--    KEYS AND IDS                        -->
     <string name="stNotifChnl_id01">01 Remind</string>
-    <string name="stNotifChnl_id02">02 Place Holder</string>
+    <string name="stNotifChnl_id02">02 Alarm</string>
     <string name="stNotifCatID">only group</string>
 </resources>

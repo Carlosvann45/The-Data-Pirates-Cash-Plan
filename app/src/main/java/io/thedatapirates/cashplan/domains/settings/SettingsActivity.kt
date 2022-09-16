@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.app.PendingIntent.getActivity
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -27,14 +26,12 @@ import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import io.thedatapirates.cashplan.domains.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.fragment_st_notifications.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.*
 
 @DelicateCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var alarm: AlarmSettings
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
@@ -50,7 +47,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         notif = StNotifications()
-        alarm = AlarmSettings(this)
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlSettingsActivity)
@@ -163,6 +159,8 @@ class SettingsActivity : AppCompatActivity() {
         }
         val pendingIntent: PendingIntent =
             getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        //
+
 //        val bitmap = BitmapFactory.decodeResource(
 //            applicationContext.resources,
 //            R.drawable.ic_launcher_background
@@ -189,8 +187,10 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    fun sendAlarm() {
+    fun sendAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {
+            this.set(Calendar.SECOND, 0)
+            this.set(Calendar.MILLISECOND, 0)
             DatePickerDialog(
                 this@SettingsActivity,
                 0,
@@ -205,6 +205,7 @@ class SettingsActivity : AppCompatActivity() {
                         { _, hr, min ->
                             this.set(Calendar.HOUR_OF_DAY, hr)
                             this.set(Calendar.MINUTE, min)
+                            callback(this.timeInMillis)
                         },
                         this.get(Calendar.HOUR_OF_DAY),
                         this.get(Calendar.MINUTE),
@@ -212,7 +213,6 @@ class SettingsActivity : AppCompatActivity() {
                     ).show()
 
                 },
-
                 this.get(Calendar.YEAR),
                 this.get(Calendar.MONTH),
                 this.get(Calendar.DAY_OF_MONTH)
