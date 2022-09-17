@@ -5,29 +5,58 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
-import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
+import kotlinx.android.synthetic.main.fragment_cash_flow.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CashFlowFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CashFlowFragment : Fragment() {
 
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
+    private lateinit var cashFlowAdapter: CashFlowAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_cash_flow, container, false)
-
-        view.tvCashFlowText.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.navNestedCashFlow)
-        }
-
-        return view
+        return inflater.inflate(R.layout.fragment_cash_flow, container, false)
     }
 
+
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        cashFlowAdapter = CashFlowAdapter(mutableListOf())
+
+        setFragmentResultListener("requestKey") { key, bundle ->
+            // Any type can be passed via to the bundle
+            val itemName = bundle.getString("name")
+            val itemOption = bundle.getString("option")
+            val itemAmount = bundle.getFloat("amount")
+
+            if (itemOption != null && itemName != null) {
+                val item = CashFlowItem(itemOption, itemName, itemAmount)
+                cashFlowAdapter.addExpense(item)
+            }
+        }
+
+        super.onViewCreated(itemView, savedInstanceState)
+        rvExpenses.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = cashFlowAdapter
+
+        }
+        tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
+
+        btnAddExpense.setOnClickListener {
+            Navigation.findNavController(itemView).navigate(R.id.rlNestedCashFlowFragment)
+        }
+
+        btnDeleteDoneExpenses.setOnClickListener {
+            cashFlowAdapter.deleteItems()
+            tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
+        }
+    }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.gson.Gson
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
@@ -16,7 +17,7 @@ import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.login.LoginService
 import io.thedatapirates.cashplan.domains.home.HomeActivity
-import io.thedatapirates.cashplan.utils.CustomToast
+import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 
@@ -30,7 +31,7 @@ object LoginServiceLocator {
 /**
  * Service locator to inject customer service into login fragment
  */
-object CustomerServiceLocator {
+object LoginCustomerServiceLocator {
     fun getCustomerService(): CustomerService = CustomerService.create()
 }
 
@@ -42,7 +43,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var loginContext: Context
     private val loginService = LoginServiceLocator.getLoginService()
-    private val customerService = CustomerServiceLocator.getCustomerService()
+    private val customerService = LoginCustomerServiceLocator.getCustomerService()
     private var toast: Toast? = null
     private var error = ""
     /**
@@ -65,7 +66,7 @@ class LoginFragment : Fragment() {
                     if (!isLoggedIn) {
                         toast?.cancel()
 
-                        toast = CustomToast.createCustomToast(error, view, loginContext)
+                        toast = AndroidUtils.createCustomToast(error, view, loginContext)
 
                         toast?.show()
                     }
@@ -102,7 +103,7 @@ class LoginFragment : Fragment() {
 
                             toast?.cancel()
 
-                            toast = CustomToast.createCustomToast(
+                            toast = AndroidUtils.createCustomToast(
                                 "Sorry there was an issue with the server. Please try again",
                                 view, loginContext
                             )
@@ -116,6 +117,10 @@ class LoginFragment : Fragment() {
 
         view.tvForgotPassword.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.navigateToForgotPasswordFragment)
+        }
+
+        view.tvCreateAccount.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.navigateToCreateAccountFragment)
         }
 
         return view

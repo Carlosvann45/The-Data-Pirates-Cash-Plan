@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.PendingIntent.getActivity
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.format.DateFormat.is24HourFormat
@@ -24,7 +25,6 @@ import io.thedatapirates.cashplan.domains.helpcenter.HelpCenterActivity
 import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
-import io.thedatapirates.cashplan.domains.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.*
@@ -76,10 +76,6 @@ class SettingsActivity : AppCompatActivity() {
             it.isChecked = true
 
             when (it.itemId) {
-                R.id.navProfileActivity -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                }
                 R.id.navLogOut -> {
                     val editSettings =
                         this.getSharedPreferences("UserInfo", MODE_PRIVATE).edit()
@@ -97,12 +93,46 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(Intent(this, HelpCenterActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
-                R.id.navShare -> navView.menu.findItem(R.id.navShare).isChecked = false
-                R.id.navWriteReview -> navView.menu.findItem(R.id.navWriteReview).isChecked = false
-                R.id.navFacebook -> navView.menu.findItem(R.id.navFacebook).isChecked = false
-                R.id.navInstagram -> navView.menu.findItem(R.id.navInstagram).isChecked = false
-                R.id.navSnapchat -> navView.menu.findItem(R.id.navSnapchat).isChecked = false
-                R.id.navLinkedIn -> navView.menu.findItem(R.id.navLinkedIn).isChecked = false
+                R.id.navWriteReview -> {
+                    navView.menu.findItem(R.id.navWriteReview).isChecked = false
+
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=io.thedatapirates.cashplan")
+                    )
+
+                    startActivity(intent)
+                }
+                R.id.navFacebook -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://m.facebook.com/TheDataPirates")
+                    )
+
+                    navView.menu.findItem(R.id.navFacebook).isChecked = false
+
+                    startActivity(intent)
+                }
+                R.id.navInstagram -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://www.instagram.com/data_pirates_cash_plan")
+                    )
+
+                    navView.menu.findItem(R.id.navInstagram).isChecked = false
+
+                    startActivity(intent)
+                }
+                R.id.navLinkedIn -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://www.linkedin.com/company/cash-plan")
+                    )
+
+                    navView.menu.findItem(R.id.navLinkedIn).isChecked = false
+
+                    startActivity(intent)
+                }
             }
             true
         }

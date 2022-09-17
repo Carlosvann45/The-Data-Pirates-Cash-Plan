@@ -9,6 +9,43 @@
         android:id="@+id/rlInvestmentFragment"
         android:name="io.thedatapirates.cashplan.domains.investment.InvestmentFragment"
         android:label="fragment_investment"
-        tools:layout="@layout/fragment_investment" />
+        tools:layout="@layout/fragment_investment">
+        <action
+            android:id="@+id/navigateToInvestmentBreakdownFragment"
+            app:destination="@id/llInvestmentBreakdownFragment" />
+        <action
+            android:id="@+id/navigateSellInvestmentFragment"
+            app:destination="@id/llSellInvestmentFragment" />
+        <action
+            android:id="@+id/navigateToBuyInvestmentFragment"
+            app:destination="@id/llBuyInvestmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/llInvestmentBreakdownFragment"
+        android:name="io.thedatapirates.cashplan.domains.investment.InvestmentBreakdownFragment"
+        android:label="fragment_investment_breakdown"
+        tools:layout="@layout/fragment_investment_breakdown">
+        <action
+            android:id="@+id/navigateToInvestmentFragmentFromBreakdown"
+            app:destination="@id/rlInvestmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/llSellInvestmentFragment"
+        android:name="io.thedatapirates.cashplan.domains.investment.SellInvestmentFragment"
+        android:label="fragment_sell_investment"
+        tools:layout="@layout/fragment_sell_investment">
+        <action
+            android:id="@+id/navigateToInvestmentFragmentFromSell"
+            app:destination="@id/rlInvestmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/llBuyInvestmentFragment"
+        android:name="io.thedatapirates.cashplan.domains.investment.BuyInvestmentFragment"
+        android:label="fragment_buy_investment"
+        tools:layout="@layout/fragment_buy_investment">
+        <action
+            android:id="@+id/navigateToInvestmentFragmentFromBuyFragment"
+            app:destination="@id/rlInvestmentFragment" />
+    </fragment>
 
 </navigation>

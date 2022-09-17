@@ -5,6 +5,8 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
+import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
+import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountResponse
 import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 
 /**
@@ -13,6 +15,7 @@ import io.thedatapirates.cashplan.data.dtos.customer.CustomerResponse
 interface CustomerService {
 
     suspend fun getCustomerInformation(email: String?, accessToken: String?): CustomerResponse?
+    suspend fun createCustomer(customerInformation: CreateAccountRequest): CreateAccountResponse
 
     /**
      * Dependency injection for customer service

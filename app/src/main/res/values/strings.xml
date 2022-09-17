@@ -35,19 +35,49 @@
     <string name="linkedin">LinkedIn</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <!--    PLACE HOLDERS AKA Temp or Template   -->
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
-    <string name="Template">Temp</string>
-    <string name="Temp_Phone">123–456–7890</string>
-    <string name="Temp_Title_StockApp">RobinHat</string>
-    <string name="Temp_Title_CryptoApp">CubeChain</string>
-    <!--    NAMES FOR BUTTONS AKA B OR Btn       -->
+    <string name="pie_legend">Pie Legend</string>
+    <string name="technology_sector">technology sector</string>
+    <string name="communication">Communication</string>
+    <string name="communication_sector">communication sector</string>
+    <string name="industrial">Industrial</string>
+    <string name="industrial_sector">industrial sector</string>
+    <string name="energy">Energy</string>
+    <string name="energy_sector">energy sector</string>
+    <string name="utility">Utility</string>
+    <string name="utility_sector">utility sector</string>
+    <string name="real_estate">Real Estate</string>
+    <string name="real_estate_sector">real estate sector</string>
+    <string name="material">Material</string>
+    <string name="material_sector">material sector</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="healthcare_sector">healthcare sector</string>
+    <string name="consumer">Consumer</string>
+    <string name="consumer_sector">consumer sector</string>
+    <string name="finance">Finance</string>
+    <string name="finance_sector">finance sector</string>
+    <string name="technology">Technology</string>
+    <string name="transactions">Transactions</string>
+    <string name="sell_stock">Sell Stock</string>
+    <string-array name="cash_flow_choices_array">
+        <item>Deposit</item>
+        <item>Expense</item>
+    </string-array>
+    <string name="selected_item">Selected item:</string>
     <string name="BTitle_Account">Account</string>
     <string name="BTitle_Customize">Customization</string>
     <string name="BTitle_Notifications">Notifications</string>
-    <!--    NAMES FOR ITEMS AKA Title            -->
     <string name="Title_Permissions">Permissions</string>
+    <string name="Template">Temp</string>
+    <string name="Temp_Phone">123–456–7890</string>
+    <string name="Temp_Email">JohnDoe@temp.com</string>
+    <string name="Temp_BankName">Bank Name</string>
+    <string name="Temp_CheckingName">Checking X4321</string>
+    <string name="Temp_SavingsName">Savings X1234</string>
+    <string name="Temp_AccntNum">*****4321</string>
+    <string name="Temp_Title_StockApp">RobinHat</string>
+    <string name="Temp_Title_CryptoApp">CubeChain</string>
     <string name="Title_FirstName">First Name:</string>
     <string name="Title_LastName">Last Name:</string>
     <string name="Title_PhoneNum">Phone Number:</string>
@@ -55,9 +85,6 @@
     <string name="Title_CheckingAccnt_Singlar">Checking Account</string>
     <string name="Title_SavingsAccnt">Savings Account</string>
     <string name="Title_Stocks">Stocks</string>
-    <string name="Title_Crypto">Cryptocurrency</string>
-    <!--    NAMES FOR CATEGORY TITLES AKA Cat    -->
-    <string name="Title_Cat_BankInfo">Banking</string>
     <string name="Title_Cat_Prsnl">Personal Information</string>
     <string name="Title_Cat_Investments">Investments</string>
     <string name="All_Notif">All Notications</string>
@@ -70,7 +97,36 @@
     <string name="sounds">Sounds</string>
     <string name="vibration">Vibration</string>
     <string name="reminders">Reminders</string>
-    <!--    KEYS AND IDS                        -->
+    <string name="sector">Sector:</string>
+    <string name="drop_down_button">Drop Down button</string>
+    <string name="amount">Amount:</string>
+    <string name="price">Price:</string>
+    <string name="buy_stock">Buy Stock</string>
+    <string name="stock_symbol">Stock Symbol:</string>
+    <string name="buy_investment">Buy Investment</string>
+    <string name="back_button">Back Button</string>
+    <string name="Title_Crypto">Cryptocurrency</string>
+    <string name="Title_Cat_BankInfo">Banking</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="miscellaneous_sector">Miscellaneous Sector</string>
+    <string name="recreation">Recreation</string>
+    <string name="recreation_sector">Recreation Sector</string>
+    <string name="personal">Personal</string>
+    <string name="personal_sector">Personal Sector</string>
+    <string name="savings">Savings</string>
+    <string name="savings_section">Savings Section</string>
+    <string name="medical">Medical</string>
+    <string name="medical_section">Medical Section</string>
+    <string name="insurance">Insurance</string>
+    <string name="insurance_section">Insurance Section</string>
+    <string name="utilities">Utilities</string>
+    <string name="utilities_section">Utilities Section</string>
+    <string name="food">Food</string>
+    <string name="food_section">Food Section</string>
+    <string name="transportation">Transportation</string>
+    <string name="transportation_section">Transportation Section</string>
+    <string name="housing">Housing</string>
+    <string name="housing_section">Housing Section</string>
     <string name="stNotifChnl_id01">01 Remind</string>
     <string name="stNotifChnl_id02">02 Alarm</string>
     <string name="stNotifCatID">only group</string>

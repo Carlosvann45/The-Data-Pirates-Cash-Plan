@@ -18,6 +18,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         reminderNotifChnl()
         alarmNotifChnl()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Ca\$hPlanReminderChannel"
+            val description = "Channel for reminding customers about expenses that need to be paid"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("REMINDERS_CHANNEL", name, importance)
+
+            channel.description = description
+
+            val notificationManager = getSystemService(NotificationManager::class.java)
+
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     /**
@@ -62,5 +75,7 @@ class LoginActivity : AppCompatActivity() {
             notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), getString(R.string.reminders)))
             notificationManager.createNotificationChannel(channel)
         }
+
+
     }
 }

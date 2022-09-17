@@ -9,8 +9,13 @@ import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.android.synthetic.main.fragment_settings.view.*
+
 
 @DelicateCoroutinesApi
+/**
+ * A simple [Fragment] subclass.
+ */
 class SettingsFragment : Fragment() {
     lateinit var settingsActivity: SettingsActivity
     lateinit var alarm: AlarmService

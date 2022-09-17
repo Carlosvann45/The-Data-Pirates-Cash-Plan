@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
     android:id="@+id/rlHomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="50dp"
     android:background="@color/light_blue"
-    tools:context=".domains.home.HomeFragment">
+    tools:context=".domains.home.HomeFragment"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="@+id/rlHomeFragment"
+    app:layout_constraintStart_toStartOf="@+id/rlHomeFragment"
+    app:layout_constraintTop_toTopOf="@+id/rlHomeFragment">
 
-    <TextView
-        android:id="@+id/tvHomeText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <include
+            layout="@layout/home_monthly_tracker" />
+
+        <include
+            layout="@layout/home_progress_tracker" />
+
+    </LinearLayout>
+
+</ScrollView>
+
+    <include
+        layout="@layout/progress_spinner_overlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rlHomeFragment"
+        app:layout_constraintStart_toStartOf="@+id/rlHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/rlHomeFragment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
