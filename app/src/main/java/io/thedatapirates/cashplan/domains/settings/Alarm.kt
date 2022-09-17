@@ -43,8 +43,8 @@ class AlarmService(private val context: Context) {
     }
 
     private fun createAlarm(timeInMillis: Long, intent: PendingIntent) {
-        manager?.let {
-            manager.setExactAndAllowWhileIdle(
+        manager.let {
+            manager?.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 timeInMillis,
                 intent
@@ -70,11 +70,11 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         val timeInMillis = intent.getLongExtra(RandomUtils.EXTRA_ALARM_TIME, 0L)
-        val activity = activity as SettingsActivity
+//        val activity = activity as SettingsActivity
 
         when (intent.action) {
             RandomUtils.ACTION_SET_ALARM -> {
-              activity.sendNotification()
+//              activity.sendNotification()
             }
             RandomUtils.ACTION_SET_REMINDER ->{
                 val cal = Calendar.getInstance().apply {

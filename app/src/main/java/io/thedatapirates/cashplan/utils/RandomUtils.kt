@@ -10,5 +10,4 @@ object RandomUtils {
 
     fun getRndInt():Int = seed.getAndIncrement()+System.currentTimeMillis().toInt()
 
-
 }

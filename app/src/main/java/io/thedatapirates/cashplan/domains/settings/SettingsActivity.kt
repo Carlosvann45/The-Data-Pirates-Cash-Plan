@@ -28,6 +28,7 @@ import io.thedatapirates.cashplan.domains.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import java.util.*
+import android.content.Context
 
 @DelicateCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
@@ -212,7 +213,7 @@ class SettingsActivity : AppCompatActivity() {
 //            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
 //            .setAutoCancel(true)
 //            .setStyle((NotificationCompat.BigTextStyle().bigText("the text that takes numerous lines")))
-        with(NotificationManagerCompat.from(this)) {
+        with(NotificationManagerCompat.from(this)){
             notify(notifID, builder.build())
         }
     }

@@ -75,7 +75,5 @@ class LoginActivity : AppCompatActivity() {
             notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), getString(R.string.reminders)))
             notificationManager.createNotificationChannel(channel)
         }
-
-
     }
 }
