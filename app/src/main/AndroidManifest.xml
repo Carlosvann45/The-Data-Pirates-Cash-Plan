@@ -23,9 +23,6 @@
             android:name=".domains.helpcenter.HelpCenterActivity"
             android:exported="false" />
         <activity
-            android:name=".domains.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".domains.investment.InvestmentActivity"
             android:exported="false" />
         <activity
@@ -62,6 +59,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".utils.AlarmReceiver" />
     </application>
 
 </manifest>
