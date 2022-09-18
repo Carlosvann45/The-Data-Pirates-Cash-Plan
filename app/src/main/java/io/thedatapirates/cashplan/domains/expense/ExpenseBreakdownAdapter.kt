@@ -29,7 +29,7 @@ class ExpenseBreakdownAdapter(
         val itemDate: TextView = holder.itemView.findViewById(R.id.tvExpenseBreakdownDate)
         val itemAmount: TextView = holder.itemView.findViewById(R.id.tvExpenseBreakdownAmount)
 
-        itemDate.text = currentItem.dateCreated.subSequence(
+        itemDate.text = currentItem.dateCreated.substring(
             0,
             currentItem.dateCreated.indexOfFirst { it == 'T' })
         itemAmount.text = String.format("%,.2f", currentItem.amount)

@@ -4,32 +4,48 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.ActivityNavigator
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val i = Intent(context, LoginActivity::class.java)
+        val id = intent.extras!!.getInt("id")
+        val reminderJson = intent.extras!!.getString("reminder")
+        val reminder = if (reminderJson != null)
+            Gson().fromJson(
+                reminderJson,
+                object : TypeToken<ReminderResponse>() {}.type
+            )
+        else ReminderResponse()
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        intent.extras!!.getString("reminder")
+        val pendingIntent = PendingIntent.getActivity(context, id, i, 0)
+        val mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_ALARM_ALERT_URI)
 
-        val pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
+        mediaPlayer.isLooping = true
+        mediaPlayer.start()
 
         val builder = NotificationCompat.Builder(context, "REMINDERS_CHANNEL")
             .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle("Test Alarm")
-            .setContentText("This is a test!!")
+            .setContentTitle(reminder.name)
+            .setContentText(reminder.description)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(123, builder.build())
+        notificationManager.notify(id, builder.build())
     }
 }

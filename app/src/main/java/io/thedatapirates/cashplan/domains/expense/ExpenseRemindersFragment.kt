@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,17 +17,20 @@ import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import kotlinx.android.synthetic.main.fragment_expense_reminders.view.*
 import kotlinx.android.synthetic.main.fragment_expense_transactions.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 /**
  * A simple [Fragment] subclass.
  * Use the [ExpenseRemindersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@DelicateCoroutinesApi
 class ExpenseRemindersFragment : Fragment() {
 
     private lateinit var expenseRemindersContext: Context
     private lateinit var recyclerView: RecyclerView
     private lateinit var expense: ExpenseResponse
+    private var toast: Toast? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +61,7 @@ class ExpenseRemindersFragment : Fragment() {
         recyclerView = view.rvExpenseReminders
         recyclerView.layoutManager = LinearLayoutManager(expenseRemindersContext)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = ReminderBreakdownAdapter(reminders, expense, view)
+        recyclerView.adapter = ReminderBreakdownAdapter(reminders, expense, view, expenseRemindersContext, toast)
 
         view.ivExpenseRemindersBackBtn.setOnClickListener {
             val bundle = Bundle()

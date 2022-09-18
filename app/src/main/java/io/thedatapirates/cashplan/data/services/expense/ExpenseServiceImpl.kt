@@ -18,7 +18,7 @@ class ExpenseServiceImpl(
      */
     override suspend fun getExpensesForCustomer(accessToken: String?): MutableList<ExpenseResponse> {
         return client.get {
-            url(HttpRoutes.ALL_EXPENSES)
+            url(HttpRoutes.EXPENSES)
             headers {
                 append("Authorization", "Bearer $accessToken")
             }

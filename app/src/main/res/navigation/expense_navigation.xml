@@ -46,5 +46,17 @@
         <action
             android:id="@+id/navigateToExpenseNavFragment"
             app:destination="@id/rlExpenseNavFragment" />
+        <action
+            android:id="@+id/navigateToAddReminderFragment"
+            app:destination="@id/rlAddReminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rlAddReminderFragment"
+        android:name="io.thedatapirates.cashplan.domains.expense.AddReminderFragment"
+        android:label="fragment_add_reminder"
+        tools:layout="@layout/fragment_add_reminder" >
+        <action
+            android:id="@+id/navigateToExpenseRemindersFragmentFromAddReminderFragment"
+            app:destination="@id/rlExpenseRemindersFragment" />
     </fragment>
 </navigation>

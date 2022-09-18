@@ -69,7 +69,7 @@ class ExpenseItemsAdapter(
                 val withdrawalBtn: TextView = holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
                 val expenseItem: CardView = holder.itemView.findViewById(R.id.cvExpenseItem)
 
-                val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T") - 1)
+                val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T"))
                 val endDate = expense.endDate?.substring(0, expense.endDate?.indexOf("T")?.minus(1) ?: 0) ?: ""
 
                 expenseNameText.text = expense.name

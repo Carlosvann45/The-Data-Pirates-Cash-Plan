@@ -1,26 +1,48 @@
 package io.thedatapirates.cashplan.domains.expense
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
+import io.thedatapirates.cashplan.data.services.frequency.FrequencyService
+import io.thedatapirates.cashplan.data.services.reminder.ReminderService
+import io.thedatapirates.cashplan.utils.AlarmReceiver
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.add_expense_button.view.*
 import kotlinx.android.synthetic.main.add_reminder_button.view.*
+import kotlinx.coroutines.*
 
+/**
+ * Service locator to inject customer service into login fragment
+ */
+object ReminderAdapterServiceLocator {
+    fun getReminderService(): ReminderService = ReminderService.create()
+}
+
+@DelicateCoroutinesApi
 class ReminderBreakdownAdapter(
     private val reminders: MutableList<ReminderResponse>,
     private val expense: ExpenseResponse,
-    val view: View
+    val view: View,
+    val context: Context,
+    private var toast: Toast? = null
 ) : RecyclerView.Adapter<ReminderBreakdownAdapter.ReminderItemsViewHolder>() {
+
+    private val reminderService = AddExpenseServiceLocator.getReminderService()
 
     /**
      * Inflates the a layout to add it to recycler view
@@ -54,6 +76,10 @@ class ReminderBreakdownAdapter(
         when (position) {
             reminders.size - 1 -> {
                 holder.itemView.btnAddReminder.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("expense", Gson().toJson(expense))
+
+                    Navigation.findNavController(view).navigate(R.id.rlAddReminderFragment, bundle)
                 }
             }
             else -> {
@@ -80,7 +106,35 @@ class ReminderBreakdownAdapter(
                 }
 
                 deleteReminderBtn.setOnClickListener {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        val deleted = deleteReminderById(reminder.id)
 
+                        withContext(Dispatchers.Main) {
+                            if (deleted) {
+                                val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+                                val intent = Intent(context, AlarmReceiver::class.java)
+
+                                val pendingIntent = PendingIntent.getBroadcast(context, reminder.id.toInt(), intent, 0)
+
+                                alarmManager.cancel(pendingIntent)
+
+                                expense.reminders.removeAt(reminders.indexOfFirst { it.id == reminder.id })
+                                reminders.removeAt(reminders.indexOfFirst { it.id == reminder.id })
+                                notifyDataSetChanged()
+                            } else {
+                                toast?.cancel()
+
+                                toast = AndroidUtils.createCustomToast(
+                                    "There was an error with the server. Please try again later.",
+                                    view,
+                                    context
+                                )
+
+                                toast?.show()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -113,5 +167,20 @@ class ReminderBreakdownAdapter(
      */
     class ReminderItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    }
+
+    private suspend fun deleteReminderById(id: Long): Boolean {
+        val sharedPreferences =
+            context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+
+        val accessToken = sharedPreferences.getString("accessToken", "")
+
+        return try {
+            reminderService.deleteReminder(accessToken, id)
+            true
+        } catch (e: Exception) {
+            print("Error: ${e.message}")
+            false
+        }
     }
 }

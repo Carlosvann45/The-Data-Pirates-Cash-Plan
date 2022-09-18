@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remind TIme:"
+                android:text="Remind Time:"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 

@@ -111,8 +111,10 @@ class HomeFragment : Fragment() {
                         }
                     }
 
-                    // adds category amount to map
-                    expensesMap[category.name] = totalCategoryAmount
+                    if (totalCategoryAmount > 0) {
+                        // adds category amount to map
+                        expensesMap[category.name] = totalCategoryAmount
+                    }
                 }
             }
 
@@ -277,21 +279,20 @@ class HomeFragment : Fragment() {
         overviewPieChart.setUsePercentValues(true)
         overviewPieChart.minAngleForSlices = 15f
 
-        val description = Description()
-
-        description.text = if (expensesMap.values.isEmpty()) "No expenses have been paid"
-            else formattedTotal
-
-        description.textColor = resources.getColor(R.color.white)
-        description.textSize = 26f
-        description.typeface = Typeface.DEFAULT_BOLD
-        description.xOffset = 135f
-        description.yOffset = 180f
-
-        overviewPieChart.description.isEnabled = true
-        overviewPieChart.description = description
 
 
+        if (expensesMap.values.isEmpty()) {
+            val description = Description()
+            description.textColor = resources.getColor(R.color.white)
+            description.text = "No expenses have been paid"
+            description.typeface = Typeface.DEFAULT_BOLD
+            description.textSize = 16f
+            description.xOffset = 86f
+            description.yOffset = 180f
+            overviewPieChart.description = description
+        } else {
+            overviewPieChart.description.isEnabled = false
+        }
 
         overviewPieChart.setExtraOffsets(5f, 10f, 5f, 5f)
         overviewPieChart.dragDecelerationFrictionCoef = 0.5f
