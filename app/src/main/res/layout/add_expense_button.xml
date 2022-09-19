@@ -6,8 +6,8 @@
     <android.widget.Button
         android:id="@+id/btnAddExpense"
         android:layout_width="match_parent"
-        android:layout_margin="5dp"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:background="@drawable/edit_btn_background"
         android:text="Add Expense"
         android:textAllCaps="false"

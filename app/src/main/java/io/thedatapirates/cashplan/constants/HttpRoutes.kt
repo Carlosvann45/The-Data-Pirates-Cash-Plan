@@ -17,4 +17,5 @@ object HttpRoutes {
     const val REMINDERS = "$BASE_URL/reminders"
     const val ALL_CATEGORIES = "$BASE_URL/categories"
     const val ALL_FREQUENCIES = "$BASE_URL/frequencies"
+    const val ALL_PRIORITY_LEVELS = "$BASE_URL/priorityLevels"
 }

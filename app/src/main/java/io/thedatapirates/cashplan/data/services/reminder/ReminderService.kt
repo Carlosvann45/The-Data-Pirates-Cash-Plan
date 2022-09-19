@@ -6,12 +6,8 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.http.*
-import io.thedatapirates.cashplan.data.dtos.category.Category
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderRequest
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
-import io.thedatapirates.cashplan.data.services.category.CategoryService
-import io.thedatapirates.cashplan.data.services.category.CategoryServiceImpl
-import kotlinx.serialization.json.Json
 
 interface ReminderService {
     suspend fun createReminder(accessToken: String?, reminder: ReminderRequest): ReminderResponse

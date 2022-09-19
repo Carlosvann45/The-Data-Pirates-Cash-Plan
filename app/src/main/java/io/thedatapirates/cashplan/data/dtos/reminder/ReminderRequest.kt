@@ -1,6 +1,5 @@
 package io.thedatapirates.cashplan.data.dtos.reminder
 
-import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
 import kotlinx.serialization.Serializable
 
 /**

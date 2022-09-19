@@ -76,8 +76,8 @@
                 android:id="@+id/ivOpenSelectTime"
                 android:layout_width="17dp"
                 android:layout_height="19dp"
-                android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
                 android:background="@drawable/calendar_icon"
                 android:contentDescription="Drop Down button" />
 
@@ -110,8 +110,8 @@
                 android:id="@+id/ivOpenSelectFrequency"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
                 android:background="@drawable/drop_down_icon"
                 android:contentDescription="Drop Down button" />
 
@@ -175,8 +175,8 @@
             android:id="@+id/btnCreateReminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/login_btn_background"

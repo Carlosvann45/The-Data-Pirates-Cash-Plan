@@ -2,11 +2,11 @@ package io.thedatapirates.cashplan.domains.expense
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +61,8 @@ class ExpenseRemindersFragment : Fragment() {
         recyclerView = view.rvExpenseReminders
         recyclerView.layoutManager = LinearLayoutManager(expenseRemindersContext)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = ReminderBreakdownAdapter(reminders, expense, view, expenseRemindersContext, toast)
+        recyclerView.adapter =
+            ReminderBreakdownAdapter(reminders, expense, view, expenseRemindersContext, toast)
 
         view.ivExpenseRemindersBackBtn.setOnClickListener {
             val bundle = Bundle()

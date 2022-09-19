@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvReminderItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    android:background="@color/blue">
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/blue">
+        android:background="@color/blue"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,17 +24,16 @@
                 android:id="@+id/tvReminderName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
                 android:text="Name"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:layout_weight="1"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -42,16 +41,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:orientation="horizontal"
             app:flexWrap="wrap"
-            app:justifyContent="space_around"
-            android:orientation="horizontal">
+            app:justifyContent="space_around">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remind Time:"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,9 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center"
+            android:orientation="horizontal"
             app:flexWrap="wrap"
-            app:justifyContent="space_around"
-            android:orientation="horizontal">
+            app:justifyContent="space_around">
 
             <TextView
                 android:id="@+id/tvReminderDate"
@@ -94,16 +93,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:orientation="horizontal"
             app:flexWrap="wrap"
-            app:justifyContent="space_around"
-            android:orientation="horizontal">
+            app:justifyContent="space_around">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description:"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -112,9 +111,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center"
+            android:orientation="horizontal"
             app:flexWrap="wrap"
-            app:justifyContent="space_around"
-            android:orientation="horizontal">
+            app:justifyContent="space_around">
 
             <TextView
                 android:id="@+id/tvReminderDescription"
@@ -133,20 +132,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center"
+            android:orientation="horizontal"
             app:flexWrap="wrap"
-            app:justifyContent="space_around"
-            android:orientation="horizontal">
+            app:justifyContent="space_around">
 
             <TextView
                 android:id="@+id/tvDeleteReminder"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:padding="1dp"
                 android:background="@drawable/login_btn_background"
+                android:padding="1dp"
                 android:text="Delete"
                 android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 

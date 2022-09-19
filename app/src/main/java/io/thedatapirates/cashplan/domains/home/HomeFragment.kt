@@ -3,8 +3,6 @@ package io.thedatapirates.cashplan.domains.home
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,12 +28,6 @@ import kotlinx.android.synthetic.main.home_progress_tracker.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.filter
-import kotlin.collections.forEach
-import kotlin.collections.mutableListOf
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 
 /**
@@ -344,7 +336,8 @@ class HomeFragment : Fragment() {
         paymentTitleText.text = "$month payment tracker"
         amountPaidText.text = totalPayed.toString()
         amountLeftText.text = "of  $totalToPay"
-        supportMessage.text = "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
+        supportMessage.text =
+            "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
         progressBar.max = if (totalToPay > 0) totalToPay * 1000 else 1000
         progressBar.progressBackgroundTintList = ColorStateList.valueOf(
             resources.getColor(R.color.white)
@@ -381,17 +374,18 @@ class HomeFragment : Fragment() {
     /**
      * Calculates total payments for month and if year still needs to be paid
      */
-    private fun findTotalToPay(expense: ExpenseResponse) : Int {
+    private fun findTotalToPay(expense: ExpenseResponse): Int {
         val calendar = Calendar.getInstance()
 
-        return when(expense.frequency.name) {
+        return when (expense.frequency.name) {
             "Daily" -> calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
             "Weekly" -> calendar.getMaximum(Calendar.WEEK_OF_MONTH)
             "Biweekly" -> 2
             "Monthly" -> 1
             "Yearly" -> {
                 val withdrawal = expense.withdrawals.find {
-                    it.dateCreated.substring(0, it.dateCreated.indexOf("-") - 1).toInt() == calendar.get(Calendar.YEAR)
+                    it.dateCreated.substring(0, it.dateCreated.indexOf("-") - 1)
+                        .toInt() == calendar.get(Calendar.YEAR)
                 }
 
                 if (withdrawal == null) 1 else 0

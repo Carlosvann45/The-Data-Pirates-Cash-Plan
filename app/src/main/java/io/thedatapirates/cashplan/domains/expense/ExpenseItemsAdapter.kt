@@ -1,6 +1,5 @@
 package io.thedatapirates.cashplan.domains.expense
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
-import io.thedatapirates.cashplan.domains.investment.InvestmentItemsAdapter
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.add_expense_button.view.*
-import kotlinx.android.synthetic.main.add_reminder_button.view.*
-import kotlinx.android.synthetic.main.expense_item.view.*
-import kotlinx.android.synthetic.main.investment_buttons.view.*
 
 class ExpenseItemsAdapter(
     private val expenses: MutableList<ExpenseResponse>,
@@ -56,6 +51,11 @@ class ExpenseItemsAdapter(
         when (position) {
             expenses.size - 1 -> {
                 holder.itemView.btnAddExpense.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("fromType", "create")
+
+                    Navigation.findNavController(view)
+                        .navigate(R.id.rlAddEditExpenseFragment, bundle)
                 }
             }
             else -> {
@@ -66,11 +66,13 @@ class ExpenseItemsAdapter(
                 val startDateText: TextView = holder.itemView.findViewById(R.id.tvExpenseStartDate)
                 val endDateNameText: TextView = holder.itemView.findViewById(R.id.tvExpenseEndDate)
                 val editExpenseBtn: TextView = holder.itemView.findViewById(R.id.tvEditExpense)
-                val withdrawalBtn: TextView = holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
+                val withdrawalBtn: TextView =
+                    holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
                 val expenseItem: CardView = holder.itemView.findViewById(R.id.cvExpenseItem)
 
                 val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T"))
-                val endDate = expense.endDate?.substring(0, expense.endDate?.indexOf("T")?.minus(1) ?: 0) ?: ""
+                val endDate =
+                    expense.endDate?.substring(0, expense.endDate?.indexOf("T") ?: 0) ?: ""
 
                 expenseNameText.text = expense.name
                 categoryNameText.text = expense.category.name
@@ -90,7 +92,12 @@ class ExpenseItemsAdapter(
                 }
 
                 editExpenseBtn.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("expense", Gson().toJson(expense))
+                    bundle.putString("fromType", "edit")
 
+                    Navigation.findNavController(view)
+                        .navigate(R.id.rlAddEditExpenseFragment, bundle)
                 }
 
                 withdrawalBtn.setOnClickListener {

@@ -8,11 +8,9 @@ import android.media.MediaPlayer
 import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.navigation.ActivityNavigator
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 
@@ -40,7 +38,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle(reminder.name)
             .setContentText(reminder.description)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

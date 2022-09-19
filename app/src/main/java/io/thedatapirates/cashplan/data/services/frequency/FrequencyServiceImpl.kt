@@ -4,7 +4,6 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.thedatapirates.cashplan.constants.HttpRoutes
 import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
-import kotlin.text.get
 
 /**
  * A class for frequency services

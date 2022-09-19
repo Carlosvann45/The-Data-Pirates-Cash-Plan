@@ -1,22 +1,22 @@
-package io.thedatapirates.cashplan.data.services.frequency
+package io.thedatapirates.cashplan.data.services.priorityLevel
 
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
-import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
+import io.thedatapirates.cashplan.data.dtos.priortiyLevel.PriorityLevel
 
-interface FrequencyService {
+interface PriorityLevelService {
 
-    suspend fun getFrequencies(): MutableList<Frequency>
+    suspend fun getPriorityLevels(): MutableList<PriorityLevel>
 
     /**
      * Dependency injection for frequency service
      */
     companion object {
-        fun create(): FrequencyService {
-            return FrequencyServiceImpl(
+        fun create(): PriorityLevelService {
+            return PriorityLevelServiceImpl(
                 client = HttpClient(Android) {
                     install(Logging) {
                         level = LogLevel.ALL
@@ -31,4 +31,5 @@ interface FrequencyService {
             )
         }
     }
+
 }

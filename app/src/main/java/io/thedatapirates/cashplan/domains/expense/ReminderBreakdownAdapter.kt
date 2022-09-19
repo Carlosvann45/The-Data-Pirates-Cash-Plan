@@ -16,13 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
-import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
-import io.thedatapirates.cashplan.data.services.frequency.FrequencyService
 import io.thedatapirates.cashplan.data.services.reminder.ReminderService
 import io.thedatapirates.cashplan.utils.AlarmReceiver
 import io.thedatapirates.cashplan.utils.AndroidUtils
-import kotlinx.android.synthetic.main.add_expense_button.view.*
 import kotlinx.android.synthetic.main.add_reminder_button.view.*
 import kotlinx.coroutines.*
 
@@ -88,13 +85,17 @@ class ReminderBreakdownAdapter(
                 val reminderNameText: TextView = holder.itemView.findViewById(R.id.tvReminderName)
                 val reminderDateText: TextView = holder.itemView.findViewById(R.id.tvReminderDate)
                 val frequencyNameText: TextView = holder.itemView.findViewById(R.id.tvFrequencyName)
-                val reminderDescriptionText: TextView = holder.itemView.findViewById(R.id.tvReminderDescription)
-                val deleteReminderBtn: TextView = holder.itemView.findViewById(R.id.tvDeleteReminder)
+                val reminderDescriptionText: TextView =
+                    holder.itemView.findViewById(R.id.tvReminderDescription)
+                val deleteReminderBtn: TextView =
+                    holder.itemView.findViewById(R.id.tvDeleteReminder)
 
-                val reminderDate = reminder.reminderTime.substring(0, reminder.reminderTime.indexOf("T") - 1)
+                val endOfDate = reminder.reminderTime.indexOf("T")
+                val reminderDate = reminder.reminderTime.substring(0, endOfDate)
+                val reminderTime = reminder.reminderTime.substring(endOfDate + 1, endOfDate + 6)
 
                 reminderNameText.text = reminder.name
-                reminderDateText.text = reminderDate
+                reminderDateText.text = reminderDate.plus(" ").plus(reminderTime)
                 frequencyNameText.text = reminder.frequency.name
                 reminderDescriptionText.text = reminder.description
 
@@ -111,16 +112,23 @@ class ReminderBreakdownAdapter(
 
                         withContext(Dispatchers.Main) {
                             if (deleted) {
-                                val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                                val alarmManager =
+                                    context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
                                 val intent = Intent(context, AlarmReceiver::class.java)
 
-                                val pendingIntent = PendingIntent.getBroadcast(context, reminder.id.toInt(), intent, 0)
+                                val pendingIntent = PendingIntent.getBroadcast(
+                                    context,
+                                    reminder.id.toInt(),
+                                    intent,
+                                    0
+                                )
 
                                 alarmManager.cancel(pendingIntent)
 
                                 expense.reminders.removeAt(reminders.indexOfFirst { it.id == reminder.id })
                                 reminders.removeAt(reminders.indexOfFirst { it.id == reminder.id })
+
                                 notifyDataSetChanged()
                             } else {
                                 toast?.cancel()

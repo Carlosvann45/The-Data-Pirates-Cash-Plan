@@ -7,12 +7,12 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -20,11 +20,8 @@ import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.dtos.frequency.Frequency
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderRequest
-import io.thedatapirates.cashplan.data.services.category.CategoryService
-import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.data.services.frequency.FrequencyService
 import io.thedatapirates.cashplan.data.services.reminder.ReminderService
-import io.thedatapirates.cashplan.domains.home.HomeServiceLocator
 import io.thedatapirates.cashplan.utils.AlarmReceiver
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.custom_picker.view.*
@@ -127,14 +124,16 @@ class AddReminderFragment : Fragment() {
                     val nameText = view.etNameText.text.toString()
                     val descriptionText = view.etDescriptionText.text.toString()
                     val reminderTime = view.etReminderTime.text.toString()
-                    val frequency = frequencies.find { it.name == view.etFrequencyText.text.toString() }
+                    val frequency =
+                        frequencies.find { it.name == view.etFrequencyText.text.toString() }
 
-                    validResponse = nameText.isNotEmpty() && descriptionText.isNotEmpty() && frequency != null && reminderTime != "Choose Time"
+                    validResponse =
+                        nameText.isNotEmpty() && descriptionText.isNotEmpty() && frequency != null && reminderTime != "Choose Time"
 
                     if (validResponse) {
                         val reminder = ReminderRequest(
                             nameText,
-                        descriptionText,
+                            descriptionText,
                             reminderTime,
                             frequency!!.id,
                             expense.id
@@ -165,7 +164,7 @@ class AddReminderFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(dateDialog != null) {
+        if (dateDialog != null) {
             dateDialog!!.dismiss()
         }
         if (timeDialog !== null) {
@@ -174,12 +173,8 @@ class AddReminderFragment : Fragment() {
     }
 
     private fun selectTimeAndDate(view: View) {
-        var newMonth: Int = 0
-        var newDay: Int = 0
-        var newYear: Int = 0
-
         Calendar.getInstance().apply {
-           dateDialog = DatePickerDialog(
+            dateDialog = DatePickerDialog(
                 addReminderContext,
                 R.style.MyDatePickerStyle,
                 { _, year, month, day ->
@@ -187,21 +182,27 @@ class AddReminderFragment : Fragment() {
                     this.set(Calendar.MONTH, month)
                     this.set(Calendar.DAY_OF_MONTH, day)
 
-                    newMonth = month
-                    newDay = day
-                    newYear = year
-
                     timeDialog = TimePickerDialog(
                         addReminderContext,
                         R.style.MyDatePickerStyle,
-                        { _, hour, min, ->
+                        { _, hour, min ->
                             this.set(Calendar.HOUR_OF_DAY, hour)
                             this.set(Calendar.MINUTE, min)
+                            this.set(Calendar.SECOND, 0)
+                            this.set(Calendar.MILLISECOND, 0)
 
-                            view.etReminderTime.text =if (hour > 12) {
-                                "$newYear-${formatDateOrTime(newMonth)}-${formatDateOrTime(newDay)} ${formatDateOrTime(hour - 12)}:${formatDateOrTime(min)}"
+                            view.etReminderTime.text = if (hour > 12) {
+                                "$year-${formatDateOrTime(month + 1)}-${formatDateOrTime(day)} ${
+                                    formatDateOrTime(
+                                        hour - 12
+                                    )
+                                }:${formatDateOrTime(min)}"
                             } else {
-                                "$newYear-${formatDateOrTime(newMonth)}-${formatDateOrTime(newDay)} ${formatDateOrTime(hour)}:${formatDateOrTime(min)}"
+                                "$year-${formatDateOrTime(month + 1)}-${formatDateOrTime(day)} ${
+                                    formatDateOrTime(
+                                        hour
+                                    )
+                                }:${formatDateOrTime(min)}"
                             }
 
                             alarmTime = this.timeInMillis
@@ -222,7 +223,7 @@ class AddReminderFragment : Fragment() {
         }
     }
 
-    private fun formatDateOrTime(dateOrTime: Int) : String {
+    private fun formatDateOrTime(dateOrTime: Int): String {
         return if (dateOrTime < 10) {
             "0$dateOrTime"
         } else dateOrTime.toString()
@@ -236,7 +237,7 @@ class AddReminderFragment : Fragment() {
 
         val reminderResponse = try {
             reminderService.createReminder(accessToken, reminder)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             print("Error: ${e.message}")
             null
         }
@@ -245,20 +246,27 @@ class AddReminderFragment : Fragment() {
             if (reminderResponse != null) {
                 expense.reminders.add(reminderResponse)
 
-                val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                val alarmManager =
+                    requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
                 val intent = Intent(addReminderContext, AlarmReceiver::class.java).apply {
                     putExtra("id", reminderResponse.id.toInt())
                     putExtra("reminder", Gson().toJson(reminderResponse))
                 }
 
-                val pendingIntent = PendingIntent.getBroadcast(addReminderContext, reminderResponse.id.toInt(), intent, 0)
+                val pendingIntent = PendingIntent.getBroadcast(
+                    addReminderContext,
+                    reminderResponse.id.toInt(),
+                    intent,
+                    0
+                )
 
                 alarmManager.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
                     alarmTime,
                     getTimeInterval(reminderResponse.frequency.name),
-                    pendingIntent)
+                    pendingIntent
+                )
 
                 val bundle = Bundle()
                 bundle.putString("expense", Gson().toJson(expense))
@@ -295,12 +303,13 @@ class AddReminderFragment : Fragment() {
         }
     }
 
-    private fun getTimeInterval(intervalName: String) : Long {
+    private fun getTimeInterval(intervalName: String): Long {
         return when (intervalName) {
             "Daily" -> AlarmManager.INTERVAL_DAY
             "Weekly" -> AlarmManager.INTERVAL_DAY * 7
             "Biweekly" -> AlarmManager.INTERVAL_DAY * 14
-            "Monthly" -> AlarmManager.INTERVAL_DAY * Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
+            "Monthly" -> AlarmManager.INTERVAL_DAY * Calendar.getInstance()
+                .getActualMaximum(Calendar.DAY_OF_MONTH)
             "Yearly" -> AlarmManager.INTERVAL_DAY * 365
             else -> 0L
 
