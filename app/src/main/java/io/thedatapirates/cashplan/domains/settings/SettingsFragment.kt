@@ -7,25 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.android.synthetic.main.fragment_settings.view.*
-
 
 @DelicateCoroutinesApi
-/**
- * A simple [Fragment] subclass.
- */
 class SettingsFragment : Fragment() {
     lateinit var settingsActivity: SettingsActivity
-    lateinit var alarm: AlarmService
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        settingsActivity = SettingsActivity()
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
@@ -39,14 +33,12 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        view.StMB_Customization.setOnClickListener {
-            val activ = activity as SettingsActivity
-            alarm = AlarmService(activ)
-            activ.sendAlarm{alarm.setAlarm(it)}
+        super.onViewCreated(view, savedInstanceState)
+        StMB_Customization.setOnClickListener{
+            settingsActivity = activity as SettingsActivity
+            settingsActivity.sendNotification()
         }
     }
-
 }
 
 

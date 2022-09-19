@@ -1,14 +1,11 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.app.PendingIntent.getActivity
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.format.DateFormat.is24HourFormat
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -27,8 +24,6 @@ import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.coroutines.DelicateCoroutinesApi
-import java.util.*
-import android.content.Context
 
 @DelicateCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
@@ -208,47 +203,13 @@ class SettingsActivity : AppCompatActivity() {
             .setContentText("Notification Content")
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
 
 //            .setLargeIcon(bitmapLarge)
 //            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
-//            .setAutoCancel(true)
 //            .setStyle((NotificationCompat.BigTextStyle().bigText("the text that takes numerous lines")))
         with(NotificationManagerCompat.from(this)){
             notify(notifID, builder.build())
-        }
-    }
-
-    fun sendAlarm(callback: (Long) -> Unit) {
-        Calendar.getInstance().apply {
-            this.set(Calendar.SECOND, 0)
-            this.set(Calendar.MILLISECOND, 0)
-            DatePickerDialog(
-                this@SettingsActivity,
-                0,
-                { _, yr, mo, day ->
-                    this.set(Calendar.YEAR, yr)
-                    this.set(Calendar.MONTH, mo)
-                    this.set(Calendar.DAY_OF_MONTH, day)
-
-                    TimePickerDialog(
-                        this@SettingsActivity,
-                        0,
-                        { _, hr, min ->
-                            this.set(Calendar.HOUR_OF_DAY, hr)
-                            this.set(Calendar.MINUTE, min)
-                            callback(this.timeInMillis)
-                        },
-                        this.get(Calendar.HOUR_OF_DAY),
-                        this.get(Calendar.MINUTE),
-                        is24HourFormat(this@SettingsActivity)
-                    ).show()
-
-                },
-                this.get(Calendar.YEAR),
-                this.get(Calendar.MONTH),
-                this.get(Calendar.DAY_OF_MONTH)
-
-            ).show()
         }
     }
 }
