@@ -65,7 +65,8 @@ class ExpenseFragment : Fragment() {
                 recyclerView.setHasFixedSize(true)
                 recyclerView.adapter = ExpenseItemsAdapter(
                     expenses,
-                    view
+                    view,
+                    expenseContext
                 )
 
                 AndroidUtils.animateView(progressOverlay, View.GONE, 0.75f, 200L)

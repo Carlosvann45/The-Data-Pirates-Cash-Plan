@@ -149,25 +149,25 @@
             app:flexWrap="wrap"
             app:justifyContent="space_around">
 
-            <TextView
+            <android.widget.Button
                 android:id="@+id/tvEditExpense"
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:background="@drawable/login_btn_background"
-                android:padding="1dp"
                 android:text="Edit"
                 android:textAlignment="center"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
-            <TextView
+            <android.widget.Button
                 android:id="@+id/tvAddWithdrawalToExpense"
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:background="@drawable/login_btn_background"
-                android:padding="1dp"
                 android:text="Withdraw"
                 android:textAlignment="center"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

@@ -1,5 +1,6 @@
 package io.thedatapirates.cashplan.domains.expense
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -66,6 +67,7 @@ class ReminderBreakdownAdapter(
     /**
      * Creates/adds each item to the recycler view
      */
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(
         holder: ReminderBreakdownAdapter.ReminderItemsViewHolder,
         position: Int

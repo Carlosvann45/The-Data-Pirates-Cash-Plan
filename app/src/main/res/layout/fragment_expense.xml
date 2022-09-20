@@ -7,12 +7,14 @@
     android:background="@color/light_blue"
     tools:context=".domains.expense.ExpenseFragment">
 
-    <include layout="@layout/progress_spinner_overlay" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExpenseItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="50dp" />
+
+    <include layout="@layout/withdrawal_form" />
+
+    <include layout="@layout/progress_spinner_overlay" />
 
 </RelativeLayout>

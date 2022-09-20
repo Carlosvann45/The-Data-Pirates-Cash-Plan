@@ -136,14 +136,14 @@
             app:flexWrap="wrap"
             app:justifyContent="space_around">
 
-            <TextView
+            <android.widget.Button
                 android:id="@+id/tvDeleteReminder"
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:background="@drawable/login_btn_background"
-                android:padding="1dp"
                 android:text="Delete"
                 android:textAlignment="center"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

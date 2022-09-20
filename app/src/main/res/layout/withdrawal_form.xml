@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clWithdrawalForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#95000000"
+    android:visibility="gone">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvWithdrawalFormBackground"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Withdrawal"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_end">
+
+                    <TextView
+                        android:id="@+id/tvCloseWithdrawalForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="X"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount:"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/etAmountToWithdrawal"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:backgroundTint="@color/white"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:text="0.01"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
+
+                <android.widget.Button
+                    android:id="@+id/btnWithdrawalForExpense"
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/login_btn_background"
+                    android:padding="0dp"
+                    android:text="Withdraw"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseRequest
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.expense.Withdrawal
 import kotlinx.serialization.ExperimentalSerializationApi
 
 /**
@@ -19,6 +20,12 @@ interface ExpenseService {
     suspend fun createExpense(accessToken: String?, expense: ExpenseRequest)
 
     suspend fun editExpense(accessToken: String?, expense: ExpenseRequest)
+
+    suspend fun addWithdrawalForExpense(
+        accessToken: String?,
+        withdrawal: Withdrawal,
+        expenseId: Long
+    ): ExpenseResponse
 
     /**
      * Dependency injection for expense service

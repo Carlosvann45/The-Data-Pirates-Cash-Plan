@@ -6,6 +6,7 @@ import io.ktor.http.*
 import io.thedatapirates.cashplan.constants.HttpRoutes
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseRequest
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.expense.Withdrawal
 
 /**
  * Implements the expense service class
@@ -45,6 +46,21 @@ class ExpenseServiceImpl(
                 append("Authorization", "Bearer $accessToken")
             }
             body = expense
+        }
+    }
+
+    override suspend fun addWithdrawalForExpense(
+        accessToken: String?,
+        withdrawal: Withdrawal,
+        expenseId: Long
+    ): ExpenseResponse {
+        return client.put {
+            url(HttpRoutes.EXPENSE_WITHDRAWAL.plus(expenseId))
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Authorization", "Bearer $accessToken")
+            }
+            body = withdrawal
         }
     }
 
