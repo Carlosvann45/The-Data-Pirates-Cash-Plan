@@ -191,7 +191,13 @@ class AddReminderFragment : Fragment() {
                             this.set(Calendar.SECOND, 0)
                             this.set(Calendar.MILLISECOND, 0)
 
-                            view.etReminderTime.text = if (hour > 12) {
+                            view.etReminderTime.text = if (hour == 0) {
+                                "$year-${formatDateOrTime(month + 1)}-${formatDateOrTime(day)} ${
+                                    formatDateOrTime(
+                                        12
+                                    )
+                                }:${formatDateOrTime(min)}"
+                            } else if (hour > 12) {
                                 "$year-${formatDateOrTime(month + 1)}-${formatDateOrTime(day)} ${
                                     formatDateOrTime(
                                         hour - 12
@@ -260,7 +266,6 @@ class AddReminderFragment : Fragment() {
                     intent,
                     0
                 )
-
                 alarmManager.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
                     alarmTime,

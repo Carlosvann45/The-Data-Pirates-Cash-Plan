@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.domains.home
 
 import android.animation.ObjectAnimator
+import android.app.AlarmManager
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
@@ -17,14 +18,18 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.category.Category
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import io.thedatapirates.cashplan.data.services.category.CategoryService
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.home_monthly_tracker.view.*
 import kotlinx.android.synthetic.main.home_progress_tracker.view.*
+import kotlinx.android.synthetic.main.home_upcoming_reminder.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -114,6 +119,8 @@ class HomeFragment : Fragment() {
                 initializeMonthlyTracker(view, totalOverviewAmount)
 
                 initializePaymentTracker(view, totalPayed, totalToPay)
+
+                initializeReminderTracker(view)
 
                 AndroidUtils.animateView(progressOverlay, View.GONE, 0f, 200L)
             }
@@ -352,6 +359,33 @@ class HomeFragment : Fragment() {
             .start()
     }
 
+    private fun initializeReminderTracker(view: View) {
+        val alarmManager = requireActivity().getSystemService(AlarmManager::class.java)
+        val nextAlarm = alarmManager.nextAlarmClock
+
+        val reminderFound = if (nextAlarm != null) {
+            val reminder = findReminderFromExpenses(nextAlarm.showIntent.creatorUid.toLong())
+
+            if (reminder != null) {
+                val endOfDate = reminder.reminderTime.indexOf("T")
+                val reminderDate = reminder.reminderTime.substring(0, endOfDate)
+                val reminderTime = reminder.reminderTime.substring(endOfDate + 1, endOfDate + 6)
+
+                view.tvUpcomingReminderName.text = reminder.name
+                view.tvUpcomingReminderDescription.text = reminder.description
+                view.tvUpcomingReminderTime.text = reminderDate.plus(" ").plus(reminderTime)
+
+                true
+            } else false
+        } else false
+
+        if (!reminderFound) {
+            view.llReminderDetails.visibility = View.GONE
+
+            view.tvReminderMessage.text = "You currently don't have any reminders coming up."
+        }
+    }
+
     /**
      * Finds color based on section name
      */
@@ -392,5 +426,15 @@ class HomeFragment : Fragment() {
             }
             else -> 0
         }
+    }
+
+    private fun findReminderFromExpenses(id: Long) : ReminderResponse? {
+        expenses.forEach { expenseResponse ->
+            expenseResponse.reminders.forEach { reminderResponse ->
+                if (reminderResponse.id == id) return reminderResponse
+            }
+        }
+
+        return null
     }
 }
