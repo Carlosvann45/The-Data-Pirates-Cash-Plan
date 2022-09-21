@@ -1,216 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llInvestmentOverview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@color/blue"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvInvestmentTotalAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="$0.00"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvTotalInvestment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Total Investments"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
         <LinearLayout
-            android:id="@+id/llInvestmentOverviewSubGroup"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:background="@color/blue"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvInvestmentCurrentP_L"
+                android:id="@+id/tvInvestmentTotalAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+0.00 (+0.00%)"
+                android:layout_marginTop="5dp"
+                android:text="$0.00"
                 android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llInvestmentOverviewSubGroup2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="0dp">
-
             <TextView
-                android:id="@+id/tvInvestmentCurrentP_LTitle"
-                android:layout_width="0dp"
+                android:id="@+id/tvTotalInvestment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Current P/L"
+                android:layout_marginBottom="15dp"
+                android:text="Total Investments"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pcInvestmentItemsPieChart"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginBottom="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/llInvestmentOverviewSubGroup"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/technology_sector"
-                    android:contentDescription="@string/technology_sector" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvInvestmentCurrentP_L"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/technology"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:layout_weight="1"
+                    android:text="+0.00 (+0.00%)"
+                    android:textAlignment="center"
+                    android:textColor="@color/green"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/llInvestmentOverviewSubGroup2"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/finance_sector"
-                    android:contentDescription="@string/finance_sector" />
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="0dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvInvestmentCurrentP_LTitle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/finance"
+                    android:layout_weight="1"
+                    android:text="Current P/L"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/consumer_sector"
-                    android:contentDescription="@string/consumer_sector" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/consumer"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/healthcare_sector"
-                    android:contentDescription="@string/healthcare_sector" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/healthcare"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/material_sector"
-                    android:contentDescription="@string/material_sector" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/material"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
             </LinearLayout>
 
         </LinearLayout>
@@ -218,137 +87,273 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:background="@color/blue"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pcInvestmentItemsPieChart"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_marginBottom="15dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/real_estate_sector"
-                    android:contentDescription="@string/real_estate_sector" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/technology_sector"
+                        android:contentDescription="@string/technology_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/technology"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/real_estate"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/finance_sector"
+                        android:contentDescription="@string/finance_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/finance"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/consumer_sector"
+                        android:contentDescription="@string/consumer_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/consumer"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/healthcare_sector"
+                        android:contentDescription="@string/healthcare_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/healthcare"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/material_sector"
+                        android:contentDescription="@string/material_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/material"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/utility_sector"
-                    android:contentDescription="@string/utility_sector" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/real_estate_sector"
+                        android:contentDescription="@string/real_estate_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/real_estate"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/utility"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/utility_sector"
+                        android:contentDescription="@string/utility_sector" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/utility"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/energy_sector"
-                    android:contentDescription="@string/energy_sector" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/energy"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/energy_sector"
+                        android:contentDescription="@string/energy_sector" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/energy"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/industrial_sector"
-                    android:contentDescription="@string/industrial_sector" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/industrial"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/industrial_sector"
+                        android:contentDescription="@string/industrial_sector" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/industrial"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/circle_background"
-                    android:backgroundTint="@color/communication_sector"
-                    android:contentDescription="@string/communication_sector" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/communication"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/communication_sector"
+                        android:contentDescription="@string/communication_sector" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/communication"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvInvestmentFirstSeparator"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black" />
-
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

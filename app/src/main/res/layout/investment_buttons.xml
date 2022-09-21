@@ -2,47 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
 
         <android.widget.Button
             android:id="@+id/btnBuyBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/blue"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_btn_background"
             android:text="Buy"
-            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="22sp" />
-
-        <TextView
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
 
         <android.widget.Button
             android:id="@+id/btnSellBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/blue"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_btn_background"
             android:text="Sell"
-            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="22sp" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
 
 </LinearLayout>
