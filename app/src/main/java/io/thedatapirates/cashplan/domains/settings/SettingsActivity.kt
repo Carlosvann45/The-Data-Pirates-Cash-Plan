@@ -4,8 +4,9 @@ import android.app.PendingIntent
 import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -32,8 +33,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var toggle: ActionBarDrawerToggle
-    lateinit var notif: StNotifications
-    private val notifID = 100
 
     /**
      * Handles adding listeners to switch between activities when any navigation button is selected
@@ -42,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        notif = StNotifications()
+
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlSettingsActivity)
@@ -158,16 +157,6 @@ class SettingsActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
 
-        object : CountDownTimer(10000, 1000) {
-            override fun onTick(tick: Long) {
-                tick - 1000
-            }
-
-            override fun onFinish() {
-                sendNotification()
-            }
-        }.start()
-
     }
 
 
@@ -185,16 +174,6 @@ class SettingsActivity : AppCompatActivity() {
         }
         val pendingIntent: PendingIntent =
             getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        //
-
-//        val bitmap = BitmapFactory.decodeResource(
-//            applicationContext.resources,
-//            R.drawable.ic_launcher_background
-//        )
-//        val bitmapLarge = BitmapFactory.decodeResource(
-//            applicationContext.resources,
-//            R.drawable.ic_launcher_foreground
-//        )
 
         //the actual notification itself
         val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
@@ -205,11 +184,36 @@ class SettingsActivity : AppCompatActivity() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
-//            .setLargeIcon(bitmapLarge)
-//            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
-//            .setStyle((NotificationCompat.BigTextStyle().bigText("the text that takes numerous lines")))
-        with(NotificationManagerCompat.from(this)){
-            notify(notifID, builder.build())
+        with(NotificationManagerCompat.from(this)) {
+            notify(100, builder.build())
         }
+    }
+
+    fun openNotif(num: Int) {
+        val context = this
+        val intent = Intent().apply {
+            when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && num > 0 -> {
+                    action = Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    when (num) {
+                        1 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.stNotifChnl_id01)                            )
+                        }
+                        2 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID,getString(R.string.stNotifChnl_id02))
+                        }
+                        else -> {
+                            return;
+                        }
+                    }
+                }
+                else -> {
+                    action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                }
+            }
+        }
+        context.startActivity(intent)
     }
 }

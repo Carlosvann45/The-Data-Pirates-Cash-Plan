@@ -34,9 +34,15 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StMB_Customization.setOnClickListener{
-            settingsActivity = activity as SettingsActivity
-            settingsActivity.sendNotification()
+        settingsActivity = activity as SettingsActivity
+        StMB_Reminder.setOnClickListener{
+            settingsActivity.openNotif(1)
+        }
+        StMB_Notify.setOnClickListener {
+            settingsActivity.openNotif(0)
+        }
+        StMB_Alarms.setOnClickListener {
+            settingsActivity.openNotif(2)
         }
     }
 }

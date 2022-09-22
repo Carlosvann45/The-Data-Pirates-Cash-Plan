@@ -8,10 +8,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.domains.settings.StNotifications
 
 class LoginActivity : AppCompatActivity() {
-    private val stNotif: StNotifications = StNotifications()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +32,13 @@ class LoginActivity : AppCompatActivity() {
             val Description = "Any reminders set will be placed here"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(getString(R.string.stNotifChnl_id01), name, importance).apply {
-                enableVibration(stNotif.vibrate)
                 description = Description
                 group = getString(R.string.stNotifCatID)
             }
 
             // Register the channel with the users device
             val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), getString(R.string.reminders)))
+            notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), "Main"))
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -53,14 +50,13 @@ class LoginActivity : AppCompatActivity() {
             val Description = "Any alarms set will be placed here"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(getString(R.string.stNotifChnl_id02), name, importance).apply {
-                enableVibration(stNotif.vibrate)
                 description = Description
                 group = getString(R.string.stNotifCatID)
             }
 
             // Register the channel with the users device
             val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), getString(R.string.reminders)))
+            notificationManager.createNotificationChannelGroup(NotificationChannelGroup(getString(R.string.stNotifCatID), "Main"))
             notificationManager.createNotificationChannel(channel)
         }
     }

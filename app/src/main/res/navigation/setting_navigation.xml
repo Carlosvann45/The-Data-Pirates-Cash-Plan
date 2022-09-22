@@ -24,15 +24,5 @@
         android:label="@string/BTitle_Account"
         tools:layout="@layout/fragment_st_account"/>
 
-    <fragment
-        android:id="@+id/stNotifications"
-        android:name="io.thedatapirates.cashplan.domains.settings.StNotifications"
-        android:label="fragment_st_notifications"
-        tools:layout="@layout/fragment_st_notifications" >
-        <action
-            android:id="@+id/stNotif_to_stMenu"
-            app:destination="@id/rlSettingsFragment" />
-    </fragment>
-
 
 </navigation>
