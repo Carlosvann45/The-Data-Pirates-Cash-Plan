@@ -29,4 +29,30 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
+
+    <style name="MyDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blue</item>
+        <!-- Highlight item color-->
+        <item name="colorControlHighlight">@color/blue</item>
+        <item name="colorControlActivated">@color/blue</item>
+        <!--Calender Background color -->
+        <item name="android:windowBackground">@color/white</item>
+        <!-- Ok Cancel Color-->
+        <item name="android:textColor">@color/blue</item>
+        <!-- Week TextColor-->
+        <item name="android:textColorSecondary">@color/Grayed_Out</item>
+        <!-- Calender Number color arrow color (< >) -->
+        <item name="android:textColorPrimary">@color/black</item>
+        <!--day , month-->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <!-- year-->
+        <item name="android:textColorSecondaryInverse">@color/light_blue</item>
+        <item name="android:buttonBarButtonStyle">@style/MyButtonBarButtonStyle</item>
+    </style>
+
+    <style name="MyButtonBarButtonStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+
 </resources>

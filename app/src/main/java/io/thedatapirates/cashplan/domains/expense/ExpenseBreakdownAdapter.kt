@@ -7,9 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.Withdrawal
-import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ExpenseBreakdownAdapter(
     private val transactions: MutableList<Withdrawal>
@@ -29,7 +26,7 @@ class ExpenseBreakdownAdapter(
         val itemDate: TextView = holder.itemView.findViewById(R.id.tvExpenseBreakdownDate)
         val itemAmount: TextView = holder.itemView.findViewById(R.id.tvExpenseBreakdownAmount)
 
-        itemDate.text = currentItem.dateCreated.subSequence(
+        itemDate.text = currentItem.dateCreated.substring(
             0,
             currentItem.dateCreated.indexOfFirst { it == 'T' })
         itemAmount.text = String.format("%,.2f", currentItem.amount)

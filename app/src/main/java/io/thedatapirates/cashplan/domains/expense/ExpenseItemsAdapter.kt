@@ -1,28 +1,41 @@
 package io.thedatapirates.cashplan.domains.expense
 
-import android.opengl.Visibility
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
-import io.thedatapirates.cashplan.domains.investment.InvestmentItemsAdapter
+import io.thedatapirates.cashplan.data.dtos.expense.Withdrawal
+import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.add_expense_button.view.*
-import kotlinx.android.synthetic.main.add_reminder_button.view.*
-import kotlinx.android.synthetic.main.expense_item.view.*
-import kotlinx.android.synthetic.main.investment_buttons.view.*
+import kotlinx.android.synthetic.main.withdrawal_form.view.*
+import kotlinx.coroutines.*
+import kotlinx.serialization.ExperimentalSerializationApi
 
+@ExperimentalSerializationApi
+object ExpenseItemsAdapterServiceLocator {
+    fun getExpenseService(): ExpenseService = ExpenseService.create()
+}
+
+@ExperimentalSerializationApi
+@DelicateCoroutinesApi
 class ExpenseItemsAdapter(
     private val expenses: MutableList<ExpenseResponse>,
-    val view: View
+    val view: View,
+    val context: Context
 ) : RecyclerView.Adapter<ExpenseItemsAdapter.ExpenseItemsViewHolder>() {
+
+    private var expenseService = ExpenseItemsAdapterServiceLocator.getExpenseService()
+    private var toast: Toast? = null
 
     /**
      * Inflates the a layout to add it to recycler view
@@ -56,6 +69,11 @@ class ExpenseItemsAdapter(
         when (position) {
             expenses.size - 1 -> {
                 holder.itemView.btnAddExpense.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("fromType", "create")
+
+                    Navigation.findNavController(view)
+                        .navigate(R.id.rlAddEditExpenseFragment, bundle)
                 }
             }
             else -> {
@@ -66,17 +84,21 @@ class ExpenseItemsAdapter(
                 val startDateText: TextView = holder.itemView.findViewById(R.id.tvExpenseStartDate)
                 val endDateNameText: TextView = holder.itemView.findViewById(R.id.tvExpenseEndDate)
                 val editExpenseBtn: TextView = holder.itemView.findViewById(R.id.tvEditExpense)
-                val withdrawalBtn: TextView = holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
+                val withdrawalBtn: TextView =
+                    holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
                 val expenseItem: CardView = holder.itemView.findViewById(R.id.cvExpenseItem)
+                val priorityText: TextView = holder.itemView.findViewById(R.id.tvExpensePriority)
 
-                val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T") - 1)
-                val endDate = expense.endDate?.substring(0, expense.endDate?.indexOf("T")?.minus(1) ?: 0) ?: ""
+                val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T"))
+                val endDate =
+                    expense.endDate?.substring(0, expense.endDate?.indexOf("T") ?: 0) ?: ""
 
                 expenseNameText.text = expense.name
                 categoryNameText.text = expense.category.name
                 frequencyNameText.text = expense.frequency.name
                 startDateText.text = startDate
                 endDateNameText.text = endDate
+                priorityText.text = expense.priorityLevel.level
 
                 if (!AndroidUtils.compareDates(startDate, endDate)) {
                     withdrawalBtn.visibility = View.GONE
@@ -90,11 +112,70 @@ class ExpenseItemsAdapter(
                 }
 
                 editExpenseBtn.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("expense", Gson().toJson(expense))
+                    bundle.putString("fromType", "edit")
 
+                    Navigation.findNavController(view)
+                        .navigate(R.id.rlAddEditExpenseFragment, bundle)
                 }
 
                 withdrawalBtn.setOnClickListener {
+                    view.clWithdrawalForm.visibility = View.VISIBLE
 
+                    view.clWithdrawalForm.setOnClickListener {
+                        view.clWithdrawalForm.visibility = View.GONE
+                    }
+
+                    view.tvCloseWithdrawalForm.setOnClickListener {
+                        view.clWithdrawalForm.visibility = View.GONE
+                    }
+
+                    view.cvWithdrawalFormBackground.setOnClickListener { }
+
+                    view.btnWithdrawalForExpense.setOnClickListener {
+                        // create withdrawal
+                        val withdrawalAmount = view.etAmountToWithdrawal.text.toString().toDouble()
+
+                        if (withdrawalAmount > 0.00) {
+                            val withdrawal = Withdrawal(0, "", "", withdrawalAmount)
+
+                            GlobalScope.launch(Dispatchers.IO) {
+                                val updatedExpense = addWithdrawalToExpense(withdrawal, expense.id)
+
+                                withContext(Dispatchers.Main) {
+                                    if (updatedExpense != null) {
+                                        expenses[position] = updatedExpense
+
+                                        view.clWithdrawalForm.visibility = View.GONE
+
+                                        notifyItemChanged(position)
+                                    } else {
+                                        toast?.cancel()
+
+                                        toast = AndroidUtils.createCustomToast(
+                                            "There was an error with the server. Please try again later.",
+                                            view,
+                                            context
+                                        )
+
+                                        toast?.show()
+                                    }
+                                }
+                            }
+
+                        } else {
+                            toast?.cancel()
+
+                            toast = AndroidUtils.createCustomToast(
+                                "The amount must be greater than 0. Please try again.",
+                                view,
+                                context
+                            )
+
+                            toast?.show()
+                        }
+                    }
                 }
             }
         }
@@ -127,5 +208,22 @@ class ExpenseItemsAdapter(
      */
     class ExpenseItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    }
+
+    private suspend fun addWithdrawalToExpense(
+        withdrawal: Withdrawal,
+        expenseId: Long
+    ): ExpenseResponse? {
+        val sharedPreferences =
+            context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+
+        val accessToken = sharedPreferences.getString("accessToken", "")
+
+        return try {
+            expenseService.addWithdrawalForExpense(accessToken, withdrawal, expenseId)
+        } catch (e: Exception) {
+            print("Error: ${e.message}")
+            null
+        }
     }
 }

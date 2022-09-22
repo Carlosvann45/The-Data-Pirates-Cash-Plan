@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/llBuyInvestmentFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,23 +21,24 @@
             android:paddingBottom="5dp">
 
             <ImageView
-                android:id="@+id/ivBuyInvestmentBackBtn"
+                android:id="@+id/ivAddEditExpenseBackBtn"
                 android:layout_width="25dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
                 android:background="@drawable/back_button"
-                android:contentDescription="@string/back_button" />
+                android:contentDescription="Back Button" />
 
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/tvAddEditExpenseTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:gravity="start"
                 android:paddingStart="12dp"
                 android:paddingEnd="0dp"
-                android:text="@string/buy_investment"
+                android:text="Add/Edit Expense"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -63,61 +60,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/stock_symbol"
+                android:text="Frequency:"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/etStockToBuy"
-                android:layout_width="125dp"
+                android:id="@+id/etFrequencyText"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="Choose Stock"
+                android:text="Choose Option"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/ivOpenSelectStockPicker"
+                android:id="@+id/ivOpenSelectFrequency"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:background="@drawable/drop_down_icon"
-                android:contentDescription="@string/drop_down_button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sector"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/etStockSector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="@string/technology"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/ivOpenSelectSectorPicker"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:background="@drawable/drop_down_icon"
-                android:contentDescription="@string/drop_down_button" />
+                android:contentDescription="Drop Down button" />
 
         </LinearLayout>
 
@@ -131,21 +94,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/amount"
+                android:text="Category:"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
-            <EditText
-                android:id="@+id/etAmountToBuy"
-                android:layout_width="150dp"
+            <TextView
+                android:id="@+id/etCategoryText"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:backgroundTint="@color/white"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:text="0.01"
+                android:text="Choose Option"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivOpenSelectCategory"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/drop_down_icon"
+                android:contentDescription="Drop Down button" />
 
         </LinearLayout>
 
@@ -159,43 +128,135 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/price"
+                android:text="Priority:"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/etPriorityLevelText"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Choose Option"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivOpenSelectPriority"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/drop_down_icon"
+                android:contentDescription="Drop Down button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date:"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvStartDateText"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Choose Date"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivOpenSelectStartDate"
+                android:layout_width="17dp"
+                android:layout_height="19dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/calendar_icon"
+                android:contentDescription="Drop Down button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date:"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvEndDateText"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Choose Date"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivOpenSelectEndDate"
+                android:layout_width="17dp"
+                android:layout_height="19dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/calendar_icon"
+                android:contentDescription="Drop Down button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/etPriceToBuy"
+                android:id="@+id/etNameText"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:backgroundTint="@color/white"
                 android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:text="0.01"
+                android:inputType="text"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvTotalSharesSelected"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="15dp"
-            android:text="You currently have 0.00 shares selected"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
 
         <android.widget.Button
-            android:id="@+id/btnBuyStock"
+            android:id="@+id/btnSubmitExpense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/login_btn_background"
-            android:text="@string/buy_stock"
+            android:text="Submit Expense"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="22sp" />
