@@ -87,6 +87,7 @@ class ExpenseItemsAdapter(
                 val withdrawalBtn: TextView =
                     holder.itemView.findViewById(R.id.tvAddWithdrawalToExpense)
                 val expenseItem: CardView = holder.itemView.findViewById(R.id.cvExpenseItem)
+                val priorityText: TextView = holder.itemView.findViewById(R.id.tvExpensePriority)
 
                 val startDate = expense.startDate.substring(0, expense.startDate.indexOf("T"))
                 val endDate =
@@ -97,6 +98,7 @@ class ExpenseItemsAdapter(
                 frequencyNameText.text = expense.frequency.name
                 startDateText.text = startDate
                 endDateNameText.text = endDate
+                priorityText.text = expense.priorityLevel.level
 
                 if (!AndroidUtils.compareDates(startDate, endDate)) {
                     withdrawalBtn.visibility = View.GONE

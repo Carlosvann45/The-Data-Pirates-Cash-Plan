@@ -10,6 +10,7 @@ import io.thedatapirates.cashplan.data.dtos.reminder.ReminderRequest
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 
 interface ReminderService {
+    suspend fun getAllReminders(accessToken: String?) : MutableList<ReminderResponse>
     suspend fun createReminder(accessToken: String?, reminder: ReminderRequest): ReminderResponse
     suspend fun deleteReminder(accessToken: String?, reminderId: Long)
 

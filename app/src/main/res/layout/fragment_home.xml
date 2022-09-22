@@ -26,8 +26,6 @@
 
             <include layout="@layout/home_progress_tracker" />
 
-            <include layout="@layout/home_upcoming_reminder" />
-
         </LinearLayout>
 
     </ScrollView>

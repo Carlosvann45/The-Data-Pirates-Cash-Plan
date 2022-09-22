@@ -11,6 +11,15 @@ class ReminderServiceImpl(
     private val client: HttpClient
 ) : ReminderService {
 
+    override suspend fun getAllReminders(accessToken: String?): MutableList<ReminderResponse> {
+        return client.get {
+            url(HttpRoutes.REMINDERS)
+            headers {
+                append("Authorization", "Bearer $accessToken")
+            }
+        }
+    }
+
     override suspend fun createReminder(
         accessToken: String?,
         reminder: ReminderRequest
