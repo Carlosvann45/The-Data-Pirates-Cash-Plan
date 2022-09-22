@@ -62,8 +62,11 @@
     <string name="transactions">Transactions</string>
     <string name="sell_stock">Sell Stock</string>
     <string-array name="cash_flow_choices_array">
-        <item>Deposit</item>
-        <item>Expense</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Bi-Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
     </string-array>
     <string name="BTitle_Account">Account</string>
     <string name="BTitle_Customize">Customization</string>

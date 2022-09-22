@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvItemTitle"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Name"
         android:textSize="20sp"
@@ -19,23 +19,38 @@
 
     <TextView
         android:id="@+id/tvExpenseValue"
-        android:layout_width="180dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Value"
+        android:layout_marginStart="20dp"
         android:textSize="20sp"
-        android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cbDone"
+        app:layout_constraintStart_toEndOf="@+id/tvItemTitle"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/green"/>
 
-    <CheckBox
-        android:id="@+id/cbDone"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvCashFlowFrequencyValue"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:text="Frequency"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tvExpenseValue"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tvCashFlowDepositsAmount"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="Amount"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCashFlowFrequencyValue"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

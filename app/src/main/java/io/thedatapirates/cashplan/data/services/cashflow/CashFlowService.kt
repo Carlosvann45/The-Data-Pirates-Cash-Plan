@@ -8,6 +8,7 @@ import io.ktor.client.features.logging.*
 import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
 import io.thedatapirates.cashplan.data.dtos.cashflow.CreateCashFlowItem
 import io.thedatapirates.cashplan.data.dtos.cashflow.Deposit
+import io.thedatapirates.cashplan.data.dtos.cashflow.DepositResponse
 
 
 /**
@@ -17,7 +18,7 @@ interface CashFlowService {
 
     suspend fun getCashFlow(accessToken: String?): MutableList<CashFlowItemsResponse>
     suspend fun createCashFlow(cashFlowInformation: CreateCashFlowItem, accessToken: String?): CashFlowItemsResponse
-    suspend fun createDepositForCashFlow(amount: Float, id: Int, accessToken: String?)
+    suspend fun createDepositForCashFlow(depositInfo: Deposit, id: Int, accessToken: String?)
 //    suspend fun removeCashFlow(id: Int, accessToken: String?)
     /**
      * Dependency injection for customer service

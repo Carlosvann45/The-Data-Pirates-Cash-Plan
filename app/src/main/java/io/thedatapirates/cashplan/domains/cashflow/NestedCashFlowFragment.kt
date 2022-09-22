@@ -17,6 +17,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
 import io.thedatapirates.cashplan.data.dtos.cashflow.CreateCashFlowItem
+import io.thedatapirates.cashplan.data.dtos.cashflow.Deposit
 import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
 import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
@@ -98,13 +99,14 @@ class NestedCashFlowFragment : Fragment() {
             val itemAmount = etAddItemAmount.text.toString().toFloat()
 
             val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-05 12:00", 1)
+            val deposit = Deposit(itemAmount)
 
             GlobalScope.launch(Dispatchers.IO) {
                 if (itemAmount != 0f && itemName != "") {
                     withContext(Dispatchers.Main) {
 
                         createCashFlowItem(cashFlowItem)
-                        createDepositItem(itemAmount)
+                        createDepositItem(deposit)
                     }
                 }
             }
@@ -125,12 +127,12 @@ class NestedCashFlowFragment : Fragment() {
         }
     }
 
-    private suspend fun createDepositItem(itemAmount: Float) {
+    private suspend fun createDepositItem(deposit: Deposit) {
         val sharedPreferences = cashFlowContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("accessToken", "")
 
         try {
-            Log.i(cashFlowService.createDepositForCashFlow(itemAmount, 0, accessToken).toString(), "DEPOSIT")
+            cashFlowService.createDepositForCashFlow(deposit, cashFlowID, accessToken)
 
         } catch (e: Exception) {
             println("Error: ${e.message}")

@@ -36,14 +36,14 @@ class CashFlowServiceImpl(
         }
     }
 
-    override suspend fun createDepositForCashFlow(amount: Float, id: Int, accessToken: String?) {
+    override suspend fun createDepositForCashFlow(depositInfo: Deposit, id: Int, accessToken: String?) {
         return client.put {
             url("${HttpRoutes.CASH_FLOWS}/deposit/to/$id")
             contentType(ContentType.Application.Json)
             headers {
                 append("Authorization", "Bearer $accessToken")
             }
-            body = { amount }
+            body = depositInfo
         }
     }
 

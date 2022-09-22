@@ -8,4 +8,6 @@ data class CreateCashFlowItem(
     var startDate: String,
     var frequencyId: Int,
 )
+
+
 // Make POST REQ to deposit
