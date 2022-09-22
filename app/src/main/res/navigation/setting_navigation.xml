@@ -9,7 +9,7 @@
         android:id="@+id/rlSettingsFragment"
         android:name="io.thedatapirates.cashplan.domains.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/stMenu_to_stAccnt"
             app:destination="@id/stAccount" />
@@ -23,6 +23,5 @@
         android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
         android:label="@string/BTitle_Account"
         tools:layout="@layout/fragment_st_account"/>
-
-
+    </fragment>
 </navigation>
