@@ -264,7 +264,7 @@ class AddReminderFragment : Fragment() {
                     addReminderContext,
                     reminderResponse.id.toInt(),
                     intent,
-                    0
+                    PendingIntent.FLAG_IMMUTABLE
                 )
                 alarmManager.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,

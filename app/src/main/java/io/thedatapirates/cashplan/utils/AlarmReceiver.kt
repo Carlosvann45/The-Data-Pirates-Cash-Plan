@@ -47,3 +47,24 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManager.notify(id, builder.build())
     }
 }
+///for reference
+//    fun sendNotification() {
+//        val intent = Intent(this, SettingsActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+//        val pendingIntent: PendingIntent =
+//            getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+//
+//        //the actual notification itself
+//        val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
+//            .setSmallIcon(R.drawable.item)
+//            .setContentTitle("Notification Title")
+//            .setContentText("Notification Content")
+//            .setContentIntent(pendingIntent)
+//            .setPriority(NotificationCompat.PRIORITY_HIGH)
+//            .setAutoCancel(true)
+//
+//        with(NotificationManagerCompat.from(this)) {
+//            notify(100, builder.build())
+//        }
+//    }

@@ -132,4 +132,11 @@
     <string name="stNotifCatID">only group</string>
     <string name="alarms">Alarms</string>
     <string name="account_information">Account Information</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="payment">Payment</string>
+    <string name="add">add</string>
+    <string name="remove">remove</string>
+    <string name="monthly">Monthly</string>
+    <string name="amount_">Amount:</string>
+    <string name="deposits">Deposits</string>
 </resources>

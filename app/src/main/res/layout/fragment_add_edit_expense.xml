@@ -1,8 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/ivAddEditExpenseBackBtn"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
                 android:background="@drawable/back_button"
@@ -31,7 +30,7 @@
 
             <TextView
                 android:id="@+id/tvAddEditExpenseTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
@@ -39,16 +38,15 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="0dp"
                 android:text="Add/Edit Expense"
-                android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <TextView
+        <com.google.android.material.divider.MaterialDivider
+            style="@style/Theme.Main"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black" />
+            android:layout_height="3dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +59,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Frequency:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -70,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Option"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -95,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Category:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -104,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Option"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -129,7 +123,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Priority:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -138,7 +131,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Option"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -163,7 +155,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Start Date:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -172,7 +163,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Date"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -197,7 +187,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="End Date:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -206,7 +195,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Date"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -231,7 +219,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name:"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <EditText
@@ -242,41 +229,39 @@
                 android:backgroundTint="@color/white"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnSubmitExpense"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/login_btn_background"
             android:text="Submit Expense"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="24sp"
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
 
-    <include
-        layout="@layout/custom_picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <include-->
+<!--        layout="@layout/custom_picker"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="50dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <include
-        layout="@layout/progress_spinner_overlay"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <include-->
+<!--        layout="@layout/progress_spinner_overlay"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

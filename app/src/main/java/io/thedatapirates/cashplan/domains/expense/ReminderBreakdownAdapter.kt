@@ -123,7 +123,7 @@ class ReminderBreakdownAdapter(
                                     context,
                                     reminder.id.toInt(),
                                     intent,
-                                    0
+                                    PendingIntent.FLAG_IMMUTABLE
                                 )
 
                                 alarmManager.cancel(pendingIntent)
@@ -175,9 +175,7 @@ class ReminderBreakdownAdapter(
     /**
      * Gets the different items from the view to modify each field on a given layout
      */
-    class ReminderItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ReminderItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private suspend fun deleteReminderById(id: Long): Boolean {
         val sharedPreferences =

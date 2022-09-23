@@ -1,7 +1,6 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.app.PendingIntent
-import android.app.PendingIntent.getActivity
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,8 +9,6 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -167,32 +164,10 @@ class SettingsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun sendNotification() {
-        val intent = Intent(this, SettingsActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent =
-            getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-        //the actual notification itself
-        val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle("Notification Title")
-            .setContentText("Notification Content")
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(100, builder.build())
-        }
-    }
-
     fun openNotif(num: Int) {
         val context = this
         val intent = Intent().apply {
-            when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && num > 0 -> {
+            when { num > 0 -> {
                     action = Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
                     putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
                     when (num) {
@@ -203,7 +178,7 @@ class SettingsActivity : AppCompatActivity() {
                             putExtra(Settings.EXTRA_CHANNEL_ID,getString(R.string.stNotifChnl_id02))
                         }
                         else -> {
-                            return;
+                            return
                         }
                     }
                 }

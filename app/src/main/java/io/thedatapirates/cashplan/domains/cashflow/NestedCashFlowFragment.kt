@@ -13,7 +13,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.Navigation
 import io.thedatapirates.cashplan.R
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
-import kotlinx.android.synthetic.main.fragment_cashflow.view.*
+import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
 

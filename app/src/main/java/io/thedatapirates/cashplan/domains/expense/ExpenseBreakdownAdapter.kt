@@ -37,8 +37,6 @@ class ExpenseBreakdownAdapter(
         return transactions.size
     }
 
-    class ExpenseBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ExpenseBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

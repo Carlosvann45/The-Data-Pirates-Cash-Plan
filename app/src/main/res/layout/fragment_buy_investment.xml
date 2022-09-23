@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llBuyInvestmentFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -26,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/ivBuyInvestmentBackBtn"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
                 android:background="@drawable/back_button"
@@ -42,16 +41,15 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="0dp"
                 android:text="@string/buy_investment"
-                android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <TextView
+        <com.google.android.material.divider.MaterialDivider
+            style="@style/Theme.Main"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/black" />
+            android:layout_height="3dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +62,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stock_symbol"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -73,7 +70,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="Choose Stock"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -98,7 +94,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sector"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <TextView
@@ -107,7 +102,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/technology"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -132,7 +126,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/amount"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <EditText
@@ -140,7 +133,6 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:backgroundTint="@color/white"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:text="0.01"
@@ -160,7 +152,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
-                android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <EditText
@@ -168,7 +159,6 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:backgroundTint="@color/white"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:text="0.01"
@@ -184,38 +174,36 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="15dp"
             android:text="You currently have 0.00 shares selected"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
+            android:textAlignment="center"/>
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnBuyStock"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/login_btn_background"
             android:text="@string/buy_stock"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="24sp"
+            app:cornerRadius="15dp" />
 
     </LinearLayout>
 
-    <include
-        layout="@layout/custom_picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <include
+            layout="@layout/custom_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <include
-        layout="@layout/progress_spinner_overlay"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <include
+            layout="@layout/progress_spinner_overlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

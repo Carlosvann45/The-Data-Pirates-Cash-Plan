@@ -14,17 +14,16 @@
         android:layout_height="wrap_content"
         android:text="Cash Flow"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <com.google.android.material.divider.MaterialDivider
         android:id="@+id/vHL"
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="5dp"
-        android:background="@color/light_grey"
+        android:layout_height="3dp"
         app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
 
     <TextView
@@ -32,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name:"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
 
@@ -43,7 +42,7 @@
         android:layout_marginStart="100dp"
         android:paddingStart="8dp"
         android:text="Amount:"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvExpensesName"
         app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
@@ -72,18 +71,25 @@
     <Button
         android:id="@+id/btnAddExpense"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginBottom="50dp"
+        android:layout_marginEnd="20dp"
         android:text="Add Item"
+        android:textSize="14sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteDoneExpenses" />
 
     <Button
         android:id="@+id/btnDeleteDoneExpenses"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginBottom="50dp"
         android:text="Delete Items"
+        android:textSize="14sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

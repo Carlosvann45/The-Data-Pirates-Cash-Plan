@@ -206,9 +206,7 @@ class ExpenseItemsAdapter(
     /**
      * Gets the different items from the view to modify each field on a given layout
      */
-    class ExpenseItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ExpenseItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private suspend fun addWithdrawalToExpense(
         withdrawal: Withdrawal,

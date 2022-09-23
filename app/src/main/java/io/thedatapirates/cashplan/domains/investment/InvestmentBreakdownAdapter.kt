@@ -39,8 +39,6 @@ class InvestmentBreakdownAdapter(
         return investmentTransactions.size
     }
 
-    class InvestmentBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class InvestmentBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }
