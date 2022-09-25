@@ -4,7 +4,6 @@
     android:id="@+id/llInvestmentBreakdownFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
     android:orientation="vertical"
     tools:context=".domains.investment.InvestmentActivity">
 
@@ -17,8 +16,8 @@
 
         <ImageView
             android:id="@+id/ivInvestmentBreakdownBackBtn"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="22dp"
             android:background="@drawable/back_button"
@@ -26,7 +25,7 @@
 
         <TextView
             android:id="@+id/tvInvestmentBreakdownTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_weight="1"
@@ -34,16 +33,15 @@
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
             android:text="@string/transactions"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
+        android:layout_height="3dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,8 +58,7 @@
             android:layout_weight="1"
             android:gravity="start"
             android:text="Date"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -70,8 +67,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Shares"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,16 +76,15 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="Price"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
+        android:layout_height="3dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInvestmentBreakdownItems"

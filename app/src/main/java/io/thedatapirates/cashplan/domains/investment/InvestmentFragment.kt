@@ -328,5 +328,3 @@ class InvestmentFragment : Fragment() {
         return this
     }
 }
-
-

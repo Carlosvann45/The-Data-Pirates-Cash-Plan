@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlExpenseTransactionsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/blue">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/ivExpenseBreakdownBackBtn"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="22dp"
             android:background="@drawable/back_button"
-            android:contentDescription="Back Button" />
+            android:contentDescription="@string/back_button" />
 
         <TextView
             android:id="@+id/tvExpenseBreakdownTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_weight="1"
@@ -33,16 +34,15 @@
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
             android:text="@string/transactions"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
+        android:layout_height="3dp"/>
 
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
@@ -59,8 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 
@@ -68,16 +67,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </com.google.android.flexbox.FlexboxLayout>
 
-    <TextView
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
+        android:layout_height="3dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExpenseBreakdownItems"

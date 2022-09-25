@@ -5,26 +5,26 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-        <android.widget.Button
-            android:id="@+id/btnBuyBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit_btn_background"
-            android:text="Buy"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+    <android.widget.Button
+        android:id="@+id/btnBuyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_btn_background"
+        android:text="Buy"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
-        <android.widget.Button
-            android:id="@+id/btnSellBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit_btn_background"
-            android:text="Sell"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+    <android.widget.Button
+        android:id="@+id/btnSellBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_btn_background"
+        android:text="Sell"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
 
 </LinearLayout>

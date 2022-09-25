@@ -64,7 +64,5 @@ class HelpItemsAdapter(
     /**
      * Gets the different items from the view to modify each field on a given layout
      */
-    class HelpItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class HelpItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

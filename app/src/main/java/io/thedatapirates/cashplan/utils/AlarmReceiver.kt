@@ -28,14 +28,14 @@ class AlarmReceiver : BroadcastReceiver() {
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        val pendingIntent = PendingIntent.getActivity(context, id, i, 0)
+        val pendingIntent = PendingIntent.getActivity(context, id, i, PendingIntent.FLAG_IMMUTABLE)
         val mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_ALARM_ALERT_URI)
 
         mediaPlayer.isLooping = true
         mediaPlayer.start()
 
         val builder = NotificationCompat.Builder(context, context.getString(R.string.stNotifChnl_id02))
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.mipmap.cashplan_launcher)
             .setContentTitle(reminder.name)
             .setContentText(reminder.description)
             .setAutoCancel(true)
