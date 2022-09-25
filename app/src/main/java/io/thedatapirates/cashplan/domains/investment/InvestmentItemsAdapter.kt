@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -125,9 +125,7 @@ class InvestmentItemsAdapter(
     /**
      * Gets the different items from the view to modify each field on a given layout
      */
-    class InvestmentItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class InvestmentItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private fun fillInvestmentOverView(
         holder: InvestmentItemsAdapter.InvestmentItemsViewHolder
@@ -216,7 +214,7 @@ class InvestmentItemsAdapter(
     private fun fillInvestmentItem(
         holder: InvestmentItemsAdapter.InvestmentItemsViewHolder, position: Int
     ) {
-        val investmentItem: LinearLayout = holder.itemView.findViewById(R.id.rlInvestmentItem)
+        val investmentItem: CardView = holder.itemView.findViewById(R.id.rlInvestmentItem)
         val itemPieLegend: ImageView =
             holder.itemView.findViewById(R.id.tvInvestmentItemDiagramCircle)
         val itemStockName: TextView = holder.itemView.findViewById(R.id.tvInvestmentItemName)

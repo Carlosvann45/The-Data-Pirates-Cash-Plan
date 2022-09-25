@@ -103,7 +103,7 @@ class SellInvestmentFragment : Fragment() {
             // if selected sell amount is meets criteria make request for sell transaction
             // otherwise it will throw toast
             if (
-                amountToSell != "" && totalInvestment != null &&amountToSell.toDouble() > 0.00
+                amountToSell != "" && totalInvestment != null && amountToSell.toDouble() > 0.00
                 && amountToSell.toDouble() <= totalInvestment.totalAmount
             ) {
 
@@ -111,55 +111,59 @@ class SellInvestmentFragment : Fragment() {
 
                     val stockWasSold: Boolean
 
-                        // if sell amount is the total amount available
-                        if (amountToSell.toDouble() == String.format("%.2f", totalInvestment.totalAmount).toDouble()) {
-                            // calculates sell transaction
-                            val newInvestment = InvestmentRequest(
-                                totalInvestment.name,
-                                totalInvestment.sector,
-                                totalInvestment.shares,
-                                (totalInvestment.totalAmount / totalInvestment.shares) * -1
-                            )
+                    // if sell amount is the total amount available
+                    if (amountToSell.toDouble() == String.format(
+                            "%.2f",
+                            totalInvestment.totalAmount
+                        ).toDouble()
+                    ) {
+                        // calculates sell transaction
+                        val newInvestment = InvestmentRequest(
+                            totalInvestment.name,
+                            totalInvestment.sector,
+                            totalInvestment.shares,
+                            (totalInvestment.totalAmount / totalInvestment.shares) * -1
+                        )
 
-                            // send sell transaction to api
-                            stockWasSold = createInvestment(newInvestment)
+                        // send sell transaction to api
+                        stockWasSold = createInvestment(newInvestment)
 
-                            // else if transaction it less then total amount
+                        // else if transaction it less then total amount
+                    } else {
+                        // calculates sell transaction
+                        val amount = amountToSell.toDouble() / totalInvestment.buyPrice
+                        val newInvestment = InvestmentRequest(
+                            totalInvestment.name,
+                            totalInvestment.sector,
+                            amount,
+                            (amountToSell.toDouble() / amount) * -1
+                        )
+
+                        // send sell transaction to api
+                        stockWasSold = createInvestment(newInvestment)
+
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        // if transaction was completed navigates to investment overview page
+                        if (stockWasSold) {
+                            Navigation.findNavController(view)
+                                .navigate(R.id.navigateToInvestmentFragmentFromSell)
+                            // else if transaction failed throws error toast
                         } else {
-                            // calculates sell transaction
-                            val amount = amountToSell.toDouble() / totalInvestment.buyPrice
-                            val newInvestment = InvestmentRequest(
-                                totalInvestment.name,
-                                totalInvestment.sector,
-                                amount,
-                                (amountToSell.toDouble() / amount) * -1
+                            // throw error toast
+                            toast?.cancel()
+
+                            toast = AndroidUtils.createCustomToast(
+                                "There was an issue with the server. Please try again later.",
+                                view,
+                                sellInvestmentContext
                             )
 
-                            // send sell transaction to api
-                            stockWasSold = createInvestment(newInvestment)
-
-                       }
-
-                        withContext(Dispatchers.Main) {
-                            // if transaction was completed navigates to investment overview page
-                            if (stockWasSold) {
-                                Navigation.findNavController(view)
-                                    .navigate(R.id.navigateToInvestmentFragmentFromSell)
-                                // else if transaction failed throws error toast
-                            } else {
-                                // throw error toast
-                                toast?.cancel()
-
-                                toast = AndroidUtils.createCustomToast(
-                                    "There was an issue with the server. Please try again later.",
-                                    view,
-                                    sellInvestmentContext
-                                )
-
-                                toast?.show()
-                            }
-
+                            toast?.show()
                         }
+
+                    }
                 }
                 // if validation doesn't pass throws error toast
             } else {

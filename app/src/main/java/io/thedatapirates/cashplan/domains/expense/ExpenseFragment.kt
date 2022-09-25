@@ -10,17 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
 import io.thedatapirates.cashplan.R
-import io.thedatapirates.cashplan.data.dtos.category.Category
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
-import io.thedatapirates.cashplan.data.services.category.CategoryService
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
 import io.thedatapirates.cashplan.domains.home.HomeServiceLocator
-import io.thedatapirates.cashplan.domains.investment.InvestmentItemsAdapter
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.fragment_expense.view.*
 import kotlinx.android.synthetic.main.fragment_investment.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
+import kotlinx.serialization.ExperimentalSerializationApi
 
 /**
  * Service locator to inject customer service into login fragment

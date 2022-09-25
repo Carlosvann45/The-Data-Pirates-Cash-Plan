@@ -24,7 +24,7 @@ import io.thedatapirates.cashplan.data.dtos.cashflow.Deposit
 import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
 import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
-import kotlinx.android.synthetic.main.fragment_cashflow.view.*
+import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
 import kotlinx.coroutines.*

@@ -3,7 +3,6 @@
     android:id="@+id/llInvestmentBreakdownItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,8 +21,7 @@
             android:layout_weight="1"
             android:gravity="start"
             android:text="00/00/00"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -33,8 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -44,15 +41,14 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="$0.00"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Theme.Main"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black" />
+        android:layout_height="3dp"/>
 
 </LinearLayout>
