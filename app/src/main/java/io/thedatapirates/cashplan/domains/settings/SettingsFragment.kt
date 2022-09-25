@@ -26,9 +26,6 @@ class SettingsFragment : Fragment() {
         view.StMB_Account.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.stMenu_to_stAccnt)
         }
-        view.StMB_Notify.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.stMenu_to_stNotif)
-        }
         return view
     }
 

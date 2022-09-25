@@ -12,11 +12,6 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/navigateToForgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -24,17 +19,6 @@
         <action
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/flCreateAccountFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="io.thedatapirates.cashplan.domains.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/navigateToLoginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 <!--    forgot password-->
     <fragment
@@ -47,6 +31,9 @@
             app:destination="@id/passwordConfirmation"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/navigateBackToLoginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 <!--    password confirmation -->
     <fragment
