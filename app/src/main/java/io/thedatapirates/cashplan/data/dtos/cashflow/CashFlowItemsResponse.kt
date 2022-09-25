@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 data class CashFlowItemsResponse (
     var name: String,
     var id: Int,
-    var startDate: String,
     var deposits: MutableList<Deposit>,
     var frequency: Frequency
     )

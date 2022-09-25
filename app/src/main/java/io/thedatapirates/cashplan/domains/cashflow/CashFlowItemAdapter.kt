@@ -37,7 +37,7 @@ class CashFlowItemAdapter(
         val curExpense = depositList.deposits[position]
         holder.itemView.apply {
             tvDepositListItemValue.text = curExpense.amount.toString()
-            tvDepositItemDate.text = depositList.startDate
+            tvDepositItemDate.text = depositList.frequency.dateCreated
         }
 
         holder.itemView.setOnClickListener {
@@ -53,7 +53,6 @@ class CashFlowItemAdapter(
        var total = 0f
 
         for (deposit in depositList.deposits) {
-            Log.i(deposit.toString(), "DEPOSIT")
             total += deposit.amount
         }
 

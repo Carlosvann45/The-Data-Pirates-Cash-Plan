@@ -32,7 +32,6 @@ class CashFlowAdapter(
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int){
         val curExpense = expensesList[position]
-        Log.i(curExpense.name, "NAME")
         holder.itemView.apply {
             tvItemTitle.text = curExpense.name
             tvCashFlowFrequencyValue.text = curExpense.frequency.name

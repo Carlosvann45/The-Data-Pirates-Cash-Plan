@@ -41,7 +41,7 @@ class CashFlowItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        cashFlowItemAdapter = CashFlowItemAdapter(CashFlowItemsResponse(name="", id=0, startDate = "", deposits = mutableListOf(), frequency = Frequency(dateCreated = "", dateUpdated = "", id = 0, name = "")))
+        cashFlowItemAdapter = CashFlowItemAdapter(CashFlowItemsResponse(name="", id=0, deposits = mutableListOf(), frequency = Frequency(dateCreated = "", dateUpdated = "", id = 0, name = "")))
 
         return inflater.inflate(R.layout.fragment_cash_flow_list, container, false)
     }

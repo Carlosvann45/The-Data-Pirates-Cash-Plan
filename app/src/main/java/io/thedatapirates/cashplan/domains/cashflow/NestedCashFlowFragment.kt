@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
 import kotlinx.coroutines.*
 import java.nio.channels.Selector
+import java.time.format.DateTimeFormatter
 
 /**
  * A simple [Fragment] subclass.
@@ -53,6 +57,7 @@ class NestedCashFlowFragment : Fragment() {
         cashFlowContext = context
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(itemView, savedInstanceState)
@@ -98,7 +103,7 @@ class NestedCashFlowFragment : Fragment() {
             val itemName = etAddItemName.text.toString()
             val itemAmount = etAddItemAmount.text.toString().toFloat()
 
-            val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-05 12:00", 1)
+            val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-25 12:00", 1)
             val deposit = Deposit(itemAmount)
 
             GlobalScope.launch(Dispatchers.IO) {
@@ -133,7 +138,6 @@ class NestedCashFlowFragment : Fragment() {
 
         try {
             cashFlowService.createDepositForCashFlow(deposit, cashFlowID, accessToken)
-
         } catch (e: Exception) {
             println("Error: ${e.message}")
         }

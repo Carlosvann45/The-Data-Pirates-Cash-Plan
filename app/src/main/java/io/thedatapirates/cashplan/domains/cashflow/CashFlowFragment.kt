@@ -64,7 +64,6 @@ class CashFlowFragment : Fragment() {
                     adapter = cashFlowAdapter
 
                 }
-                Log.i(cashFlowAdapter.getItemCount().toString(), "DEPOSIT")
                 tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
             }
         }
