@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rlAddReminderFragment"
+    android:id="@+id/llInvestmentBreakdownFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_blue"
     android:orientation="vertical"
     tools:context=".domains.investment.InvestmentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue"
         android:orientation="horizontal"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        tools:ignore="UseCompoundDrawables">
+        android:paddingBottom="5dp">
 
         <ImageView
             android:id="@+id/ivExpenseRemindersBackBtn"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="22dp"
             android:background="@drawable/back_button"
@@ -34,15 +35,16 @@
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
             android:text="Expense Reminders"
-            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <com.google.android.material.divider.MaterialDivider
-        style="@style/Theme.Main"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="2dp"
+        android:background="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExpenseReminders"

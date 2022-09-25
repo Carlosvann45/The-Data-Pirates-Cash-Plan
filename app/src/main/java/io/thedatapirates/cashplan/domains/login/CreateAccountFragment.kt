@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_create_account.view.*
 import kotlinx.coroutines.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import io.thedatapirates.cashplan.utils.AndroidUtils
 
 /**
  * Service locator to inject customer service into login fragment
@@ -27,6 +28,7 @@ class CreateAccountFragment : Fragment() {
     private val customerService = CreateAccountServiceLocator.getCustomerService()
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.][a-z]+"
     private lateinit var createAccountContext: Context
+    private var toast: Toast? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,21 +45,33 @@ class CreateAccountFragment : Fragment() {
                 CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
 
             if (email.matches(emailPattern.toRegex())) {
-                Toast.makeText(createAccountContext, "Valid email address",
-                    Toast.LENGTH_SHORT).show()
+                toast?.cancel()
+
+                toast = AndroidUtils.createCustomToast("Valid email address", view, createAccountContext)
+
+                toast?.show()
             } else {
-                Toast.makeText(createAccountContext, "Invalid email address",
-                    Toast.LENGTH_SHORT).show()
+                toast?.cancel()
+
+                toast = AndroidUtils.createCustomToast("Invalid email address",view, createAccountContext)
+
+                toast?.show()
             }
             if (initialPasswordEntry.length <= 8 || initialPasswordEntry.length >= 20) {
                 // Toast here - password must be between 8 and 20 characters in length
-                Toast.makeText(createAccountContext, "Password must be between 8 and 20 characters",
-                    Toast.LENGTH_SHORT).show()
+                toast?.cancel()
+
+                toast = AndroidUtils.createCustomToast("Password must be between 8 and 20 characters", view, createAccountContext)
+
+                toast?.show()
             }
             if (initialPasswordEntry != reenterPasswordEntry) {
                 // Toast here - passwords do not match
-                Toast.makeText(createAccountContext, "Passwords do not match",
-                    Toast.LENGTH_SHORT).show()
+                toast?.cancel()
+
+                toast = AndroidUtils.createCustomToast("Passwords do not match", view, createAccountContext)
+
+                toast?.show()
             }
 
             GlobalScope.launch(Dispatchers.IO) {

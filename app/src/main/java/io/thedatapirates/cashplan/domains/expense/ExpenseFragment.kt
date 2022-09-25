@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.charts.PieChart
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
@@ -23,6 +22,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 /**
  * Service locator to inject customer service into login fragment
  */
+@ExperimentalSerializationApi
 object ExpenseServiceLocator {
     fun getExpenseService(): ExpenseService = ExpenseService.create()
 }
@@ -32,6 +32,7 @@ object ExpenseServiceLocator {
  * Use the [ExpenseFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@ExperimentalSerializationApi
 @DelicateCoroutinesApi
 class ExpenseFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class ExpenseFragment : Fragment() {
     private lateinit var progressOverlay: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var expenses: MutableList<ExpenseResponse>
-    private val expenseService = HomeServiceLocator.getExpenseService()
+    private val expenseService = ExpenseServiceLocator.getExpenseService()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +66,8 @@ class ExpenseFragment : Fragment() {
                 recyclerView.setHasFixedSize(true)
                 recyclerView.adapter = ExpenseItemsAdapter(
                     expenses,
-                    view
+                    view,
+                    expenseContext
                 )
 
                 AndroidUtils.animateView(progressOverlay, View.GONE, 0.75f, 200L)

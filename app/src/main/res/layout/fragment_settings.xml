@@ -5,6 +5,7 @@
     android:id="@+id/rlSettingsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     tools:context="domains.settings.SettingsFragment">
 
     <TextView
@@ -104,6 +105,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/StMB_Reminder"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

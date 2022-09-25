@@ -55,7 +55,7 @@ class CashFlowAdapter(
     }
 
     fun expensesTotal() : Float {
-       var total = 0f
+        var total = 0f
 
         for (expense in expensesList) {
             for (deposit in expense.deposits)  {

@@ -4,6 +4,7 @@
     android:id="@+id/llInvestmentOverview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/blue"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
@@ -26,6 +27,7 @@
                 android:layout_marginTop="5dp"
                 android:text="$0.00"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -37,7 +39,7 @@
                 android:text="Total Investments"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:id="@+id/llInvestmentOverviewSubGroup"
@@ -49,13 +51,13 @@
 
                 <TextView
                     android:id="@+id/tvInvestmentCurrentP_L"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="+0.00 (+0.00%)"
                     android:textAlignment="center"
                     android:textColor="@color/green"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -76,7 +78,8 @@
                     android:layout_weight="1"
                     android:text="Current P/L"
                     android:textAlignment="center"
-                    android:textSize="15sp" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -118,6 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/technology"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -141,6 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/finance"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -164,6 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/consumer"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -187,6 +193,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/healthcare"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -210,6 +217,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/material"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -229,7 +237,6 @@
                     android:orientation="horizontal">
 
                     <ImageView
-
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_marginTop="4dp"
@@ -242,6 +249,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/real_estate"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -265,6 +273,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/utility"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -288,6 +297,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/energy"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -311,6 +321,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/industrial"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -334,6 +345,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/communication"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
                 </LinearLayout>

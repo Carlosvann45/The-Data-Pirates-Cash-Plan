@@ -340,13 +340,18 @@ class HomeFragment : Fragment() {
         val amountLeftText = view.tvPaymentAmountLeft
         val supportMessage = view.tvPaymentSupportMsg
         val progressBar = view.pbPaymentBar
+        val totalAmountPayed = totalToPay - totalPayed
 
         // sets up text and progress bar for payment tracker
         paymentTitleText.text = "$month payment tracker"
         amountPaidText.text = totalPayed.toString()
         amountLeftText.text = "of  $totalToPay"
         supportMessage.text =
-            "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
+            if (totalAmountPayed > 0) "Keep it up! You only have $totalAmountPayed payments left this month."
+            else if (totalAmountPayed == 0)
+                "Great Job! You made all of your payments this month!"
+            else
+                "Way to go! You made ${totalAmountPayed * -1} extra payment(s) this month!"
         progressBar.max = if (totalToPay > 0) totalToPay * 1000 else 1000
         progressBar.progressBackgroundTintList = ColorStateList.valueOf(
             resources.getColor(R.color.white)

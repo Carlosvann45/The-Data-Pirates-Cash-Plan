@@ -5,7 +5,7 @@
     android:id="@+id/app_navigation"
     app:startDestination="@id/loginFragment">
 
-<!--    login-->
+    <!--    login-->
     <fragment
         android:id="@+id/loginFragment"
         android:name="io.thedatapirates.cashplan.domains.login.LoginFragment"
@@ -20,7 +20,7 @@
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/flCreateAccountFragment" />
     </fragment>
-<!--    forgot password-->
+    <!--    forgot password-->
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="io.thedatapirates.cashplan.domains.login.ForgotPasswordFragment"
@@ -35,7 +35,7 @@
             android:id="@+id/navigateBackToLoginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-<!--    password confirmation -->
+    <!--    password confirmation -->
     <fragment
         android:id="@+id/passwordConfirmation"
         android:name="io.thedatapirates.cashplan.domains.login.PasswordConfirmation"

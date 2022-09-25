@@ -4,6 +4,7 @@
     android:id="@+id/cvReminderItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/blue"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
@@ -30,7 +31,8 @@
                 android:paddingBottom="5dp"
                 android:text="Name"
                 android:textAlignment="center"
-                android:textSize="28sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -47,13 +49,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remind Time:"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Frequency:"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -72,14 +76,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0000-00-00"
-                android:textSize="20sp" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvFrequencyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="frequency"
-                android:textSize="20sp" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -95,7 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description:"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -115,7 +122,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="This is a description."
-                android:textSize="20sp" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -128,16 +136,16 @@
             app:flexWrap="wrap"
             app:justifyContent="space_around">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/tvDeleteReminder"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
+                android:layout_width="130dp"
+                android:layout_height="25dp"
+                android:background="@drawable/login_btn_background"
                 android:text="Delete"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textSize="20sp"
-                app:cornerRadius="15dp" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </com.google.android.flexbox.FlexboxLayout>
 
