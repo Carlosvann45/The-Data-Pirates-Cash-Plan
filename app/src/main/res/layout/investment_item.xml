@@ -56,8 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,22 +76,22 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="Price"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="Price"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvInvestmentItemCurrentPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="$0.00"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tvInvestmentItemCurrentPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="$0.00"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -99,30 +99,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvInvestmentItemCurrentP_L"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:gravity="center"
-                android:text="+0.00 (+0.00%)"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tvInvestmentItemCurrentP_L"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="+0.00 (+0.00%)"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvInvestmentItemCurrentP_LTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Current P/L"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tvInvestmentItemCurrentP_LTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Current P/L"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

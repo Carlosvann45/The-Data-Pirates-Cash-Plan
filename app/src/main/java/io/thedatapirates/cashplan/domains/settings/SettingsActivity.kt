@@ -1,12 +1,17 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.content.Context
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -17,7 +22,6 @@ import io.thedatapirates.cashplan.domains.helpcenter.HelpCenterActivity
 import io.thedatapirates.cashplan.domains.home.HomeActivity
 import io.thedatapirates.cashplan.domains.investment.InvestmentActivity
 import io.thedatapirates.cashplan.domains.login.LoginActivity
-import io.thedatapirates.cashplan.domains.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -36,6 +40,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlSettingsActivity)
@@ -46,7 +51,7 @@ class SettingsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val sharedPreferences = this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val sharedPreferences = this.getSharedPreferences("UserInfo", MODE_PRIVATE)
 
         val headerView = navView.getHeaderView(0)
         val customerNameView = headerView.findViewById<TextView>(R.id.tvCustomerName)
@@ -65,13 +70,9 @@ class SettingsActivity : AppCompatActivity() {
             it.isChecked = true
 
             when (it.itemId) {
-                R.id.navProfileActivity -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                }
                 R.id.navLogOut -> {
                     val editSettings =
-                        this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE).edit()
+                        this.getSharedPreferences("UserInfo", MODE_PRIVATE).edit()
 
                     // removes all settings related to getting customer information in api
                     editSettings.remove("accessToken")
@@ -86,12 +87,46 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(Intent(this, HelpCenterActivity::class.java))
                     overridePendingTransition(0, 0)
                 }
-                R.id.navShare -> navView.menu.findItem(R.id.navShare).isChecked = false
-                R.id.navWriteReview -> navView.menu.findItem(R.id.navWriteReview).isChecked = false
-                R.id.navFacebook -> navView.menu.findItem(R.id.navFacebook).isChecked = false
-                R.id.navInstagram -> navView.menu.findItem(R.id.navInstagram).isChecked = false
-                R.id.navSnapchat -> navView.menu.findItem(R.id.navSnapchat).isChecked = false
-                R.id.navLinkedIn -> navView.menu.findItem(R.id.navLinkedIn).isChecked = false
+                R.id.navWriteReview -> {
+                    navView.menu.findItem(R.id.navWriteReview).isChecked = false
+
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=io.thedatapirates.cashplan")
+                    )
+
+                    startActivity(intent)
+                }
+                R.id.navFacebook -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://m.facebook.com/TheDataPirates")
+                    )
+
+                    navView.menu.findItem(R.id.navFacebook).isChecked = false
+
+                    startActivity(intent)
+                }
+                R.id.navInstagram -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://www.instagram.com/data_pirates_cash_plan")
+                    )
+
+                    navView.menu.findItem(R.id.navInstagram).isChecked = false
+
+                    startActivity(intent)
+                }
+                R.id.navLinkedIn -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://www.linkedin.com/company/cash-plan")
+                    )
+
+                    navView.menu.findItem(R.id.navLinkedIn).isChecked = false
+
+                    startActivity(intent)
+                }
             }
             true
         }
@@ -120,7 +155,9 @@ class SettingsActivity : AppCompatActivity() {
 
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
+
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
@@ -128,5 +165,54 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun sendNotification() {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent =
+            getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        //the actual notification itself
+        val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle("Notification Title")
+            .setContentText("Notification Content")
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(100, builder.build())
+        }
+    }
+
+    fun openNotif(num: Int) {
+        val context = this
+        val intent = Intent().apply {
+            when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && num > 0 -> {
+                    action = Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    when (num) {
+                        1 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.stNotifChnl_id01)                            )
+                        }
+                        2 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID,getString(R.string.stNotifChnl_id02))
+                        }
+                        else -> {
+                            return;
+                        }
+                    }
+                }
+                else -> {
+                    action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                }
+            }
+        }
+        context.startActivity(intent)
     }
 }

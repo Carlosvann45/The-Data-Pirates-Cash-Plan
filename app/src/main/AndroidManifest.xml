@@ -5,6 +5,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,9 +26,6 @@
             android:name=".domains.helpcenter.HelpCenterActivity"
             android:exported="false" />
         <activity
-            android:name=".domains.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".domains.investment.InvestmentActivity"
             android:exported="false" />
         <activity
@@ -36,7 +36,21 @@
             android:exported="false" />
         <activity
             android:name=".domains.home.HomeActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="facebook" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="fb" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".domains.login.LoginActivity"
             android:exported="true"
@@ -48,6 +62,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".utils.AlarmReceiver" />
     </application>
 
 </manifest>

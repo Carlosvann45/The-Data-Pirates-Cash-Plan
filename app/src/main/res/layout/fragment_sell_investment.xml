@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llSellInvestmentFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,29 +19,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal" >
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/ivSellInvestmentBackBtn"
                 android:layout_width="25dp"
                 android:layout_height="20dp"
-                android:background="@drawable/back_button"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
-                android:contentDescription="Back Button"/>
+                android:background="@drawable/back_button"
+                android:contentDescription="Back Button" />
 
             <TextView
                 android:id="@+id/tvInvestmentBreakdownTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:text="Sell Investment"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:gravity="start"
+                android:paddingStart="12dp"
+                android:paddingEnd="0dp"
+                android:text="Sell Investment"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -79,8 +78,9 @@
 
             <ImageView
                 android:id="@+id/ivOpenSelectStockPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/drop_down_icon"
                 android:contentDescription="Drop Down button" />
