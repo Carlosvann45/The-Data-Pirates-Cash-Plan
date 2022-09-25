@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rlNestedCashFlowFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/light_blue">
 
     <LinearLayout
         android:id="@+id/tvNestedCashFlowText"
@@ -18,8 +19,7 @@
             android:layout_marginBottom="8dp"
             android:text="Add Item"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="28sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,8 +29,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="180dp"
-        android:background="@color/blue"
         android:orientation="vertical"
+        android:background="@color/blue"
         android:padding="15dp">
 
 
@@ -47,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-
             android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
@@ -58,23 +57,23 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="20dp"
                 android:text="Name:"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <EditText
+                style="@style/Theme.Login"
                 android:id="@+id/etAddItemName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
+                android:layout_height="48dp"
                 android:layout_marginBottom="15dp"
-                android:background="@color/white"
                 android:hint="Enter Name"
                 android:importantForAutofill="no"
+                android:backgroundTint="@color/white"
                 android:inputType="textEmailAddress"
                 android:minHeight="36dp"
                 android:padding="8dp"
                 android:paddingStart="10dp"
-                android:paddingEnd="8dp" />
+                android:paddingEnd="8dp"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -82,7 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-
             android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
@@ -93,17 +91,17 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="20dp"
                 android:text="Amount:"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <EditText
+                style="@style/Theme.Login"
                 android:id="@+id/etAddItemAmount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
+                android:layout_height="48dp"
                 android:layout_marginBottom="15dp"
-                android:background="@color/white"
                 android:hint="Enter Amount"
+                android:textSize="20sp"
+                android:backgroundTint="@color/white"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 android:minHeight="36dp"
@@ -125,6 +123,7 @@
                 android:id="@+id/cbItemMonthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="monthly"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -142,19 +141,21 @@
 
             <Button
                 android:id="@+id/btnAddItem"
-                style="button"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:text="add" />
+                android:backgroundTint="@color/black"
+                android:text="add"
+                app:cornerRadius="15dp" />
 
             <Button
                 android:id="@+id/btnCancelItem"
-                style="button"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:text="cancel" />
+                android:backgroundTint="@color/black"
+                android:text="cancel"
+                app:cornerRadius="15dp" />
 
 
         </LinearLayout>

@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import java.text.SimpleDateFormat
-import java.util.*
 
 class InvestmentBreakdownAdapter(
     private val investmentTransactions: MutableList<InvestmentResponse>
@@ -28,7 +26,6 @@ class InvestmentBreakdownAdapter(
         val itemDate: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownDate)
         val itemShares: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownShares)
         val itemPrice: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownAmount)
-        val formatter = SimpleDateFormat("MM-dd-yy", Locale.US)
 
         itemDate.text = currentItem.dateCreated.subSequence(
             0,
@@ -42,8 +39,6 @@ class InvestmentBreakdownAdapter(
         return investmentTransactions.size
     }
 
-    class InvestmentBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class InvestmentBreakdownViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

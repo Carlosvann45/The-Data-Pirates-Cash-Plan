@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.helpCenter.HelpItem
-import io.thedatapirates.cashplan.domains.investment.InvestmentItemsAdapter
 
 class HelpItemsAdapter(
     private val helpItems: MutableList<HelpItem>
@@ -18,7 +17,8 @@ class HelpItemsAdapter(
         parent: ViewGroup,
         viewType: Int
     ): HelpItemsAdapter.HelpItemsViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.help_center_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.help_center_item, parent, false)
 
         return HelpItemsViewHolder(itemView)
     }
@@ -35,7 +35,7 @@ class HelpItemsAdapter(
         itemQuestion.text = currentItem.question
 
         itemButton.setOnClickListener {
-            itemAnswer.visibility = when(itemAnswer.visibility) {
+            itemAnswer.visibility = when (itemAnswer.visibility) {
                 View.GONE -> {
                     itemButton.setImageResource(R.drawable.up_arrow)
 
@@ -55,7 +55,7 @@ class HelpItemsAdapter(
      */
     override fun getItemViewType(position: Int): Int {
         return R.layout.help_center_item
-        }
+    }
 
     override fun getItemCount(): Int {
         return helpItems.size
@@ -64,7 +64,5 @@ class HelpItemsAdapter(
     /**
      * Gets the different items from the view to modify each field on a given layout
      */
-    class HelpItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class HelpItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

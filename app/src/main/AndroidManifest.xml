@@ -4,14 +4,16 @@
     package="io.thedatapirates.cashplan">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/cashplan_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/cashplan_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Main"
         android:usesCleartextTraffic="true"
@@ -21,9 +23,6 @@
             android:exported="false" />
         <activity
             android:name=".domains.helpcenter.HelpCenterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".domains.profile.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".domains.investment.InvestmentActivity"
@@ -62,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".utils.AlarmReceiver" />
     </application>
 
 </manifest>

@@ -83,8 +83,10 @@ class InvestmentFragment : Fragment() {
                     // adds the stock total to the investment overview
                     investmentOverview.calculateTotalOverview(totalInvestment)
 
-                    // adds total investment to map
-                    investmentsMap[stock] = totalInvestment
+                    if (totalInvestment.currentAmount > 0 || totalInvestment.totalAmount > 0) {
+                        // adds total investment to map
+                        investmentsMap[stock] = totalInvestment
+                    }
                 }
             }
 
@@ -108,35 +110,55 @@ class InvestmentFragment : Fragment() {
 
                 // sets up pie entries and colors for pie chart getting the average based
                 // on the investment overview total and the sector total
-                colors.add(findColorResource("Technology"))
-                pieEntries.add(PieEntry(((techOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (techOverview.currentAmount > 0 || techOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Technology"))
+                    pieEntries.add(PieEntry(((techOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Finance"))
-                pieEntries.add(PieEntry(((financeOverView.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (financeOverView.currentAmount > 0 || financeOverView.totalAmount > 0) {
+                    colors.add(findColorResource("Finance"))
+                    pieEntries.add(PieEntry(((financeOverView.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Consumer"))
-                pieEntries.add(PieEntry(((consumerOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (consumerOverview.currentAmount > 0 || consumerOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Consumer"))
+                    pieEntries.add(PieEntry(((consumerOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Healthcare"))
-                pieEntries.add(PieEntry(((healthcareOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (healthcareOverview.currentAmount > 0 || healthcareOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Healthcare"))
+                    pieEntries.add(PieEntry(((healthcareOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Material"))
-                pieEntries.add(PieEntry(((materialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (materialOverview.currentAmount > 0 || materialOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Material"))
+                    pieEntries.add(PieEntry(((materialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Real Estate"))
-                pieEntries.add(PieEntry(((realEstateOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (realEstateOverview.currentAmount > 0 || realEstateOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Real Estate"))
+                    pieEntries.add(PieEntry(((realEstateOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Utility"))
-                pieEntries.add(PieEntry(((utilityOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (utilityOverview.currentAmount > 0 || utilityOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Utility"))
+                    pieEntries.add(PieEntry(((utilityOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Energy"))
-                pieEntries.add(PieEntry(((energyOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (energyOverview.currentAmount > 0 || energyOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Energy"))
+                    pieEntries.add(PieEntry(((energyOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Industrial"))
-                pieEntries.add(PieEntry(((industrialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (industrialOverview.currentAmount > 0 || industrialOverview.totalAmount > 0) {
+                    colors.add(findColorResource("Industrial"))
+                    pieEntries.add(PieEntry(((industrialOverview.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
-                colors.add(findColorResource("Communication"))
-                pieEntries.add(PieEntry(((communication.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                if (communication.currentAmount > 0 || communication.totalAmount > 0) {
+                    colors.add(findColorResource("Communication"))
+                    pieEntries.add(PieEntry(((communication.currentAmount / investmentOverview.currentAmount) * 100).toFloat()))
+                }
 
                 val investmentItems = mutableListOf<TotalInvestment>()
 

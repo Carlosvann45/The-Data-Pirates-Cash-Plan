@@ -5,32 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<ScrollView
-    android:id="@+id/rlHomeFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="50dp"
-    android:background="@color/light_blue"
-    tools:context=".domains.home.HomeFragment"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="@+id/rlHomeFragment"
-    app:layout_constraintStart_toStartOf="@+id/rlHomeFragment"
-    app:layout_constraintTop_toTopOf="@+id/rlHomeFragment">
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/rlHomeFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/light_blue"
+        android:paddingBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rlHomeFragment"
+        app:layout_constraintStart_toStartOf="@+id/rlHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/rlHomeFragment"
+        tools:context=".domains.home.HomeFragment">
 
-        <include
-            layout="@layout/home_monthly_tracker" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <include
-            layout="@layout/home_progress_tracker" />
+            <include layout="@layout/home_monthly_tracker" />
 
-    </LinearLayout>
+            <include layout="@layout/home_progress_tracker" />
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
 
     <include
         layout="@layout/progress_spinner_overlay"

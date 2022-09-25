@@ -13,6 +13,11 @@ object HttpRoutes {
     const val STOCK_PRICES = "$STOCK_URL/stock/data/quote?symbols="
     const val CREATE_CUSTOMER = "$CUSTOMERS/create"
     const val STOCK_TICKERS = "$STOCK_URL/stock/tickers/all"
-    const val ALL_EXPENSES = "$BASE_URL/expenses"
+    const val EXPENSES = "$BASE_URL/expenses"
+    const val EXPENSE_WITHDRAWAL = "$EXPENSES/withdrawal/for/"
+    const val REMINDERS = "$BASE_URL/reminders"
     const val ALL_CATEGORIES = "$BASE_URL/categories"
+    const val ALL_FREQUENCIES = "$BASE_URL/frequencies"
+    const val ALL_PRIORITY_LEVELS = "$BASE_URL/priorityLevels"
+    const val CASH_FLOWS = "$BASE_URL/cashFlows"
 }

@@ -1,10 +1,9 @@
 package io.thedatapirates.cashplan.domains.home
 
 import android.animation.ObjectAnimator
+import android.app.AlarmManager
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,29 +18,30 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.category.Category
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import io.thedatapirates.cashplan.data.services.category.CategoryService
 import io.thedatapirates.cashplan.data.services.expense.ExpenseService
+import io.thedatapirates.cashplan.data.services.reminder.ReminderService
 import io.thedatapirates.cashplan.utils.AndroidUtils
 import kotlinx.android.synthetic.main.home_monthly_tracker.view.*
 import kotlinx.android.synthetic.main.home_progress_tracker.view.*
 import kotlinx.android.synthetic.main.progress_spinner_overlay.view.*
 import kotlinx.coroutines.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.filter
-import kotlin.collections.forEach
-import kotlin.collections.mutableListOf
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 
 /**
  * Service locator to inject customer service into login fragment
  */
+@ExperimentalSerializationApi
 object HomeServiceLocator {
+    fun getRemindersService(): ReminderService = ReminderService.create()
     fun getExpenseService(): ExpenseService = ExpenseService.create()
     fun getCategoryService(): CategoryService = CategoryService.create()
 }
@@ -49,6 +49,7 @@ object HomeServiceLocator {
 /**
  * A simple [Fragment] subclass.
  */
+@ExperimentalSerializationApi
 @DelicateCoroutinesApi
 class HomeFragment : Fragment() {
 
@@ -111,8 +112,10 @@ class HomeFragment : Fragment() {
                         }
                     }
 
-                    // adds category amount to map
-                    expensesMap[category.name] = totalCategoryAmount
+                    if (totalCategoryAmount > 0) {
+                        // adds category amount to map
+                        expensesMap[category.name] = totalCategoryAmount
+                    }
                 }
             }
 
@@ -277,21 +280,20 @@ class HomeFragment : Fragment() {
         overviewPieChart.setUsePercentValues(true)
         overviewPieChart.minAngleForSlices = 15f
 
-        val description = Description()
-
-        description.text = if (expensesMap.values.isEmpty()) "No expenses have been paid"
-            else formattedTotal
-
-        description.textColor = resources.getColor(R.color.white)
-        description.textSize = 26f
-        description.typeface = Typeface.DEFAULT_BOLD
-        description.xOffset = 135f
-        description.yOffset = 180f
-
-        overviewPieChart.description.isEnabled = true
-        overviewPieChart.description = description
 
 
+        if (expensesMap.values.isEmpty()) {
+            val description = Description()
+            description.textColor = resources.getColor(R.color.white)
+            description.text = "No expenses have been paid"
+            description.typeface = Typeface.DEFAULT_BOLD
+            description.textSize = 16f
+            description.xOffset = 86f
+            description.yOffset = 180f
+            overviewPieChart.description = description
+        } else {
+            overviewPieChart.description.isEnabled = false
+        }
 
         overviewPieChart.setExtraOffsets(5f, 10f, 5f, 5f)
         overviewPieChart.dragDecelerationFrictionCoef = 0.5f
@@ -343,7 +345,8 @@ class HomeFragment : Fragment() {
         paymentTitleText.text = "$month payment tracker"
         amountPaidText.text = totalPayed.toString()
         amountLeftText.text = "of  $totalToPay"
-        supportMessage.text = "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
+        supportMessage.text =
+            "Keep it up! You only have ${totalToPay - totalPayed} payments left this month."
         progressBar.max = if (totalToPay > 0) totalToPay * 1000 else 1000
         progressBar.progressBackgroundTintList = ColorStateList.valueOf(
             resources.getColor(R.color.white)
@@ -380,17 +383,18 @@ class HomeFragment : Fragment() {
     /**
      * Calculates total payments for month and if year still needs to be paid
      */
-    private fun findTotalToPay(expense: ExpenseResponse) : Int {
+    private fun findTotalToPay(expense: ExpenseResponse): Int {
         val calendar = Calendar.getInstance()
 
-        return when(expense.frequency.name) {
+        return when (expense.frequency.name) {
             "Daily" -> calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
             "Weekly" -> calendar.getMaximum(Calendar.WEEK_OF_MONTH)
             "Biweekly" -> 2
             "Monthly" -> 1
             "Yearly" -> {
                 val withdrawal = expense.withdrawals.find {
-                    it.dateCreated.substring(0, it.dateCreated.indexOf("-") - 1).toInt() == calendar.get(Calendar.YEAR)
+                    it.dateCreated.substring(0, it.dateCreated.indexOf("-") - 1)
+                        .toInt() == calendar.get(Calendar.YEAR)
                 }
 
                 if (withdrawal == null) 1 else 0

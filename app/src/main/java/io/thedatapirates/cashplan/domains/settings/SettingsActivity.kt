@@ -1,9 +1,11 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.content.Context
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -46,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val sharedPreferences = this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val sharedPreferences = this.getSharedPreferences("UserInfo", MODE_PRIVATE)
 
         val headerView = navView.getHeaderView(0)
         val customerNameView = headerView.findViewById<TextView>(R.id.tvCustomerName)
@@ -67,7 +69,7 @@ class SettingsActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navLogOut -> {
                     val editSettings =
-                        this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE).edit()
+                        this.getSharedPreferences("UserInfo", MODE_PRIVATE).edit()
 
                     // removes all settings related to getting customer information in api
                     editSettings.remove("accessToken")
@@ -158,5 +160,32 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun openNotif(num: Int) {
+        val context = this
+        val intent = Intent().apply {
+            when { num > 0 -> {
+                    action = Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    when (num) {
+                        1 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.stNotifChnl_id01)                            )
+                        }
+                        2 -> {
+                            putExtra(Settings.EXTRA_CHANNEL_ID,getString(R.string.stNotifChnl_id02))
+                        }
+                        else -> {
+                            return
+                        }
+                    }
+                }
+                else -> {
+                    action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                }
+            }
+        }
+        context.startActivity(intent)
     }
 }

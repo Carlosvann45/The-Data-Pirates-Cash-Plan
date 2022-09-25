@@ -1,33 +1,48 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import io.thedatapirates.cashplan.R
+import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.navigation.Navigation
-import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
+import io.thedatapirates.cashplan.data.dtos.cashflow.CreateCashFlowItem
+import io.thedatapirates.cashplan.data.dtos.cashflow.Deposit
+import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
+import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
-import kotlinx.android.synthetic.main.fragment_cashflow.view.*
+import kotlinx.android.synthetic.main.fragment_cash_flow.view.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.view.*
+import kotlinx.coroutines.*
+import java.nio.channels.Selector
+import java.time.format.DateTimeFormatter
 
 /**
  * A simple [Fragment] subclass.
  * Use the [NestedCashFlowFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@DelicateCoroutinesApi
 class NestedCashFlowFragment : Fragment() {
 
-
     var option = ""
-    private lateinit var cashFlowAdapter: CashFlowAdapter
-
+    private val cashFlowService = CashFlowServiceLocater.getCashFlowService()
+    private lateinit var cashFlowContext: Context
+    var cashFlowID = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +52,13 @@ class NestedCashFlowFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_nested_cash_flow, container, false)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        cashFlowContext = context
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
-        cashFlowAdapter = CashFlowAdapter(mutableListOf())
 
         super.onViewCreated(itemView, savedInstanceState)
 
@@ -79,24 +99,49 @@ class NestedCashFlowFragment : Fragment() {
 
 
         btnAddItem.setOnClickListener {
+            if (etAddItemAmount.text.toString() != ""  && etAddItemName.text.toString() != "") {
+                val itemName = etAddItemName.text.toString()
+                val itemAmount = etAddItemAmount.text.toString().toFloat()
 
-            val itemName = etAddItemName.text.toString()
-            val itemAmount = etAddItemAmount.text.toString().toFloat()
-            val itemMonthly = cbItemMonthly.isChecked
+                val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-25 12:00", 1)
+                val deposit = Deposit(itemAmount)
 
-            if (itemName.isNotEmpty()) {
-                setFragmentResult(
-                    "requestKey",
-                    bundleOf(
-                        "name" to itemName,
-                        "amount" to itemAmount,
-                        "option" to option,
-                        "monthly" to itemMonthly
-                    )
-                )
+                GlobalScope.launch(Dispatchers.IO) {
+                    withContext(Dispatchers.Main) {
+
+                        createCashFlowItem(cashFlowItem)
+                        createDepositItem(deposit)
+                    }
+
+                }
+
+                Navigation.findNavController(itemView).navigate(R.id.rlCashFlowFragment)
             }
-            Navigation.findNavController(itemView).navigate(R.id.rlCashFlowFragment)
         }
     }
 
+    private suspend fun createCashFlowItem(cashFlowItem: CreateCashFlowItem) {
+        val sharedPreferences = cashFlowContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("accessToken", "")
+
+        try {
+            cashFlowID = cashFlowService.createCashFlow(cashFlowItem, accessToken).id
+
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+        }
+    }
+
+    private suspend fun createDepositItem(deposit: Deposit) {
+        val sharedPreferences = cashFlowContext.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("accessToken", "")
+
+        try {
+            cashFlowService.createDepositForCashFlow(deposit, cashFlowID, accessToken)
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+        }
+    }
 }
+
+
