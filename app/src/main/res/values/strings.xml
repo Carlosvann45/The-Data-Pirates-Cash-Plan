@@ -37,6 +37,7 @@
     <string name="close">Close</string>
     <string name="place_holder_name">Bob Ross</string>
     <string name="place_holder_email">bob.ross@example.com</string>
+    <string name="selected_item">Selected item:</string>
     <string name="pie_legend">Pie Legend</string>
     <string name="technology_sector">technology sector</string>
     <string name="communication">Communication</string>
@@ -61,10 +62,12 @@
     <string name="transactions">Transactions</string>
     <string name="sell_stock">Sell Stock</string>
     <string-array name="cash_flow_choices_array">
-        <item>Deposit</item>
-        <item>Expense</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Bi-Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
     </string-array>
-    <string name="selected_item">Selected item:</string>
     <string name="BTitle_Account">Account</string>
     <string name="BTitle_Customize">Customization</string>
     <string name="BTitle_Notifications">Notifications</string>
@@ -96,6 +99,7 @@
     <string name="sound_and_vibration">Sound and Vibration</string>
     <string name="sounds">Sounds</string>
     <string name="vibration">Vibration</string>
+    <string name="reminders">Reminders</string>
     <string name="sector">Sector:</string>
     <string name="drop_down_button">Drop Down button</string>
     <string name="amount">Amount:</string>
@@ -126,4 +130,9 @@
     <string name="transportation_section">Transportation Section</string>
     <string name="housing">Housing</string>
     <string name="housing_section">Housing Section</string>
+    <string name="stNotifChnl_id01">01 Remind</string>
+    <string name="stNotifChnl_id02">02 Alarm</string>
+    <string name="stNotifCatID">only group</string>
+    <string name="alarms">Alarms</string>
+    <string name="account_information">Account Information</string>
 </resources>

@@ -4,8 +4,8 @@
     android:id="@+id/rlExpenseTransactionsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/blue">
 
     <LinearLayout
         android:layout_width="match_parent"

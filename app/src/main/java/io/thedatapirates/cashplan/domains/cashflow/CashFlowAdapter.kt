@@ -1,17 +1,20 @@
 package io.thedatapirates.cashplan.domains.cashflow
 
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
+import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
 import kotlinx.android.synthetic.main.item_expense_and_deposit.view.*
 
 class CashFlowAdapter(
-    private val expensesList: MutableList<CashFlowItem>
-
+    private val expensesList: MutableList<CashFlowItemsResponse>
 
 ) : RecyclerView.Adapter<CashFlowAdapter.ExpenseViewHolder>() {
 
@@ -27,37 +30,23 @@ class CashFlowAdapter(
         )
     }
 
-    fun addExpense(expense: CashFlowItem) {
-        expensesList.add(expense)
-        notifyItemInserted(expensesList.size - 1)
-    }
-
-    fun deleteItems() {
-        expensesList.removeAll { expense ->
-            expense.isChecked
-        }
-        notifyDataSetChanged()
-    }
-
-    private fun toggleStrikeThrough(tvTodoTitle: TextView, isChecked: Boolean) {
-        if (isChecked) {
-            tvTodoTitle.paintFlags = tvTodoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
-        } else {
-            tvTodoTitle.paintFlags = tvTodoTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
-        }
-    }
-
-    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int){
         val curExpense = expensesList[position]
         holder.itemView.apply {
-            tvTodoTitle.text = curExpense.name
-            tvExpenseValue.text = curExpense.amount.toString()
-            curExpense.isChecked = curExpense.isChecked
-            toggleStrikeThrough(tvTodoTitle, curExpense.isChecked)
-            cbDone.setOnCheckedChangeListener { _, isChecked ->
-                toggleStrikeThrough(tvTodoTitle, isChecked)
-                curExpense.isChecked = !curExpense.isChecked
+            tvItemTitle.text = curExpense.name
+            tvCashFlowFrequencyValue.text = curExpense.frequency.name
+            tvCashFlowDepositsAmount.text = curExpense.deposits.size.toString()
+            if (curExpense.deposits.size != 0) {
+                tvExpenseValue.text = curExpense.deposits[0].amount.toString()
+            } else {
+                tvExpenseValue.text = "0"
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("position", position)
+            Navigation.findNavController(holder.itemView).navigate(R.id.navCashFlowList, bundle)
         }
     }
 
@@ -65,10 +54,14 @@ class CashFlowAdapter(
         return expensesList.size
     }
 
-    fun expensesTotal(): Float {
+    fun expensesTotal() : Float {
         var total = 0f
 
-        for (expense in expensesList) total += expense.amount
+        for (expense in expensesList) {
+            for (deposit in expense.deposits)  {
+                total += deposit.amount
+            }
+        }
 
         return total
     }

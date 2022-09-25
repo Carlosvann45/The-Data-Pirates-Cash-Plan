@@ -32,6 +32,7 @@ object ExpenseServiceLocator {
  * Use the [ExpenseFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@ExperimentalSerializationApi
 @DelicateCoroutinesApi
 class ExpenseFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class ExpenseFragment : Fragment() {
     private lateinit var progressOverlay: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var expenses: MutableList<ExpenseResponse>
-    private val expenseService = HomeServiceLocator.getExpenseService()
+    private val expenseService = ExpenseServiceLocator.getExpenseService()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

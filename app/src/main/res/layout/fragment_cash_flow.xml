@@ -5,15 +5,16 @@
     android:id="@+id/rlCashFlowFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/light_blue"
     tools:context=".domains.cashflow.CashFlowFragment">
 
     <TextView
+        android:textAlignment="center"
         android:id="@+id/tvExpensesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cash Flow"
-        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,69 +23,60 @@
     <View
         android:id="@+id/vHL"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginHorizontal="5dp"
+        android:layout_height="1dp"
         android:background="@color/light_grey"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle"
+        />
 
-    <TextView
-        android:id="@+id/tvExpensesName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
 
-    <TextView
-        android:id="@+id/tvExpensesAmount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:paddingStart="8dp"
-        android:text="Amount:"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvExpensesName"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesTitle" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvExpenses"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/vHL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@id/btnAddExpense"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesName"
-        app:layout_constraintVertical_bias="1.0" />
+        android:descendantFocusability="blocksDescendants">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tvExpensesTotal"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Balance: 0"
+        android:layout_marginBottom="50dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddExpense"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAddExpense"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <Button
         android:id="@+id/btnAddExpense"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
         android:text="Add Item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteDoneExpenses" />
-
-    <Button
-        android:id="@+id/btnDeleteDoneExpenses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Delete Items"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

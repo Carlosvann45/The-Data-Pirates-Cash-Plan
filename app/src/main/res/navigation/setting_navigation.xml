@@ -19,5 +19,6 @@
         android:id="@+id/stAccount"
         android:name="io.thedatapirates.cashplan.domains.settings.StAccount"
         android:label="@string/BTitle_Account"
-        tools:layout="@layout/fragment_st_account" />
+        tools:layout="@layout/fragment_st_account"/>
+
 </navigation>

@@ -34,11 +34,11 @@ class AlarmReceiver : BroadcastReceiver() {
         mediaPlayer.isLooping = true
         mediaPlayer.start()
 
-        val builder = NotificationCompat.Builder(context, "REMINDERS_CHANNEL")
+        val builder = NotificationCompat.Builder(context, context.getString(R.string.stNotifChnl_id02))
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle(reminder.name)
             .setContentText(reminder.description)
-            .setAutoCancel(false)
+            .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

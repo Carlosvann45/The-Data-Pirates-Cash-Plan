@@ -19,4 +19,5 @@ object HttpRoutes {
     const val ALL_CATEGORIES = "$BASE_URL/categories"
     const val ALL_FREQUENCIES = "$BASE_URL/frequencies"
     const val ALL_PRIORITY_LEVELS = "$BASE_URL/priorityLevels"
+    const val CASH_FLOWS = "$BASE_URL/cashFlows"
 }

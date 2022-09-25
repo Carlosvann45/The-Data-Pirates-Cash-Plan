@@ -6,6 +6,4 @@ data class CashFlowItem(
     var amount: Float,
     var isMonthly: Boolean = false,
     var isChecked: Boolean = false
-
-
 )
