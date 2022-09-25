@@ -2,32 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp">
-
-    <TextView
-        android:id="@+id/tvTodoTitle"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="9dp"
-        android:background="@drawable/cash_flow_item"
-        android:orientation="vertical"
-        android:padding="4dp"
-        android:text="Name"
-        android:textSize="20sp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/cash_flow_item"
+    android:layout_margin="9dp"
+    android:padding="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
         <TextView
             android:id="@+id/tvItemTitle"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="Name"
+            android:layout_marginStart="8dp"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/tvExpenseValue"
@@ -42,25 +35,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
         <TextView
             android:id="@+id/tvCashFlowFrequencyValue"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="Frequency"
-            android:textColor="@color/white"
+            android:layout_marginStart="8dp"
+            android:textSize="20sp"
 
-            android:textSize="20sp" />
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tvCashFlowDepositsAmount"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Amount"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

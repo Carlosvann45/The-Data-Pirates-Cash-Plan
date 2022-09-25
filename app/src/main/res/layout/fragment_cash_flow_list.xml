@@ -5,16 +5,15 @@
     android:id="@+id/rlCashFlowItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/light_blue"
     tools:context=".domains.cashflow.CashFlowItemFragment">
 
     <TextView
-        android:textAlignment="center"
         android:id="@+id/tvExpensesListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Deposit List"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,22 +22,20 @@
     <View
         android:id="@+id/vHLI"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="5dp"
         android:layout_height="1dp"
+        android:layout_marginHorizontal="5dp"
         android:background="@color/light_grey"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesListTitle"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvExpensesListTitle" />
 
     <TextView
         android:id="@+id/tvDepositAmount"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Amount:"
         android:paddingStart="8dp"
+        android:text="Amount:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExpensesListTitle"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvExpensesListTitle" />
 
     <TextView
         android:id="@+id/tvDepositsTotalAmount"
@@ -50,8 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDepositAmount"
         app:layout_constraintTop_toBottomOf="@+id/tvExpensesListTitle" />
-
-
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -73,12 +68,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
