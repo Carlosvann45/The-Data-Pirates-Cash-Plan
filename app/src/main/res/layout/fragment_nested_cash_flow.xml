@@ -70,7 +70,7 @@
                 android:background="@color/white"
                 android:hint="Enter Name"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:minHeight="36dp"
                 android:padding="8dp"
                 android:paddingStart="10dp"
@@ -85,7 +85,6 @@
 
             android:layout_marginEnd="20dp"
             android:orientation="horizontal">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,30 +104,11 @@
                 android:background="@color/white"
                 android:hint="Enter Amount"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:minHeight="36dp"
                 android:padding="8dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="8dp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cbItemMonthly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="monthly"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
 
         </LinearLayout>
 

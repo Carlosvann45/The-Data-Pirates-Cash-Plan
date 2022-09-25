@@ -15,4 +15,5 @@ object HttpRoutes {
     const val STOCK_TICKERS = "$STOCK_URL/stock/tickers/all"
     const val ALL_EXPENSES = "$BASE_URL/expenses"
     const val ALL_CATEGORIES = "$BASE_URL/categories"
+    const val CASH_FLOWS = "$BASE_URL/cashFlows"
 }

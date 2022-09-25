@@ -17,33 +17,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.ktor.client.features.*
 import io.thedatapirates.cashplan.data.dtos.cashflow.CashFlowItemsResponse
+import io.thedatapirates.cashplan.data.dtos.cashflow.Deposit
+import io.thedatapirates.cashplan.data.dtos.cashflow.Frequency
 import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import io.thedatapirates.cashplan.domains.investment.InvestmentServiceLocator
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
+import kotlinx.android.synthetic.main.fragment_cash_flow.rvExpenses
+import kotlinx.android.synthetic.main.fragment_cash_flow_list.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.coroutines.*
 
 
-object CashFlowServiceLocater {
-    fun getCashFlowService(): CashFlowService = CashFlowService.create()
-}
-
 @DelicateCoroutinesApi
-class CashFlowFragment : Fragment() {
+class CashFlowItemFragment : Fragment() {
     private val cashFlowService = CashFlowServiceLocater.getCashFlowService()
     private lateinit var cashFlowContext: Context
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
-    private lateinit var cashFlowAdapter: CashFlowAdapter
+    private lateinit var cashFlowItemAdapter: CashFlowItemAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        cashFlowAdapter = CashFlowAdapter(mutableListOf())
-        return inflater.inflate(R.layout.fragment_cash_flow, container, false)
+        cashFlowItemAdapter = CashFlowItemAdapter(CashFlowItemsResponse(name="", id=0, deposits = mutableListOf(), frequency = Frequency(dateCreated = "", dateUpdated = "", id = 0, name = "")))
+
+        return inflater.inflate(R.layout.fragment_cash_flow_list, container, false)
     }
 
     override fun onAttach(context: Context) {
@@ -53,27 +52,20 @@ class CashFlowFragment : Fragment() {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
 
-
         GlobalScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-                cashFlowAdapter = CashFlowAdapter(getCashFlowInformation())
+                val depositItem = arguments?.getInt("position")
+                if (depositItem != null) {
+                    cashFlowItemAdapter = CashFlowItemAdapter(getCashFlowInformation()[depositItem])
+                }
 
-                rvExpenses.apply {
+                rvDepositsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
-                    adapter = cashFlowAdapter
+                    adapter = cashFlowItemAdapter
 
                 }
-                tvExpensesTotal.text = cashFlowAdapter.expensesTotal().toString()
+                tvDepositTotal.text = cashFlowItemAdapter.depositsTotal().toString()
             }
-        }
-
-
-        tvExpensesTitle.setOnClickListener{
-            Navigation.findNavController(itemView).navigate(R.id.navCashFlowList)
-
-        }
-        btnAddExpense.setOnClickListener {
-            Navigation.findNavController(itemView).navigate(R.id.navNestedCashFlow)
         }
     }
 
