@@ -28,6 +28,7 @@ class InvestmentBreakdownAdapter(
         val itemDate: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownDate)
         val itemShares: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownShares)
         val itemPrice: TextView = holder.itemView.findViewById(R.id.tvInvestmentBreakdownAmount)
+        val formatter = SimpleDateFormat("MM-dd-yy", Locale.US)
 
         itemDate.text = currentItem.dateCreated.subSequence(
             0,

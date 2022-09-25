@@ -1,17 +1,13 @@
 package io.thedatapirates.cashplan.domains.settings
 
-import android.app.PendingIntent
-import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -40,7 +36,6 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlSettingsActivity)
@@ -51,7 +46,7 @@ class SettingsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val sharedPreferences = this.getSharedPreferences("UserInfo", MODE_PRIVATE)
+        val sharedPreferences = this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE)
 
         val headerView = navView.getHeaderView(0)
         val customerNameView = headerView.findViewById<TextView>(R.id.tvCustomerName)
@@ -72,7 +67,7 @@ class SettingsActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navLogOut -> {
                     val editSettings =
-                        this.getSharedPreferences("UserInfo", MODE_PRIVATE).edit()
+                        this.getSharedPreferences("UserInfo", Context.MODE_PRIVATE).edit()
 
                     // removes all settings related to getting customer information in api
                     editSettings.remove("accessToken")
@@ -155,9 +150,7 @@ class SettingsActivity : AppCompatActivity() {
 
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
-
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
@@ -165,54 +158,5 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    fun sendNotification() {
-        val intent = Intent(this, SettingsActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent =
-            getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-        //the actual notification itself
-        val builder = NotificationCompat.Builder(this, getString(R.string.stNotifChnl_id01))
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .setContentTitle("Notification Title")
-            .setContentText("Notification Content")
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(100, builder.build())
-        }
-    }
-
-    fun openNotif(num: Int) {
-        val context = this
-        val intent = Intent().apply {
-            when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && num > 0 -> {
-                    action = Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS
-                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                    when (num) {
-                        1 -> {
-                            putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.stNotifChnl_id01)                            )
-                        }
-                        2 -> {
-                            putExtra(Settings.EXTRA_CHANNEL_ID,getString(R.string.stNotifChnl_id02))
-                        }
-                        else -> {
-                            return;
-                        }
-                    }
-                }
-                else -> {
-                    action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
-                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                }
-            }
-        }
-        context.startActivity(intent)
     }
 }
