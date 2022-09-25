@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.os.bundleOf
-import androidx.navigation.NavAction
-import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
@@ -94,11 +90,6 @@ class InvestmentItemsAdapter(
 
                 holder.itemView.btnBuyBtn.setOnClickListener {
                     Navigation.findNavController(view).navigate(R.id.llBuyInvestmentFragment)
-
-                    val bundle = Bundle()
-                    bundle.putString("stockList", Gson().toJson(totalInvestments))
-                    Navigation.findNavController(view)
-                        .navigate(R.id.llSellInvestmentFragment, bundle)
                 }
             }
             else -> {

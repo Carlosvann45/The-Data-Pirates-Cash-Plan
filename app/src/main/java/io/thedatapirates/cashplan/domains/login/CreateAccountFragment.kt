@@ -2,20 +2,15 @@ package io.thedatapirates.cashplan.domains.login
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import io.ktor.client.features.*
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.createAccount.CreateAccountRequest
-import io.thedatapirates.cashplan.data.dtos.login.LoginRequest
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import kotlinx.android.synthetic.main.fragment_create_account.view.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -98,5 +93,4 @@ class CreateAccountFragment : Fragment() {
 
         return isLoggedIn
     }
-
 }

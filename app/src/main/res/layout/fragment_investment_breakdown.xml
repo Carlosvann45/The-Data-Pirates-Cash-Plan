@@ -11,29 +11,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:orientation="horizontal">
+        android:paddingBottom="5dp">
 
         <ImageView
             android:id="@+id/ivInvestmentBreakdownBackBtn"
             android:layout_width="25dp"
             android:layout_height="20dp"
-            android:background="@drawable/back_button"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="22dp"
+            android:background="@drawable/back_button"
             android:contentDescription="Back Button" />
 
         <TextView
             android:id="@+id/tvInvestmentBreakdownTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="12dp"
-            android:paddingEnd="0dp"
-            android:text="@string/transactions"
             android:layout_marginStart="15dp"
             android:layout_weight="1"
             android:gravity="start"
+            android:paddingStart="12dp"
+            android:paddingEnd="0dp"
+            android:text="@string/transactions"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -49,40 +49,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="35dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:gravity="start"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:text="Date"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shares"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:text="Shares"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price"
-            android:textColor="@color/white"
             android:layout_weight="1"
             android:gravity="end"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:text="Price"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

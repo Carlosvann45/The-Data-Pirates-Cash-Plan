@@ -5,9 +5,9 @@
     android:id="@+id/clCustomPickerLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
     android:layout_marginBottom="50dp"
     android:orientation="vertical"
-    android:layout_gravity="bottom"
     android:visibility="gone">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,8 +35,8 @@
         android:id="@+id/npCustomPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/numberPicker"
-        android:background="@color/blue" />
+        android:background="@color/blue"
+        android:theme="@style/numberPicker" />
 
 
 </LinearLayout>

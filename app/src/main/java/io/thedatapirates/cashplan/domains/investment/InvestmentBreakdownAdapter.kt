@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.investment.InvestmentResponse
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 import java.text.SimpleDateFormat
 import java.util.*
 

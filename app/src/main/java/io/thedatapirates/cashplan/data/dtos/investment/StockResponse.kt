@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
  * A class to represent each item in the response from the stock api
  */
 @Serializable
-class StockResponse(
+data class StockResponse(
     var price: Double?,
     var symbol: String?
-) {
-}
+)
