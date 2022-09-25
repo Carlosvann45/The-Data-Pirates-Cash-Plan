@@ -36,6 +36,8 @@ class CashFlowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cash_flow)
 
+        supportActionBar!!.title = "Cash Flow"
+
         bottomNav = findViewById(R.id.navCashFlowBottomNavigation)
         navView = findViewById(R.id.nvCashFlowTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlCashFlowActivity)

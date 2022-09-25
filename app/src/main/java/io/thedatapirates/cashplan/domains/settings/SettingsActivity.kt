@@ -36,6 +36,8 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        supportActionBar!!.title = "Settings"
+
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlSettingsActivity)
