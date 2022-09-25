@@ -21,7 +21,6 @@ import io.thedatapirates.cashplan.data.services.cashflow.CashFlowService
 import io.thedatapirates.cashplan.data.services.customer.CustomerService
 import io.thedatapirates.cashplan.data.services.investment.InvestmentService
 import io.thedatapirates.cashplan.domains.investment.InvestmentServiceLocator
-import io.thedatapirates.cashplan.domains.login.CustomerServiceLocator
 import kotlinx.android.synthetic.main.fragment_cash_flow.*
 import kotlinx.android.synthetic.main.fragment_nested_cash_flow.*
 import kotlinx.coroutines.*
