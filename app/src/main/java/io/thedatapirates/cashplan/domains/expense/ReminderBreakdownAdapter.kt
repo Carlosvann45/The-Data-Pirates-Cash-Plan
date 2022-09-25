@@ -36,6 +36,7 @@ class ReminderBreakdownAdapter(
     private val reminders: MutableList<ReminderResponse>,
     private val expense: ExpenseResponse,
     val view: View,
+    val context: Context,
     private var toast: Toast? = null
 ) : RecyclerView.Adapter<ReminderBreakdownAdapter.ReminderItemsViewHolder>() {
 

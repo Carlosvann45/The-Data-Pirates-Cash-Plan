@@ -16,12 +16,14 @@ import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
 import io.thedatapirates.cashplan.data.dtos.reminder.ReminderResponse
 import kotlinx.android.synthetic.main.fragment_expense_reminders.view.*
 import kotlinx.android.synthetic.main.fragment_expense_transactions.view.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 /**
  * A simple [Fragment] subclass.
  * Use the [ExpenseRemindersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@DelicateCoroutinesApi
 class ExpenseRemindersFragment : Fragment() {
 
     private lateinit var expenseRemindersContext: Context
@@ -57,7 +59,7 @@ class ExpenseRemindersFragment : Fragment() {
         recyclerView = view.rvExpenseReminders
         recyclerView.layoutManager = LinearLayoutManager(expenseRemindersContext)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = ReminderBreakdownAdapter(reminders, expense, view)
+        recyclerView.adapter = ReminderBreakdownAdapter(reminders, expense, view, expenseRemindersContext)
 
         view.ivExpenseRemindersBackBtn.setOnClickListener {
             val bundle = Bundle()
