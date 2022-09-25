@@ -136,6 +136,7 @@
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:text="0.01"
+                android:backgroundTint="@color/white"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -161,6 +162,7 @@
                 android:layout_marginStart="15dp"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
+                android:backgroundTint="@color/white"
                 android:text="0.01"
                 android:textColor="@color/white"
                 android:textSize="20sp" />

@@ -4,14 +4,12 @@
     android:id="@+id/clWithdrawalForm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#95000000"
     android:visibility="gone">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvWithdrawalFormBackground"
         android:layout_width="375dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +34,6 @@
                     android:layout_marginTop="15dp"
                     android:text="Withdrawal"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
                     android:textSize="35sp"
                     android:textStyle="bold" />
 
@@ -54,8 +51,7 @@
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
                         android:text="X"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="22sp" />
 
                 </com.google.android.flexbox.FlexboxLayout>
 
@@ -72,15 +68,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Amount:"
-                    android:textColor="@color/white"
                     android:textSize="25sp" />
 
                 <EditText
+                    style="@style/Theme.Login"
                     android:id="@+id/etAmountToWithdrawal"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:backgroundTint="@color/white"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:text="0.01"
@@ -98,18 +93,18 @@
                 app:flexWrap="wrap"
                 app:justifyContent="center">
 
-                <android.widget.Button
+                <Button
                     android:id="@+id/btnWithdrawalForExpense"
                     android:layout_width="160dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/login_btn_background"
+                    android:backgroundTint="@color/black"
                     android:padding="0dp"
                     android:text="Withdraw"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:cornerRadius="15dp" />
 
             </com.google.android.flexbox.FlexboxLayout>
 

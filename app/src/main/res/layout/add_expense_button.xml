@@ -14,6 +14,7 @@
         android:layout_marginBottom="5dp"
         android:text="Add Expense"
         android:textAllCaps="false"
+        android:backgroundTint="@color/blue"
         android:textSize="24sp"
         app:cornerRadius="20dp" />
 

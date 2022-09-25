@@ -49,16 +49,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_FName" />
 
-        <!--        Title for Phone Number              -->
-        <TextView
-            android:id="@+id/StAccntTV_Phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Title_PhoneNum"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_LName" />
-
         <!--        Title for Email                     -->
         <TextView
             android:id="@+id/StAccntTV_Email"
@@ -67,72 +57,7 @@
             android:text="@string/Title_Email"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_Phone" />
-
-
-        <!--        Title for Investment Category               -->
-        <TextView
-            android:id="@+id/StAccntTV_Investments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_Cat_Investments"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntDiv_BanktoInvestments" />
-
-        <!--        Title for Stock Accounts                -->
-        <TextView
-            android:id="@+id/StAccntTV_InvestStocks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_Stocks"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_Investments" />
-
-        <TextView
-            android:id="@+id/StAccntTV_I1Stock1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_Title_StockApp"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_InvestStocks" />
-
-        <!--        Title for Crypto Accounts               -->
-        <TextView
-            android:id="@+id/StAccntTV_InvestCrypto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Title_Crypto"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_I1Stock1" />
-
-        <TextView
-            android:id="@+id/StAccntTV_I1Crypto1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/Temp_Title_CryptoApp"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/StAccntTV_InvestCrypto" />
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_LName" />
 
 
         <!--        ******* TEXT INPUT ITEMS *******                -->
@@ -163,18 +88,6 @@
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_LName"
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_LName" />
 
-        <!--        Text Input for Phone Number         -->
-        <TextView
-            android:id="@+id/StAccntTVI_Phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Temp_Phone"
-            android:textColor="@color/Grayed_Out"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@+id/StAccntTV_Phone"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Phone" />
 
         <!--        Text Input for Email Address        -->
         <TextView
@@ -190,19 +103,6 @@
             app:layout_constraintStart_toEndOf="@+id/StAccntTV_Email"
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Email" />
 
-
-        <!--        ******* CATEGORY DIVIDERS *******               -->
-        <!--    Personal Info to Banking Info Divider   -->
-
-        <View
-            android:id="@+id/StAccntDiv_BanktoInvestments"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StAccntTVI_Email" />
 
 
         <!--  TEMP CODE OR REMOVED ITEMS DON'T REMOVE UNLESS WE DON'T NEED IT   -->

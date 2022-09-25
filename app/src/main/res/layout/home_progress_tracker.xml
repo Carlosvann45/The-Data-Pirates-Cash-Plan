@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
@@ -21,8 +20,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="Month payment tracker"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -36,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="0"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -47,8 +44,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="15dp"
                 android:text="of 0"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -59,7 +55,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="15dp"
             android:text="Keep it up! You only have 0 payments left this month"
-            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <ProgressBar

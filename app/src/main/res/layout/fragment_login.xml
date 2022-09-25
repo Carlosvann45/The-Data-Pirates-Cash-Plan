@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rlLoginPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,6 +35,7 @@
             android:hint="@string/username"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
+            android:minHeight="48dp"
             android:padding="8dp"
             android:paddingStart="10dp"
             android:paddingEnd="8dp"
@@ -51,6 +53,7 @@
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:minHeight="48dp"
             android:padding="8dp"
             android:paddingStart="10dp"
             android:paddingEnd="8dp"
@@ -68,7 +71,7 @@
             android:text="@string/forgot_password"
             android:textColor="@color/white" />
 
-        <android.widget.Button
+        <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,11 +79,12 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/login_btn_background"
+            android:backgroundTint="@color/black"
             android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="24sp"
+            app:cornerRadius="15dp" />
 
         <TextView
             android:id="@+id/tvCreateAccount"
