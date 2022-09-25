@@ -18,7 +18,9 @@
             app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/navigateToForgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/flCreateAccountFragment" />
@@ -42,10 +44,9 @@
         tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/navigateToPasswordConfirmation"
-            app:destination="@id/passwordConfirmation" />
-        <action
-            android:id="@+id/navigateBackToLoginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/passwordConfirmation"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 <!--    password confirmation -->
     <fragment

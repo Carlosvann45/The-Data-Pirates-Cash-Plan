@@ -1,15 +1,16 @@
 package io.thedatapirates.cashplan.domains.expense
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.thedatapirates.cashplan.R
 import io.thedatapirates.cashplan.data.dtos.expense.ExpenseResponse
+import io.thedatapirates.cashplan.data.dtos.investment.TotalInvestment
 import kotlinx.android.synthetic.main.add_expense_button.view.*
 import kotlinx.android.synthetic.main.fragment_expense_nav.view.*
 

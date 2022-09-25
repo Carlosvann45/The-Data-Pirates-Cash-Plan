@@ -104,18 +104,16 @@
             app:layout_constraintTop_toBottomOf="@+id/StAccntTV_Email" />
 
 
+        <View
+            android:id="@+id/StAccntDiv_BanktoInvestments"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/StAccntTV_B1S1Name" />
 
-        <!--  TEMP CODE OR REMOVED ITEMS DON'T REMOVE UNLESS WE DON'T NEED IT   -->
-        <!--    <Button-->
-        <!--        android:id="@+id/frag_btn"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="100dp"-->
-        <!--        android:layout_marginTop="56dp"-->
-        <!--        android:text="Return to Settings"-->
-        <!--        android:textAllCaps="false"-->
-        <!--        android:textSize="30sp"-->
-        <!--        app:layout_constraintHorizontal_bias="0.0"-->
-        <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--        app:layout_constraintRight_toRightOf="parent"/>-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

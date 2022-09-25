@@ -13,12 +13,24 @@
         <action
             android:id="@+id/navNestedCashFlow"
             app:destination="@id/rlNestedCashFlowFragment" />
+        <action
+            android:id="@+id/navCashFlowList"
+            app:destination="@id/rlCashFlowItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/rlNestedCashFlowFragment"
         android:name="io.thedatapirates.cashplan.domains.cashflow.NestedCashFlowFragment"
         android:label="fragment_nested_cash_flow"
         tools:layout="@layout/fragment_nested_cash_flow">
+        <action
+            android:id="@+id/navCashFlow"
+            app:destination="@id/rlCashFlowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rlCashFlowItemFragment"
+        android:name="io.thedatapirates.cashplan.domains.cashflow.CashFlowItemFragment"
+        android:label="fragment_cash_flow_list"
+        tools:layout="@layout/fragment_cash_flow_list">
         <action
             android:id="@+id/navCashFlow"
             app:destination="@id/rlCashFlowFragment" />

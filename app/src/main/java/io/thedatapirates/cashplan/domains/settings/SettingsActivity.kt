@@ -1,6 +1,7 @@
 package io.thedatapirates.cashplan.domains.settings
 
-
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -36,7 +37,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
 
         bottomNav = findViewById(R.id.navSettingsBottomNavigation)
         navView = findViewById(R.id.nvSettingsTopNavigationWithHeader)
@@ -152,9 +152,7 @@ class SettingsActivity : AppCompatActivity() {
 
         bottomNav.selectedItemId = R.id.navInvisible
         navView.setCheckedItem(R.id.navSettingsActivity)
-
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {

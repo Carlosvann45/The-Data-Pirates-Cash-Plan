@@ -9,19 +9,16 @@
         android:id="@+id/rlExpenseFragment"
         android:name="io.thedatapirates.cashplan.domains.expense.ExpenseFragment"
         android:label="fragment_expense"
-        tools:layout="@layout/fragment_expense">
+        tools:layout="@layout/fragment_expense" >
         <action
             android:id="@+id/navigateToExpenseNavFragment"
             app:destination="@id/rlExpenseNavFragment" />
-        <action
-            android:id="@+id/navigateToAddEditExpenseFragment"
-            app:destination="@id/rlAddEditExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/rlExpenseNavFragment"
         android:name="io.thedatapirates.cashplan.domains.expense.ExpenseNavFragment"
         android:label="fragment_expense_nav"
-        tools:layout="@layout/fragment_expense_nav">
+        tools:layout="@layout/fragment_expense_nav" >
         <action
             android:id="@+id/navigateToExpenseFragment"
             app:destination="@id/rlExpenseFragment" />
@@ -36,7 +33,7 @@
         android:id="@+id/rlExpenseTransactionsFragment"
         android:name="io.thedatapirates.cashplan.domains.expense.ExpenseTransactionsFragment"
         android:label="fragment_expense_transactions"
-        tools:layout="@layout/fragment_expense_transactions">
+        tools:layout="@layout/fragment_expense_transactions" >
         <action
             android:id="@+id/navigateToExpenseNavFragmentFromExpenseTransactionsFragment"
             app:destination="@id/rlExpenseNavFragment" />
@@ -45,30 +42,9 @@
         android:id="@+id/rlExpenseRemindersFragment"
         android:name="io.thedatapirates.cashplan.domains.expense.ExpenseRemindersFragment"
         android:label="fragment_expense_reminders"
-        tools:layout="@layout/fragment_expense_reminders">
+        tools:layout="@layout/fragment_expense_reminders" >
         <action
             android:id="@+id/navigateToExpenseNavFragment"
             app:destination="@id/rlExpenseNavFragment" />
-        <action
-            android:id="@+id/navigateToAddReminderFragment"
-            app:destination="@id/rlAddReminderFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/rlAddReminderFragment"
-        android:name="io.thedatapirates.cashplan.domains.expense.AddReminderFragment"
-        android:label="fragment_add_reminder"
-        tools:layout="@layout/fragment_add_reminder">
-        <action
-            android:id="@+id/navigateToExpenseRemindersFragmentFromAddReminderFragment"
-            app:destination="@id/rlExpenseRemindersFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/rlAddEditExpenseFragment"
-        android:name="io.thedatapirates.cashplan.domains.expense.AddEditExpenseFragment"
-        android:label="fragment_add_expense"
-        tools:layout="@layout/fragment_add_edit_expense">
-        <action
-            android:id="@+id/navigateToExpenseFragmentFromAddEditExpense"
-            app:destination="@id/rlExpenseFragment" />
     </fragment>
 </navigation>
