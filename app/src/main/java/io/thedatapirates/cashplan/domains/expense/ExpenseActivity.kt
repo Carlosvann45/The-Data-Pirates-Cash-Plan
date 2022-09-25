@@ -36,6 +36,8 @@ class ExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense)
 
+        supportActionBar!!.title = "Expenses"
+
         bottomNav = findViewById(R.id.navExpenseBottomNavigation)
         navView = findViewById(R.id.nvExpenseTopNavigationWithHeader)
         drawerLayout = findViewById(R.id.dlExpenseActivity)

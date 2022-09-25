@@ -96,6 +96,7 @@
     <string name="sound_and_vibration">Sound and Vibration</string>
     <string name="sounds">Sounds</string>
     <string name="vibration">Vibration</string>
+    <string name="reminders">Reminders</string>
     <string name="sector">Sector:</string>
     <string name="drop_down_button">Drop Down button</string>
     <string name="amount">Amount:</string>
@@ -126,4 +127,9 @@
     <string name="transportation_section">Transportation Section</string>
     <string name="housing">Housing</string>
     <string name="housing_section">Housing Section</string>
+    <string name="stNotifChnl_id01">01 Remind</string>
+    <string name="stNotifChnl_id02">02 Alarm</string>
+    <string name="stNotifCatID">only group</string>
+    <string name="alarms">Alarms</string>
+    <string name="account_information">Account Information</string>
 </resources>
