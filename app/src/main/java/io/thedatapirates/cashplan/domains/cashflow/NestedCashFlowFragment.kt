@@ -99,24 +99,24 @@ class NestedCashFlowFragment : Fragment() {
 
 
         btnAddItem.setOnClickListener {
+            if (etAddItemAmount.text.toString() != ""  && etAddItemName.text.toString() != "") {
+                val itemName = etAddItemName.text.toString()
+                val itemAmount = etAddItemAmount.text.toString().toFloat()
 
-            val itemName = etAddItemName.text.toString()
-            val itemAmount = etAddItemAmount.text.toString().toFloat()
+                val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-25 12:00", 1)
+                val deposit = Deposit(itemAmount)
 
-            val cashFlowItem = CreateCashFlowItem(itemName, "2022-09-25 12:00", 1)
-            val deposit = Deposit(itemAmount)
-
-            GlobalScope.launch(Dispatchers.IO) {
-                if (itemAmount != 0f && itemName != "") {
+                GlobalScope.launch(Dispatchers.IO) {
                     withContext(Dispatchers.Main) {
 
                         createCashFlowItem(cashFlowItem)
                         createDepositItem(deposit)
                     }
-                }
-            }
 
-            Navigation.findNavController(itemView).navigate(R.id.rlCashFlowFragment)
+                }
+
+                Navigation.findNavController(itemView).navigate(R.id.rlCashFlowFragment)
+            }
         }
     }
 
