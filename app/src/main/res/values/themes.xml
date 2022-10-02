@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 
     <!--    Widget Theme -->
@@ -19,7 +19,7 @@
         <item name="buttonTint">@color/white_bkgrnd</item>
         <item name="cardBackgroundColor">@color/light_blue</item>
         <item name="android:colorBackground">@color/blue</item>
-        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:statusBarColor">@color/black</item>
 
     </style>
 

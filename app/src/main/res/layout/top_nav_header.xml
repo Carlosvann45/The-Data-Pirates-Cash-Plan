@@ -21,7 +21,7 @@
             android:id="@+id/tvCustomerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
+            android:paddingTop="10dp"
             android:text="@string/place_holder_name"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -30,6 +30,7 @@
             android:id="@+id/tvCustomerEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
             android:text="@string/place_holder_email"
             android:textSize="16sp" />
 

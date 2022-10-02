@@ -35,6 +35,7 @@ class CreateAccountFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_account, container, false)
+
         view.btnCreateAccount.setOnClickListener {
             val firstName = view.etFirstNameField.text.toString()
             val lastName = view.etLastNameField.text.toString()
@@ -83,6 +84,17 @@ class CreateAccountFragment : Fragment() {
                 }
             }
         }
+
+        view.tvHaveAccount.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.navigateTologinFragmentFromCreateAccount)
+        }
+
+        view.tvLogin.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.navigateTologinFragmentFromCreateAccount)
+        }
+
         return view
     }
 
