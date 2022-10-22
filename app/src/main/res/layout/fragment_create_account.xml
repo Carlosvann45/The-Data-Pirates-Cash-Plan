@@ -1,145 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flCreateAccountFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:alignItems="center"
-    app:flexDirection="column"
-    app:flexWrap="wrap"
-    android:background="@drawable/login_background"
-    app:justifyContent="space_evenly"
-    android:theme="@style/Theme.Login">
+    android:background="@drawable/login_background">
 
-    <TextView
-        android:id="@+id/tvCreateAccountTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Create Account"
-        android:textAlignment="center"
-        android:textSize="40sp" />
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etFirstNameField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/login_edit_background"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/Grayed_Out"
-        android:inputType="textPersonName"
-        android:hint="First Name"
-        android:importantForAutofill="no" />
+        <TextView
+            android:id="@+id/tvCreateAccountTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="30dp"
+            android:text="Sign Up"
+            android:textAlignment="center"
+            android:textSize="40sp" />
 
-    <EditText
-        android:id="@+id/etLastNameField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/login_edit_background"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/Grayed_Out"
-        android:inputType="textPersonName"
-        android:hint="Last Name"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/etFirstNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_edit_background"
+            android:hint="First Name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
-    <EditText
-        android:id="@+id/etEmailAddressField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/login_edit_background"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/Grayed_Out"
-        android:inputType="textEmailAddress"
-        android:hint="Email Address"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/etLastNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_edit_background"
+            android:hint="Last Name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
-    <EditText
-        android:id="@+id/etPasswordEntryField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/login_edit_background"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/Grayed_Out"
-        android:hint="Password"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/etEmailAddressField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_edit_background"
+            android:hint="Email Address"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
-    <EditText
-        android:id="@+id/etPasswordReentryField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/login_edit_background"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/Grayed_Out"
-        android:hint="Re-Enter Password"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/etPasswordEntryField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_edit_background"
+            android:hint="Password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="0dp"
-        android:backgroundTint="@color/black"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:cornerRadius="15dp"
-        android:text="Create Account" />
+        <EditText
+            android:id="@+id/etPasswordReentryField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_edit_background"
+            android:hint="Re-Enter Password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Grayed_Out" />
 
-    <TextView
-        android:id="@+id/tvHaveAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:textSize="20sp"
-        android:text="Already Have an Account?"
-        android:textAlignment="center" />
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="@color/black"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:cornerRadius="15dp" />
 
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="Log In"
-        android:textSize="28sp"
-        android:textAlignment="center"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-</com.google.android.flexbox.FlexboxLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:text="Already Have an Account?"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvHaveAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="9dp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/create_account_sign_up"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

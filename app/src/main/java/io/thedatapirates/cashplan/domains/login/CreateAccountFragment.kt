@@ -90,11 +90,6 @@ class CreateAccountFragment : Fragment() {
                 .navigate(R.id.navigateTologinFragmentFromCreateAccount)
         }
 
-        view.tvLogin.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.navigateTologinFragmentFromCreateAccount)
-        }
-
         return view
     }
 
