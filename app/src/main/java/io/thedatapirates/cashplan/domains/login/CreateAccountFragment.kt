@@ -45,41 +45,58 @@ class CreateAccountFragment : Fragment() {
             val customerInformation =
                 CreateAccountRequest(firstName, lastName, email, initialPasswordEntry)
 
-            if (email.matches(emailPattern.toRegex())) {
+            if (firstName.isEmpty()) {
                 toast?.cancel()
 
-                toast = AndroidUtils.createCustomToast("Valid email address", view, createAccountContext)
+                toast = AndroidUtils.createCustomToast(
+                    "First name is required",
+                    view,
+                    createAccountContext
+                )
 
                 toast?.show()
-            } else {
+
+            } else if (lastName.isEmpty()) {
                 toast?.cancel()
 
-                toast = AndroidUtils.createCustomToast("Invalid email address",view, createAccountContext)
+                toast = AndroidUtils.createCustomToast(
+                    "Last name is required",
+                    view,
+                    createAccountContext
+                )
 
                 toast?.show()
-            }
-            if (initialPasswordEntry.length <= 8 || initialPasswordEntry.length >= 20) {
+            } else if (!email.matches(emailPattern.toRegex())) {
+                toast?.cancel()
+
+                toast = AndroidUtils.createCustomToast(
+                    "Invalid email address",
+                    view,
+                    createAccountContext
+                )
+
+                toast?.show()
+            } else if (initialPasswordEntry.length <= 8 || initialPasswordEntry.length >= 20) {
                 // Toast here - password must be between 8 and 20 characters in length
                 toast?.cancel()
 
                 toast = AndroidUtils.createCustomToast("Password must be between 8 and 20 characters", view, createAccountContext)
 
                 toast?.show()
-            }
-            if (initialPasswordEntry != reenterPasswordEntry) {
+            } else if (initialPasswordEntry != reenterPasswordEntry) {
                 // Toast here - passwords do not match
                 toast?.cancel()
 
                 toast = AndroidUtils.createCustomToast("Passwords do not match", view, createAccountContext)
 
                 toast?.show()
-            }
-
-            GlobalScope.launch(Dispatchers.IO) {
-                if (processCreateAccount(customerInformation)) {
-                    withContext(Dispatchers.Main) {
-                        Navigation.findNavController(view)
-                            .navigate(R.id.navigateTologinFragmentFromCreateAccount)
+            } else {
+                GlobalScope.launch(Dispatchers.IO) {
+                    if (processCreateAccount(customerInformation)) {
+                        withContext(Dispatchers.Main) {
+                            Navigation.findNavController(view)
+                                .navigate(R.id.navigateTologinFragmentFromCreateAccount)
+                        }
                     }
                 }
             }

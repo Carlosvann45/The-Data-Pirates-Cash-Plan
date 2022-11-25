@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 data class CreateAccountResponse(
     var firstName: String,
     var lastName: String,
-    var username: String,
+    var email: String,
     var password: String
 )
